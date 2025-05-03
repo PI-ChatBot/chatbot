@@ -152,7 +152,7 @@ const estilos = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 12,
     paddingHorizontal: 24,
-    marginBottom: 16,
+    marginBottom: 30,
     alignItems: 'center',
   },
   textoBotao: {
@@ -165,7 +165,7 @@ const estilos = StyleSheet.create({
     color: '#888',
     marginVertical: 8,
     textAlign: 'center',
-    marginTop: -5,
+    marginTop: -25,
   },
   continuarSemLogin: {
     fontSize: 16,
@@ -176,10 +176,10 @@ const estilos = StyleSheet.create({
   },
   logoEscolaContainer: {
     width: 160,
-    height: 40,
+    height: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 24,
+    marginTop: 10,
   },
   logoEscola: {
     width: '100%',
