@@ -1,9 +1,19 @@
-import React from 'react';
-import { Image, StyleSheet, SafeAreaView, TouchableOpacity, View, Text } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { Animated, Image, StyleSheet, SafeAreaView, TouchableOpacity, View, Text } from 'react-native';
 import { useRouter } from 'expo-router';
 
 export default function TelaBoasVindas() {
   const router = useRouter();
+
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }, []);
 
   const irParaLogin = () => {
     router.push('/login');
@@ -14,35 +24,77 @@ export default function TelaBoasVindas() {
   };
 
   const continuarSemLogin = () => {
-    router.replace('/(tabs)/inicio'); 
+    router.replace('/(tabs)/inicio');
+  };
+
+  const BotaoAnimado = ({ onPress, titulo }: { onPress: () => void, titulo: string }) => {
+    const scale = useRef(new Animated.Value(1)).current;
+    const opacity = useRef(new Animated.Value(1)).current;
+
+    const onPressIn = () => {
+      Animated.parallel([
+        Animated.spring(scale, {
+          toValue: 0.96,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 0.7,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    };
+
+    const onPressOut = () => {
+      Animated.parallel([
+        Animated.spring(scale, {
+          toValue: 1,
+          friction: 3,
+          tension: 40,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 1,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    };
+
+    return (
+      <Animated.View style={{ transform: [{ scale }], opacity }}>
+        <TouchableOpacity 
+          onPress={onPress} 
+          onPressIn={onPressIn} 
+          onPressOut={onPressOut}
+          style={estilos.botao}
+          activeOpacity={1}
+        >
+          <Text style={estilos.textoBotao}>{titulo}</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    );
   };
 
   return (
     <SafeAreaView style={estilos.container}>
-      {/* Logo do aplicativo */}
-      <View style={estilos.logoContainer}>
+      <Animated.View style={{ ...estilos.logoContainer, opacity: fadeAnim }}>
         <Image 
-          source={require('@/assets/images/Robo.png')} 
+          source={require('@/assets/images/Robo2.png')} 
           style={estilos.logo}
           resizeMode="contain"
         />
-      </View>
+      </Animated.View>
 
-      {/* Nome do aplicativo */}
-      <Text style={estilos.nomeApp}>PoliChat</Text>
+      <Animated.Text style={{ ...estilos.nomeApp, opacity: fadeAnim }}>
+        PoliChat
+      </Animated.Text>
 
-      {/* Texto de boas-vindas */}
       <Text style={estilos.textoBoasVindas}>Bem-vindo!</Text>
 
-      {/* Botões */}
       <View style={estilos.containerBotoes}>
-        <TouchableOpacity style={estilos.botao} onPress={irParaLogin}>
-          <Text style={estilos.textoBotao}>Login</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={estilos.botao} onPress={irParaCadastro}>
-          <Text style={estilos.textoBotao}>Cadastre-se</Text>
-        </TouchableOpacity>
+        <BotaoAnimado onPress={irParaLogin} titulo="Login" />
+        <BotaoAnimado onPress={irParaCadastro} titulo="Cadastre-se" />
       </View>
 
       <Text style={estilos.ouTexto}>ou</Text>
@@ -70,8 +122,8 @@ const estilos = StyleSheet.create({
     paddingHorizontal: 24,
   },
   logoContainer: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 130,
     marginBottom: 24,
   },
   logo: {
@@ -98,7 +150,7 @@ const estilos = StyleSheet.create({
   botao: {
     backgroundColor: '#78aeb4',
     borderRadius: 12,
-    paddingVertical: 16,
+    paddingVertical: 12,
     paddingHorizontal: 24,
     marginBottom: 16,
     alignItems: 'center',
