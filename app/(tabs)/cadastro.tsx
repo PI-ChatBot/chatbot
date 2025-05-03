@@ -15,7 +15,7 @@ export default function TelaCadastro() {
   }, []);
 
   const irParaInicio = () => {
-    router.replace('/(tabs)/inicio');
+    router.replace('/(tabs)');
   };
 
   return (

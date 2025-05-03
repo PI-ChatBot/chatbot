@@ -24,7 +24,7 @@ export default function TelaBoasVindas() {
   };
 
   const continuarSemLogin = () => {
-    router.replace('/(tabs)/inicio');
+    router.replace('/selecionaunidade');
   };
 
   const BotaoAnimado = ({ onPress, titulo }: { onPress: () => void, titulo: string }) => {
