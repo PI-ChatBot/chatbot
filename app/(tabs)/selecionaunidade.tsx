@@ -30,7 +30,7 @@ export default function TelaUnidade() {
   }, []);
 
   const irParaInicio = () => {
-    router.replace('/(tabs)');
+    router.replace('/(tabs)/home');
   };
 
   const unidades = ['Unidade Campinas', 'Unidade São José', 'Unidade São Paulo'];

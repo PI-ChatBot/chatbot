@@ -16,7 +16,7 @@ export default function TelaLogin() {
   }, []);
 
   const irParaInicio = () => {
-    router.replace('/(tabs)');
+    router.replace('/(tabs)/home');
   };
 
   const toggleLembrarSenha = () => {
