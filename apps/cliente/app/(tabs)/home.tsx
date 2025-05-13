@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Feather } from '@expo/vector-icons';
 
 export default function TelaHome() {
   const router = useRouter();
@@ -69,16 +70,32 @@ export default function TelaHome() {
             <Text style={estilos.textoBloco}>FAQ</Text>
           </TouchableOpacity>
         </View>
+      </View>
 
-        {/* Botão Flutuante - Robô */}
+      {/* Barra de Navegação Inferior Fixa */}
+      <View style={estilos.barraNavegacao}>
         <TouchableOpacity 
-          style={estilos.roboBotao} 
-          onPress={() => irPara('/pedido')}
+          style={estilos.botaoNavegacao} 
+          onPress={() => irPara('/chat')}
           activeOpacity={0.7}
         >
-          <View style={estilos.circuloRobo}>
-            <Image source={require('@/assets/images/Robo2.png')} style={estilos.imgRoboMelhor} />
-          </View>
+          <Feather name="message-circle" size={24} color="#666" />
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={[estilos.botaoNavegacao, estilos.botaoNavegacaoAtivo]} 
+          onPress={() => irPara('/')}
+          activeOpacity={0.7}
+        >
+          <Feather name="home" size={24} color="#78aeb4" />
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={estilos.botaoNavegacao} 
+          onPress={() => irPara('/configuracoes')}
+          activeOpacity={0.7}
+        >
+          <Feather name="settings" size={24} color="#666" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -106,6 +123,7 @@ const estilos = StyleSheet.create({
     flex: 1,
     padding: 24,
     zIndex: 1,
+    paddingBottom: 80, // Adicionado espaço para a barra de navegação
   },
   topo: {
     flexDirection: 'row',
@@ -227,28 +245,35 @@ const estilos = StyleSheet.create({
     fontWeight: '500',
     color: '#444',
   },
-  roboBotao: {
-    alignSelf: 'center',
-    marginTop: 50,
-    marginBottom: 16,
-  },
-  circuloRobo: {
-    width: 80,
-    height: 80,
-    backgroundColor: '#faa41f',
-    borderRadius: 40,
-    justifyContent: 'center',
+  // Estilos para a nova barra de navegação inferior
+  barraNavegacao: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 60,
+    backgroundColor: '#ffffff',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#e0e0e0',
+    elevation: 10,
     shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    elevation: 4,
+    shadowRadius: 3,
   },
-  imgRoboMelhor: {
-    width: 65,
-    height: 75,
-    borderRadius: 27,
-    overflow: 'hidden',
+  botaoNavegacao: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    height: '100%',
+    paddingVertical: 10,
+  },
+  botaoNavegacaoAtivo: {
+    borderTopWidth: 2,
+    borderTopColor: '#78aeb4',
+    backgroundColor: '#f5f5f5',
   },
 });
