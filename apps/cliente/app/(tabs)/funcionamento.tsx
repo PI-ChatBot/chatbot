@@ -70,7 +70,14 @@ export default function TelaFuncionamento() {
               >
                 {item.dia}
               </Text>
-              <Text style={estilos.horarioTexto}>{item.horario}</Text>
+              <Text
+                style={[
+                  estilos.horarioTexto,
+                  index === diaAtual && estilos.horarioTextoAtual, // Aplica estilo ao horário do dia atual
+                ]}
+              >
+                {item.horario}
+              </Text>
             </Animated.View>
           ))}
         </View>
@@ -151,7 +158,7 @@ const estilos = StyleSheet.create({
     elevation: 2,
   },
   horarioItemAtual: {
-    backgroundColor: '#D1F7C4', // Cor de destaque para o dia atual
+    backgroundColor: '#78aeb4', // Azul da tela
   },
   diaTexto: {
     fontSize: 16,
@@ -159,11 +166,14 @@ const estilos = StyleSheet.create({
     color: '#333',
   },
   diaTextoAtual: {
-    color: '#2E7D32', // Cor de destaque para o texto do dia atual
+    color: '#FFFFFF', // Texto branco
     fontWeight: '700',
   },
   horarioTexto: {
     fontSize: 15,
     color: '#555',
+  },
+  horarioTextoAtual: {
+    color: '#FFFFFF', // Texto branco
   },
 });
