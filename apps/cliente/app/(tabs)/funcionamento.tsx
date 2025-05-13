@@ -10,14 +10,16 @@ export default function TelaFuncionamento() {
   const insets = useSafeAreaInsets();
 
   const horarios = [
+    { dia: 'Domingo', horario: 'Fechado' },
     { dia: 'Segunda-feira', horario: '08:00 - 18:00' },
     { dia: 'Terça-feira', horario: '08:00 - 18:00' },
     { dia: 'Quarta-feira', horario: '08:00 - 18:00' },
     { dia: 'Quinta-feira', horario: '08:00 - 18:00' },
     { dia: 'Sexta-feira', horario: '08:00 - 18:00' },
     { dia: 'Sábado', horario: '09:00 - 14:00' },
-    { dia: 'Domingo', horario: 'Fechado' },
   ];
+
+  const diaAtual = new Date().getDay();
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -52,8 +54,22 @@ export default function TelaFuncionamento() {
 
         <View style={estilos.horariosContainer}>
           {horarios.map((item, index) => (
-            <Animated.View key={index} style={[estilos.horarioItem, { opacity: fadeAnim }]}>
-              <Text style={estilos.diaTexto}>{item.dia}</Text>
+            <Animated.View
+              key={index}
+              style={[
+                estilos.horarioItem,
+                { opacity: fadeAnim },
+                index === diaAtual && estilos.horarioItemAtual, // Aplica estilo ao dia atual
+              ]}
+            >
+              <Text
+                style={[
+                  estilos.diaTexto,
+                  index === diaAtual && estilos.diaTextoAtual, // Aplica estilo ao texto do dia atual
+                ]}
+              >
+                {item.dia}
+              </Text>
               <Text style={estilos.horarioTexto}>{item.horario}</Text>
             </Animated.View>
           ))}
@@ -108,7 +124,7 @@ const estilos = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
-    marginTop: -40, 
+    marginTop: -40,
   },
   titulo: {
     fontSize: 32,
@@ -134,10 +150,17 @@ const estilos = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
+  horarioItemAtual: {
+    backgroundColor: '#D1F7C4', // Cor de destaque para o dia atual
+  },
   diaTexto: {
     fontSize: 16,
     fontWeight: '500',
     color: '#333',
+  },
+  diaTextoAtual: {
+    color: '#2E7D32', // Cor de destaque para o texto do dia atual
+    fontWeight: '700',
   },
   horarioTexto: {
     fontSize: 15,
