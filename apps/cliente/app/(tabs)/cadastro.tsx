@@ -1,10 +1,15 @@
-import React, { useRef, useEffect } from 'react';
+import React, {useRef, useEffect, useState, useMemo, useCallback } from 'react';
 import { Animated, Image, SafeAreaView, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
+import { fazerCadastro } from '@/lib/data';
 
 export default function TelaCadastro() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const router = useRouter();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -21,7 +26,6 @@ export default function TelaCadastro() {
   return (
     <SafeAreaView style={estilos.container}>
       <ScrollView contentContainerStyle={estilos.scrollContainer} showsVerticalScrollIndicator={false}>
-        
         {/* Botão de voltar */}
         <TouchableOpacity onPress={() => router.back()} style={estilos.botaoVoltar}>
           <Text style={estilos.textoVoltar}>← Voltar</Text>
@@ -29,8 +33,8 @@ export default function TelaCadastro() {
 
         {/* Logo do robô */}
         <Animated.View style={{ ...estilos.logoContainer, opacity: fadeAnim }}>
-          <Image 
-            source={require('@/assets/images/Robo2.png')} 
+          <Image
+            source={require('@/assets/images/Robo2.png')}
             style={estilos.logo}
             resizeMode="contain"
           />
@@ -91,13 +95,28 @@ export default function TelaCadastro() {
           <Text style={estilos.label}>E-mail</Text>
           <TextInput
             placeholder="seunome@email.com"
+            value={username}
+            onChangeText={text => setUsername(text)}
             style={estilos.input}
             keyboardType="email-address"
             placeholderTextColor="#aaa"
           />
         </View>
 
-        <TouchableOpacity style={estilos.botao} onPress={irParaInicio}>
+        <View style={estilos.formGroup}>
+          <Text style={estilos.label}>Senha</Text>
+          <TextInput
+            value={password}
+            onChangeText={text => setPassword(text)}
+            placeholder='*******'
+            style={estilos.input}
+            keyboardType="visible-password"
+            placeholderTextColor="#aaa"
+          />
+        </View>
+
+
+        <TouchableOpacity style={estilos.botao} onPress={async () => await fazerCadastro(username, password)}>
           <Text style={estilos.textoBotao}>Criar Conta</Text>
         </TouchableOpacity>
       </ScrollView>

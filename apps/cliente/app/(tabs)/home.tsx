@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Href, useRouter } from 'expo-router';
 
 export default function TelaHome() {
   const router = useRouter();
 
-  const irPara = (rota) => {
+  const irPara = (rota : Href) => {
     router.push(rota);
   };
 
@@ -30,8 +30,8 @@ export default function TelaHome() {
 
         <Text style={estilos.saudacao}>Olá, Mateus</Text>
 
-        <TouchableOpacity 
-          onPress={() => irPara('/pedido')} 
+        <TouchableOpacity
+          onPress={() => irPara('/pedido')}
           style={estilos.botaoPedido}
           activeOpacity={0.8}
         >
@@ -71,8 +71,8 @@ export default function TelaHome() {
         </View>
 
         {/* Botão Flutuante - Robô */}
-        <TouchableOpacity 
-          style={estilos.roboBotao} 
+        <TouchableOpacity
+          style={estilos.roboBotao}
           onPress={() => irPara('/pedido')}
           activeOpacity={0.7}
         >
