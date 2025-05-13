@@ -114,7 +114,6 @@ const estilos = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   scrollContainer: {
-    alignItems: 'center',
     padding: 24,
     paddingBottom: 48,
   },
@@ -132,14 +131,15 @@ const estilos = StyleSheet.create({
     top: -40,
     left: 0,
     right: 0,
-    height: 200,
+    height: 260,
     backgroundColor: '#78aeb4',
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
     zIndex: -1,
   },
   cabecalhoContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 40,
     marginTop: 24,
@@ -151,7 +151,7 @@ const estilos = StyleSheet.create({
     backgroundColor: '#ffffff30',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginBottom: 12,
   },
   iconText: {
     color: '#fff',
@@ -162,6 +162,7 @@ const estilos = StyleSheet.create({
     fontSize: 36,
     fontWeight: '600',
     color: '#FFFFFF',
+    textAlign: 'center',
   },
   faqContainer: {
     width: '100%',
@@ -182,13 +183,12 @@ const estilos = StyleSheet.create({
     padding: 16,
     backgroundColor: '#F5F5F5',
     borderRadius: 12,
-    alignItems: 'center',
   },
   perguntaTexto: {
     fontSize: 16,
     fontWeight: '500',
     color: '#333',
-    textAlign: 'center',
+    textAlign: 'left',
   },
   respostaContainer: {
     padding: 16,
@@ -199,7 +199,7 @@ const estilos = StyleSheet.create({
     fontSize: 15,
     color: '#555',
     lineHeight: 22,
-    textAlign: 'center',
+    textAlign: 'left',
   },
   contatoContainer: {
     marginTop: 32,
