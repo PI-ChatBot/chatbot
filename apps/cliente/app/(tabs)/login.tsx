@@ -6,6 +6,8 @@ export default function TelaLogin() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const router = useRouter();
   const [lembrarSenha, setLembrarSenha] = useState(false);
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -22,6 +24,8 @@ export default function TelaLogin() {
   const toggleLembrarSenha = () => {
     setLembrarSenha(!lembrarSenha);
   };
+
+  const isFormValid = email.trim() !== '' && senha.trim() !== '';
 
   return (
     <SafeAreaView style={estilos.container}>
@@ -48,6 +52,8 @@ export default function TelaLogin() {
               style={estilos.input}
               keyboardType="email-address"
               placeholderTextColor="#aaa"
+              value={email}
+              onChangeText={setEmail}
             />
           </View>
 
@@ -58,6 +64,8 @@ export default function TelaLogin() {
               style={estilos.input}
               secureTextEntry
               placeholderTextColor="#aaa"
+              value={senha}
+              onChangeText={setSenha}
             />
           </View>
 
@@ -69,7 +77,11 @@ export default function TelaLogin() {
             <Text style={estilos.labelCheckbox}>Lembrar minha senha</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={estilos.botao} onPress={irParaInicio}>
+          <TouchableOpacity 
+            style={[estilos.botao, !isFormValid && { backgroundColor: '#ccc' }]} 
+            onPress={irParaInicio} 
+            disabled={!isFormValid}
+          >
             <Text style={estilos.textoBotao}>Login</Text>
           </TouchableOpacity>
 
