@@ -162,7 +162,7 @@ const estilos = StyleSheet.create({
   },
   fundoTopo: {
     position: 'absolute',
-    top: -170,
+    top: -190,
     left: 0,
     right: 0,
     height: 430,
@@ -181,13 +181,13 @@ const estilos = StyleSheet.create({
     fontSize: 16,
     color: '#FFFFFF',
     fontWeight: '500',
-    marginTop: -60,
+    marginTop: -80,
   },
   cabecalhoContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 16, 
+    marginBottom: 12, 
   },
   iconContainer: {
     width: 50,
@@ -197,7 +197,7 @@ const estilos = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 110,
-    marginTop: -110,
+    marginTop: -130,
   },
   titulo: {
     fontSize: 32,
