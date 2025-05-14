@@ -1,0 +1,175 @@
+-- Criar banco de dados
+CREATE DATABASE IF NOT EXISTS `polichat`;
+-- Usar o banco de dados
+USE `polichat`;
+-- Extensão uuid-ossp: gera UUIDs para PKs
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+-- Unidade do Colégio
+CREATE TABLE IF NOT EXISTS local.unidade (
+    -- ID da unidade (PK)
+    id_unidade UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- nome da unidade
+    nome VARCHAR(100) NOT NULL UNIQUE,
+    -- endereço da unidade
+    endereco VARCHAR(200) NOT NULL UNIQUE
+);
+-- Restaurante ou Lanchonete
+CREATE TABLE IF NOT EXISTS local.restaurante (
+    -- ID do restaurante (PK)
+    id_restaurante UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- Unidade do restaurante (FK)
+    id_unidade UUID NOT NULL,
+    -- Nome do restaurante
+    nome VARCHAR(100) NOT NULL UNIQUE,
+    -- Localização do restaurante
+    localizacao VARCHAR(70) NOT NULL,
+    -- FK Unidade
+    CONSTRAINT fk_unidade FOREIGN KEY (id_unidade) REFERENCES local.unidade (id_unidade) ON DELETE CASCADE ON UPDATE CASCADE,
+);
+-- Administrador do colégio responsável por gerenciar unidades e restaurantes
+CREATE TABLE IF NOT EXISTS user.administrador(
+    -- ID do administrador
+    id_administrador UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- Nome do administrador
+    nome VARCHAR(100) NOT NULL,
+    -- E-mail do administrador
+    email VARCHAR(255) NOT NULL UNIQUE,
+    -- Senha (hash) do administrador
+    senha CHAR(60),
+    -- Função do administrador (diretor, coordenador, etc)
+    funcao VARCHAR(60) NOT NULL,
+    -- Se o administrador está ativo ou inativo (demitido)
+    ativo BOOLEAN DEFAULT TRUE,
+);
+-- Relação entre unidade e administrador
+CREATE TABLE IF NOT EXISTS local.unidade_administrador(
+    -- ID da unidade (FK)
+    id_unidade UUID NOT NULL,
+    -- ID do administrador (FK)
+    id_administrador UUID NOT NULL,
+    -- FK Unidade
+    CONSTRAINT fk_unidade FOREIGN KEY (id_unidade) REFERENCES local.unidade (id_unidade) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FK Administrador
+    CONSTRAINT fk_administrador FOREIGN KEY (id_administrador) REFERENCES user.administrador (id_administrador) ON DELETE CASCADE ON UPDATE CASCADE,
+);
+-- Horário de funcionamento do restaurante
+CREATE TABLE IF NOT EXISTS info.horario_funcionamento(
+    -- ID do horário (PK)
+    id_horario UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- ID do restaurante (FK)
+    id_restaurante UUID NOT NULL,
+    -- Dia da semana (0 = domingo, 1 = segunda, ..., 6 = sábado)
+    dia_semana INT NOT NULL CHECK (
+        dia_semana >= 0
+        AND dia_semana <= 6
+    ),
+    -- Hora de abertura
+    hora_abertura TIME NOT NULL,
+    -- Hora de fechamento
+    hora_fechamento TIME NOT NULL,
+    -- FK Restaurante
+    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
+);
+-- Telefones do restaurante
+CREATE TABLE IF NOT EXISTS info.telefone(
+    -- ID do telefone (PK)
+    id_telefone UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- ID do restaurante (FK)
+    id_restaurante UUID NOT NULL,
+    -- Tipo do telefone (fixo, celular, fax)
+    tipo VARCHAR(10) NOT NULL,
+    -- Número do telefone
+    numero VARCHAR(20) NOT NULL UNIQUE,
+    -- Se possui WhatsApp
+    whatsapp BOOLEAN DEFAULT FALSE,
+    -- FK Restaurante
+    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
+);
+-- Categoria dos itens
+CREATE TABLE IF NOT EXISTS cardapio.categoria(
+    -- ID da categoria (PK)
+    id_categoria UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- Nome da categoria
+    nome VARCHAR(100) NOT NULL UNIQUE,
+    -- Ícone ou imagem da categoria (URI)
+    icone VARCHAR(255) DEFAULT NULL,
+);
+-- Item do cardápio do restaurante
+CREATE TABLE IF NOT EXISTS cardapio.item(
+    -- ID do item (PK)
+    id_item UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- ID do restaurante (FK)
+    id_restaurante UUID NOT NULL,
+    -- ID da categoria (FK)
+    id_categoria UUID NOT NULL,
+    -- Nome do item
+    nome VARCHAR(100) NOT NULL,
+    -- Descrição
+    descricao TEXT NOT NULL,
+    -- Estoque
+    estoque INT NOT NULL CHECK (estoque >= 0),
+    -- Preço
+    preco NUMERIC(10, 2) NOT NULL CHECK (preco >= 0),
+    -- Preço promocional (para membros do colégio)
+    preco_especial NUMERIC(10, 2) DEFAULT NULL CHECK (preco_especial >= 0),
+    -- Imagem do item (URI)
+    imagem VARCHAR(255) DEFAULT NULL,
+    -- FK Restaurante
+    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FK Categoria
+    CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES cardapio.categoria (id_categoria) ON DELETE CASCADE ON UPDATE CASCADE,
+);
+-- Ingrediente do item do cardápio
+CREATE TABLE IF NOT EXISTS cardapio.ingrediente(
+    -- ID do ingrediente (PK)
+    id_ingrediente UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- Nome do ingrediente
+    nome VARCHAR(100) NOT NULL,
+    -- Imagem (URI)
+    imagem VARCHAR(255) DEFAULT NULL,
+);
+-- Relação entre item do cardápio e ingrediente
+CREATE TABLE IF NOT EXISTS cardapio.item_ingrediente(
+    -- ID do item (FK)
+    id_item UUID NOT NULL,
+    -- ID do ingrediente (FK)
+    id_ingrediente UUID NOT NULL,
+    -- Papel do ingrediente (tempero, molho, acompanhamento...)
+    papel VARCHAR(50) NOT NULL,
+    -- FK Item
+    CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FK Ingrediente
+    CONSTRAINT fk_ingrediente FOREIGN KEY (id_ingrediente) REFERENCES cardapio.ingrediente (id_ingrediente) ON DELETE CASCADE ON UPDATE CASCADE,
+);
+-- Relação de composição entre itens do cardápio
+CREATE TABLE IF NOT EXISTS cardapio.item_composicao(
+    -- ID do item (FK)
+    id_item UUID NOT NULL,
+    -- ID do item composto (FK)
+    id_item_composto UUID NOT NULL,
+    -- Tipo de composição (principal, acompanhamento, bebida, etc)
+    tipo_composicao VARCHAR(25) NOT NULL,
+    -- Quantidade
+    quantidade INT NOT NULL CHECK (quantidade > 0),
+    -- FK Item
+    CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FK Item Composto
+    CONSTRAINT fk_item_composto FOREIGN KEY (id_item_composto) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE,
+);
+-- Restrição alimentar
+CREATE TABLE IF NOT EXISTS restricao.restricao_alimentar(
+    -- ID da restrição (PK)
+    id_restricao UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- Nome da restrição
+    nome VARCHAR(100) NOT NULL UNIQUE,
+    -- Ícone ou imagem da restrição (URI)
+    icone VARCHAR(255) DEFAULT NULL,
+);
+-- Relação entre restrição alimentar e ingrediente
+
+-- Funcionário do restaurante responsável por preparar os pratos
+-- Cliente que realiza um pedido
+-- Restrições alimentares do cliente
+-- Pedido realizado ao restaurante
+-- Item no pedido
+-- Restrições alimentares anotadas no pedido
