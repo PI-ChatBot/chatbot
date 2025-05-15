@@ -21,50 +21,50 @@ export default function TelaCardapio() {
   const produtos = [
     {
       id: '1',
-      nome: 'Mussarela',
-      descricao: 'A clássica pizza',
-      preco: 'R$ 51.00',
-      imagem: require('assets/images/Robo.png'),
+      nome: 'Filé de Frango Grelhado',
+      descricao: 'Filé de frango grelhado com arroz, feijão, fritas e salada',
+      preco: 'R$ 28,90',
+      imagem: require('assets/images/filegrelhado.jpg'),
       categoria: 'Pratos Feitos'
     },
     {
       id: '2',
-      nome: 'Calabresa',
-      descricao: 'A favorita do chef',
-      preco: 'R$ 52.50',
-      imagem: require('assets/images/Robo.png'),
+      nome: 'Linguiça Toscana Grelhada',
+      descricao: 'Linguiça toscana grelhada com arroz, feijão, fritas e salada',
+      preco: 'R$ 28,99',
+      imagem: require('assets/images/lingtoscana.avif'),
       categoria: 'Pratos Feitos'
     },
     {
       id: '3',
-      nome: 'Frango c/ catupiry',
-      descricao: 'Nada melhor',
-      preco: 'R$ 58.00',
-      imagem: require('assets/images/Robo.png'),
+      nome: 'Strogonoff de Frango',
+      descricao: 'Strogonoff de frango, com arroz e batata frita',
+      preco: 'R$ 29,99',
+      imagem: require('assets/images/strogonoff.webp'),
       categoria: 'Pratos Feitos'
     },
     {
       id: '4',
-      nome: 'Peperonni',
-      descricao: 'A mais saída da casa',
-      preco: 'R$ 56.60',
-      imagem: require('assets/images/Robo.png'),
+      nome: 'Nuggets de Frango',
+      descricao: 'Com arroz, feijão, fritas e salada',
+      preco: 'R$ 28,99',
+      imagem: require('assets/images/nuggets.jpg'),
       categoria: 'Pratos Feitos'
     },
     {
       id: '5',
-      nome: 'Brigadeiro',
-      descricao: 'Sobremesa tradicional',
+      nome: 'Kinder Bueno',
+      descricao: 'Delicioso chocolate com recheio de avelã e creme de leite',
       preco: 'R$ 12.90',
-      imagem: require('assets/images/Robo.png'),
+      imagem: require('assets/images/kinderbueno.png'),
       categoria: 'Sobremesas'
     },
     {
       id: '6',
-      nome: 'Coxinha',
+      nome: 'Salgado comum',
       descricao: 'Salgado tradicional',
-      preco: 'R$ 8.50',
-      imagem: require('assets/images/Robo.png'),
+      preco: 'R$ 8,00',
+      imagem: require('assets/images/salgados.jpg'),
       categoria: 'Salgados'
     }
   ];
@@ -112,8 +112,8 @@ export default function TelaCardapio() {
         defaultSource={require('assets/images/Robo.png')}
       />
       <Text style={estilos.produtoNome}>{item.nome}</Text>
-      <Text style={estilos.produtoDescricao}>{item.descricao}</Text>
       <Text style={estilos.produtoPreco}>{item.preco}</Text>
+      <Text style={estilos.produtoDescricao}>{item.descricao}</Text>
     </Animated.View>
   );
 
@@ -251,10 +251,11 @@ const estilos = StyleSheet.create({
     elevation: 2,
   },
   produtoImagem: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: '100%',
+    height: 110,
+    borderRadius: 12,
     marginBottom: 12,
+    resizeMode: 'cover',
   },
   produtoNome: {
     fontSize: 18,
@@ -273,5 +274,6 @@ const estilos = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#78aeb4',
+    marginBottom: 10, // Adicione esta linha para espaçamento extra
   },
 });
