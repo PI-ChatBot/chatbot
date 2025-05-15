@@ -55,7 +55,7 @@ export default function TelaCardapio() {
       id: '5',
       nome: 'Kinder Bueno',
       descricao: 'Delicioso chocolate com recheio de avelã e creme de leite',
-      preco: 'R$ 12.90',
+      preco: 'R$ 12,90',
       imagem: require('assets/images/kinderbueno.png'),
       categoria: 'Sobremesas'
     },
