@@ -1,25 +1,23 @@
-import React, { useEffect, useRef } from 'react';
-import { Animated, StyleSheet, Text, View, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import { Animated, StyleSheet, Text, View, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
+
+const horarios = [
+  { id: '0', dia: 'Domingo', horario: 'Fechado' },
+  { id: '1', dia: 'Segunda-feira', horario: '08:00 - 18:00' },
+  { id: '2', dia: 'Terça-feira', horario: '08:00 - 18:00' },
+  { id: '3', dia: 'Quarta-feira', horario: '08:00 - 18:00' },
+  { id: '4', dia: 'Quinta-feira', horario: '08:00 - 18:00' },
+  { id: '5', dia: 'Sexta-feira', horario: '08:00 - 18:00' },
+  { id: '6', dia: 'Sábado', horario: '09:00 - 14:00' },
+];
 
 export default function TelaFuncionamento() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const router = useRouter();
   const insets = useSafeAreaInsets();
-
-  const horarios = [
-    { dia: 'Domingo', horario: 'Fechado' },
-    { dia: 'Segunda-feira', horario: '08:00 - 18:00' },
-    { dia: 'Terça-feira', horario: '08:00 - 18:00' },
-    { dia: 'Quarta-feira', horario: '08:00 - 18:00' },
-    { dia: 'Quinta-feira', horario: '08:00 - 18:00' },
-    { dia: 'Sexta-feira', horario: '08:00 - 18:00' },
-    { dia: 'Sábado', horario: '09:00 - 14:00' },
-  ];
-
-  const diaAtual = new Date().getDay();
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -33,55 +31,40 @@ export default function TelaFuncionamento() {
     router.replace('/(tabs)/home');
   };
 
+  const renderHorarioItem = ({ item }) => {
+    const diaAtual = new Date().getDay().toString();
+    const isHoje = item.id === diaAtual;
+
+    return (
+      <View style={[estilos.cardHorario, isHoje && estilos.cardHorarioHoje, estilos.cardHorarioLinha]}>
+        <Text style={[estilos.diaTitulo, isHoje && estilos.textoHorarioHoje]}>{item.dia}</Text>
+        <Text style={[estilos.horarioDescricao, isHoje && estilos.textoHorarioHoje]}>{item.horario}</Text>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={estilos.container}>
-      <ScrollView
-        contentContainerStyle={[estilos.scrollContainer, { paddingTop: insets.top + 24 }]}
+      <View style={estilos.fundoTopo} />
+
+      <TouchableOpacity onPress={irParaInicio} style={[estilos.botaoVoltar, { marginTop: insets.top + 24 }]}>
+        <Text style={estilos.textoVoltar}>← Voltar</Text>
+      </TouchableOpacity>
+
+      <View style={[estilos.cabecalhoContainer, { marginTop: insets.top + 24 }]}>
+        <View style={estilos.iconContainer}>
+          <MaterialIcons name="access-time" size={28} color="#fff" />
+        </View>
+        <Text style={estilos.titulo}>Funcionamento</Text>
+      </View>
+
+      <FlatList
+        data={horarios}
+        renderItem={renderHorarioItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={estilos.listaHorariosContainer}
         showsVerticalScrollIndicator={false}
-      >
-        <View style={estilos.fundoTopo} />
-
-        <TouchableOpacity onPress={irParaInicio} style={estilos.botaoVoltar}>
-          <Text style={estilos.textoVoltar}>← Voltar</Text>
-        </TouchableOpacity>
-
-        <View style={estilos.cabecalhoContainer}>
-          <View style={estilos.iconContainer}>
-            <MaterialIcons name="access-time" size={28} color="#fff" />
-          </View>
-          <Text style={estilos.titulo}>Horários de Funcionamento</Text>
-        </View>
-
-        <View style={estilos.horariosContainer}>
-          {horarios.map((item, index) => (
-            <Animated.View
-              key={index}
-              style={[
-                estilos.horarioItem,
-                { opacity: fadeAnim },
-                index === diaAtual && estilos.horarioItemAtual, // Aplica estilo ao dia atual
-              ]}
-            >
-              <Text
-                style={[
-                  estilos.diaTexto,
-                  index === diaAtual && estilos.diaTextoAtual, // Aplica estilo ao texto do dia atual
-                ]}
-              >
-                {item.dia}
-              </Text>
-              <Text
-                style={[
-                  estilos.horarioTexto,
-                  index === diaAtual && estilos.horarioTextoAtual, // Aplica estilo ao horário do dia atual
-                ]}
-              >
-                {item.horario}
-              </Text>
-            </Animated.View>
-          ))}
-        </View>
-      </ScrollView>
+      />
     </SafeAreaView>
   );
 }
@@ -91,37 +74,34 @@ const estilos = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-  scrollContainer: {
-    padding: 24,
-    paddingBottom: 48,
-  },
-  botaoVoltar: {
-    alignSelf: 'flex-start',
-    marginBottom: 12,
-    marginTop: -60,
-  },
-  textoVoltar: {
-    fontSize: 16,
-    color: '#FFFFFF',
-    fontWeight: '500',
-  },
   fundoTopo: {
     position: 'absolute',
-    top: -40,
+    top: -190,
     left: 0,
     right: 0,
-    height: 260,
+    height: 430,
     backgroundColor: '#78aeb4',
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
     zIndex: -1,
   },
+  botaoVoltar: {
+    alignSelf: 'flex-start',
+    marginBottom: 10,
+    marginLeft: 24,
+    zIndex: 1,
+  },
+  textoVoltar: {
+    fontSize: 16,
+    color: '#FFFFFF',
+    fontWeight: '500',
+    marginTop: -80,
+  },
   cabecalhoContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 40,
-    marginTop: 50,
+    marginBottom: 12, 
   },
   iconContainer: {
     width: 50,
@@ -130,50 +110,53 @@ const estilos = StyleSheet.create({
     backgroundColor: '#ffffff30',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 12,
-    marginTop: -40,
+    marginBottom: 110,
+    marginTop: -130,
   },
   titulo: {
     fontSize: 32,
     fontWeight: '600',
     color: '#FFFFFF',
     textAlign: 'center',
+    marginTop: -100,
+    marginBottom: 30,
   },
-  horariosContainer: {
-    marginTop: 12,
-    width: '100%',
+  listaHorariosContainer: {
+    paddingHorizontal: 16,
+    paddingBottom: 24,
   },
-  horarioItem: {
+  cardHorario: {
     backgroundColor: '#F5F5F5',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    borderRadius: 16,
+    paddingVertical: 18, // aumentado
+    paddingHorizontal: 20, // aumentado
+    marginBottom: 16, // aumentado o espaçamento entre os dias
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.07,
     shadowRadius: 2,
-    elevation: 2,
+    elevation: 1,
   },
-  horarioItemAtual: {
-    backgroundColor: '#78aeb4', // Azul da tela
+  cardHorarioLinha: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  diaTexto: {
-    fontSize: 16,
-    fontWeight: '500',
+  diaTitulo: {
+    fontSize: 15,
+    fontWeight: '600',
     color: '#333',
   },
-  diaTextoAtual: {
-    color: '#FFFFFF', // Texto branco
-    fontWeight: '700',
-  },
-  horarioTexto: {
-    fontSize: 15,
+  horarioDescricao: {
+    fontSize: 13,
     color: '#555',
+    lineHeight: 18,
   },
-  horarioTextoAtual: {
-    color: '#FFFFFF', // Texto branco
+  cardHorarioHoje: {
+    backgroundColor: '#78aeb4',
+  },
+  textoHorarioHoje: {
+    color: '#FFFFFF',
+    fontWeight: '700',
   },
 });
