@@ -1,39 +1,42 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Animated, SafeAreaView, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Animated, StyleSheet, Text, View, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { MaterialIcons } from '@expo/vector-icons';
+
+const perguntasRespostas = [
+  {
+    id: '1',
+    pergunta: 'O que é este aplicativo?',
+    resposta: 'Este aplicativo foi desenvolvido para facilitar o acesso a informações e serviços importantes para nossos usuários.',
+  },
+  {
+    id: '2',
+    pergunta: 'Como posso alterar minhas configurações de conta?',
+    resposta: 'Vá até o menu "Perfil", selecione "Configurações" e ajuste as preferências conforme desejar.',
+  },
+  {
+    id: '3',
+    pergunta: 'O que fazer se o app não estiver funcionando corretamente?',
+    resposta: 'Recomendamos fechar e reabrir o app. Se o problema persistir, entre em contato com o suporte.',
+  },
+  {
+    id: '4',
+    pergunta: 'O app está disponível para iOS e Android?',
+    resposta: 'Sim, o app está disponível para download tanto na App Store quanto no Google Play.',
+  },
+  {
+    id: '5',
+    pergunta: 'Como posso enviar feedback?',
+    resposta: 'Você pode enviar sugestões e comentários através da opção "Fale Conosco" no menu principal.',
+  },
+];
 
 export default function TelaFAQ() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const router = useRouter();
-  const [expandedItems, setExpandedItems] = useState({});
-
-  const faqItems = [
-    {
-      id: 1,
-      pergunta: 'Como cancelar um pedido?',
-      resposta: 'Para cancelar um pedido, acesse a seção "Meus Pedidos"...'
-    },
-    {
-      id: 2,
-      pergunta: 'Como alterar minha unidade ou restaurante?',
-      resposta: 'Você pode alterar sua unidade ou restaurante...'
-    },
-    {
-      id: 3,
-      pergunta: 'Qual o prazo para reembolso?',
-      resposta: 'Após a confirmação do cancelamento do pedido...'
-    },
-    {
-      id: 4,
-      pergunta: 'Como adicionar métodos de pagamento?',
-      resposta: 'Acesse o menu "Perfil", selecione "Métodos de Pagamento"...'
-    },
-    {
-      id: 5,
-      pergunta: 'Posso fazer pedidos para retirada?',
-      resposta: 'Sim! Ao finalizar seu pedido, selecione a opção...'
-    }
-  ];
+  const insets = useSafeAreaInsets();
+  const [aberta, setAberta] = useState(null);
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -47,63 +50,42 @@ export default function TelaFAQ() {
     router.replace('/(tabs)/home');
   };
 
-  const toggleItem = (id) => {
-    setExpandedItems(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
+  const renderPergunta = ({ item, index }) => (
+    <Animated.View style={[estilos.faqItem, { opacity: fadeAnim }]}>
+      <TouchableOpacity onPress={() => setAberta(aberta === item.id ? null : item.id)}>
+        <View style={estilos.perguntaContainer}>
+          <MaterialIcons name={aberta === item.id ? 'expand-less' : 'expand-more'} size={24} color="#78aeb4" />
+          <Text style={estilos.pergunta}>{item.pergunta}</Text>
+        </View>
+      </TouchableOpacity>
+      {aberta === item.id && (
+        <Text style={estilos.resposta}>{item.resposta}</Text>
+      )}
+    </Animated.View>
+  );
 
   return (
     <SafeAreaView style={estilos.container}>
-      <ScrollView contentContainerStyle={estilos.scrollContainer} showsVerticalScrollIndicator={false}>
+      <View style={estilos.fundoTopo} />
 
-        <View style={estilos.fundoTopo} />
+      <TouchableOpacity onPress={irParaInicio} style={[estilos.botaoVoltar, { marginTop: insets.top + 24 }]}>
+        <Text style={estilos.textoVoltar}>← Voltar</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity onPress={irParaInicio} style={estilos.botaoVoltar}>
-          <Text style={estilos.textoVoltar}>← Voltar</Text>
-        </TouchableOpacity>
-
-        <View style={estilos.cabecalhoContainer}>
-          <View style={estilos.iconContainer}>
-            <Text style={estilos.iconText}>?</Text>
-          </View>
-          <Text style={estilos.tituloFAQ}>FAQ</Text>
+      <View style={[estilos.cabecalhoContainer, { marginTop: insets.top + 24 }]}>
+        <View style={estilos.iconContainer}>
+          <MaterialIcons name="info" size={28} color="#fff" />
         </View>
+        <Text style={estilos.titulo}>FAQ</Text>
+      </View>
 
-        <View style={estilos.faqContainer}>
-          {faqItems.map((item) => {
-            const isExpanded = expandedItems[item.id];
-            return (
-              <Animated.View key={item.id} style={[estilos.faqItemContainer, { opacity: fadeAnim }]}>
-                <TouchableOpacity
-                  style={estilos.perguntaContainer}
-                  onPress={() => toggleItem(item.id)}
-                  activeOpacity={0.7}
-                >
-                  <Text style={estilos.perguntaTexto}>
-                    {isExpanded ? '↓' : '→'} {item.pergunta}
-                  </Text>
-                </TouchableOpacity>
-
-                {isExpanded && (
-                  <Animated.View style={estilos.respostaContainer}>
-                    <Text style={estilos.respostaTexto}>{item.resposta}</Text>
-                  </Animated.View>
-                )}
-              </Animated.View>
-            );
-          })}
-        </View>
-
-        <View style={estilos.contatoContainer}>
-          <Text style={estilos.contatoTitulo}>Ainda tem dúvidas?</Text>
-          <TouchableOpacity style={estilos.botaoContato}>
-            <Text style={estilos.textoBotaoContato}>Fale Conosco</Text>
-          </TouchableOpacity>
-        </View>
-
-      </ScrollView>
+      <FlatList
+        data={perguntasRespostas}
+        renderItem={renderPergunta}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={estilos.faqContainer}
+        showsVerticalScrollIndicator={false}
+      />
     </SafeAreaView>
   );
 }
@@ -113,36 +95,34 @@ const estilos = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-  scrollContainer: {
-    padding: 24,
-    paddingBottom: 48,
-  },
-  botaoVoltar: {
-    alignSelf: 'flex-start',
-    marginBottom: 12,
-  },
-  textoVoltar: {
-    fontSize: 16,
-    color: '#FFFFFF',
-    fontWeight: '500',
-  },
   fundoTopo: {
     position: 'absolute',
-    top: -40,
+    top: -190,
     left: 0,
     right: 0,
-    height: 260,
+    height: 430,
     backgroundColor: '#78aeb4',
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
     zIndex: -1,
   },
+  botaoVoltar: {
+    alignSelf: 'flex-start',
+    marginBottom: 10,
+    marginLeft: 24,
+    zIndex: 1,
+  },
+  textoVoltar: {
+    fontSize: 16,
+    color: '#FFFFFF',
+    fontWeight: '500',
+    marginTop: -80,
+  },
   cabecalhoContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 40,
-    marginTop: 24,
+    marginBottom: 12, 
   },
   iconContainer: {
     width: 50,
@@ -151,78 +131,47 @@ const estilos = StyleSheet.create({
     backgroundColor: '#ffffff30',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 110,
+    marginTop: -130,
   },
-  iconText: {
-    color: '#fff',
-    fontSize: 26,
-    fontWeight: 'bold',
-  },
-  tituloFAQ: {
-    fontSize: 36,
+  titulo: {
+    fontSize: 32,
     fontWeight: '600',
     color: '#FFFFFF',
     textAlign: 'center',
+    marginTop: -100,
+    marginBottom: 30,
   },
   faqContainer: {
-    width: '100%',
-    marginTop: 20,
+    paddingHorizontal: 16,
+    paddingBottom: 24,
   },
-  faqItemContainer: {
-    marginBottom: 12,
-    borderRadius: 12,
-    overflow: 'hidden',
+  faqItem: {
     backgroundColor: '#F5F5F5',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.07,
     shadowRadius: 2,
-    elevation: 2,
+    elevation: 1,
   },
   perguntaContainer: {
-    padding: 16,
-    backgroundColor: '#F5F5F5',
-    borderRadius: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  perguntaTexto: {
-    fontSize: 16,
-    fontWeight: '500',
+  pergunta: {
+    fontSize: 17,
+    fontWeight: '600',
     color: '#333',
-    textAlign: 'left',
+    marginLeft: 8,
+    flex: 1,
   },
-  respostaContainer: {
-    padding: 16,
-    paddingTop: 0,
-    backgroundColor: '#F5F5F5',
-  },
-  respostaTexto: {
+  resposta: {
     fontSize: 15,
     color: '#555',
+    marginTop: 10,
     lineHeight: 22,
-    textAlign: 'left',
-  },
-  contatoContainer: {
-    marginTop: 32,
-    alignItems: 'center',
-    width: '100%',
-  },
-  contatoTitulo: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: '#333',
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  botaoContato: {
-    backgroundColor: '#78aeb4',
-    borderRadius: 12,
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-  },
-  textoBotaoContato: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
   },
 });
