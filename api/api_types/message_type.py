@@ -2,7 +2,7 @@
 from typing import Literal, TypedDict
 
 from typing_extensions import NotRequired
-from api_types import agent_literal
+from api_types import agent_literal, guard_decision_literal
 
 MessageRole = Literal['user', 'assistant', 'system']  # Papéis possíveis
 
@@ -20,6 +20,10 @@ class ChatbotMemory(TypedDict):
     guard_decision
     '''
     agent: agent_literal  # Agente usado
+
+    # Guard Agent
+    # Decisão do Guard Agent
+    guard_decision: NotRequired[guard_decision_literal]
 
 
 class Message(TypedDict):  # Dicionário tipado
