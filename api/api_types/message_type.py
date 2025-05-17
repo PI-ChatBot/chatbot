@@ -1,8 +1,25 @@
 # Modelo de dados das mensagens
+from typing import Literal, TypedDict
 
-from typing import TypedDict, Literal
+from typing_extensions import NotRequired
+from api_types import agent_literal
 
 MessageRole = Literal['user', 'assistant', 'system']  # Papéis possíveis
+
+
+class ChatbotMemory(TypedDict):
+    '''
+    Estrutura de dados para a memória do chatbot.
+    Esta estrutura é usada para armazenar informações relevantes sobre o agente utilizado e outros dados que podem ser necessários durante a conversa.
+
+    Attributes
+    ----------
+    agent: agent_literal
+        O agente utilizado no momento. Este campo é importante para manter o contexto da conversa e garantir que o modelo de linguagem tenha acesso às informações corretas.
+
+    guard_decision
+    '''
+    agent: agent_literal  # Agente usado
 
 
 class Message(TypedDict):  # Dicionário tipado
@@ -23,8 +40,13 @@ class Message(TypedDict):  # Dicionário tipado
         - Para mensagens do usuário (`'user'`), contém a pergunta ou solicitação do usuário.
         - Para mensagens do sistema (`'system'`), contém instruções ou regras que o modelo deve seguir.
         - Para mensagens do assistente (`'assistant'`), contém a resposta gerada pelo modelo em interações anteriores.
+    memory: ChatbotMemory
+        Memória do chatbot, que armazena informações sobre o agente utilizado e outros dados relevantes para a conversa.
+        A memória é utilizada para manter o contexto da conversa e garantir que o modelo de linguagem tenha acesso às informações necessárias para gerar respostas coerentes e relevantes.
     """
     # Papel da mensagem
     role: MessageRole
     # Conteúdo da mensagem
     content: str
+    # Memória do chatbot
+    memory: NotRequired[ChatbotMemory]
