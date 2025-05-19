@@ -1,18 +1,25 @@
 # Código para testar o chatbot via terminal
 
 import os
-import pathlib
 import sys
 from typing import List
 
-from agents import (  # Importação dos agentes
-    GuardAgent
-)
-from api_types import Message
-
 # Adicionar caminho do projeto ao sys.path
-folder_path = pathlib.Path(__file__).resolve()
-sys.path.append(os.path.join(folder_path, "../.."))
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(script_dir, "../.."))
+api_dir = os.path.abspath(os.path.join(script_dir, ".."))
+
+# Certifique-se de que os caminhos não estejam duplicados
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+if api_dir not in sys.path:
+    sys.path.insert(0, api_dir)
+
+# print(f"Caminhos adicionados ao sys.path: {project_root}, {api_dir}")
+
+# Importações após adicionar caminhos ao sys.path
+from agents import GuardAgent
+from api_types import Message
 
 # Função principal
 
@@ -26,12 +33,12 @@ def main():
     # Interações com o usuário
     while True:
         # Limpar o processamento dos agentes (exibir somente as mensagens)
-        os.system('cls' if os.name == 'nt' else 'clear')
+        # os.system('cls' if os.name == 'nt' else 'clear')
 
-        # Exibir mensagens anteriores
+        # Exibir histórico de mensagens entre o usuário e chatbot
         print("\n\n Mensagens: ***************")
         for message in messages:
-            print(f'{message["role"]}: {message['content']}')
+            print(f'{message["role"]}: {message["content"]}')
 
         # Input da entrada do usuário
         prompt = input("Usuário: ")
@@ -45,6 +52,9 @@ def main():
         if memory.get('guard_decision') == 'not allowed':
             messages.append(guard_agent_response)
             continue
+
+        # 2º Executar Classification Agent
+        print('Próxima etapa: Classification Agent')
 
 
 # Garantir que o script seja executado diretamente (e não importado como um módulo)
