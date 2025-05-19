@@ -18,8 +18,11 @@ if api_dir not in sys.path:
 # print(f"Caminhos adicionados ao sys.path: {project_root}, {api_dir}")
 
 # Importações após adicionar caminhos ao sys.path
-from agents import GuardAgent
-from api_types import Message
+# fmt: off
+# noqa: E402
+from agents import GuardAgent  # noqa: E402
+from api_types import Message  # noqa: E402
+# fmt: on
 
 # Função principal
 
@@ -47,6 +50,7 @@ def main():
 
         # 1º Executar Guard Agent
         guard_agent_response = guard_agent.get_response(messages)
+        print("Resposta do Guard Agent:", guard_agent_response)  # debug
         # Se não for permitido, exibir mensagem e reiniciar loop
         memory = guard_agent_response.get('memory', {})
         if memory.get('guard_decision') == 'not allowed':
