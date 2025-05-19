@@ -20,8 +20,11 @@ if api_dir not in sys.path:
 # Importações após adicionar caminhos ao sys.path
 # fmt: off
 # noqa: E402
-from agents import GuardAgent  # noqa: E402
-from api_types import Message  # noqa: E402
+from agents import ( # importação dos agentes # noqa: E402
+    GuardAgent,
+    ClassificationAgent
+) 
+from api_types import Message, agent_literal  # noqa: E402
 # fmt: on
 
 # Função principal
@@ -30,6 +33,7 @@ from api_types import Message  # noqa: E402
 def main():
     # Instanciar agentes
     guard_agent = GuardAgent()
+    classification_agent = ClassificationAgent()
 
     # Lista de mensagens
     messages: List[Message] = []
@@ -50,7 +54,7 @@ def main():
 
         # 1º Executar Guard Agent
         guard_agent_response = guard_agent.get_response(messages)
-        print("Resposta do Guard Agent:", guard_agent_response)  # debug
+        print("\n\tResposta do Guard Agent:", guard_agent_response)  # debug
         # Se não for permitido, exibir mensagem e reiniciar loop
         memory = guard_agent_response.get('memory', {})
         if memory.get('guard_decision') == 'not allowed':
@@ -58,7 +62,15 @@ def main():
             continue
 
         # 2º Executar Classification Agent
-        print('Próxima etapa: Classification Agent')
+        classification_agent_response = classification_agent.get_response(
+            messages)
+        # Agente escolhido
+        chosen_agent = classification_agent_response.get(
+            'memory', {}).get('classification_decision')
+        print("\tResposta do Classification Agent:",  # debug
+              classification_agent_response)
+        print("\tAgente escolhido:",  # debug
+              chosen_agent)
 
 
 # Garantir que o script seja executado diretamente (e não importado como um módulo)

@@ -25,6 +25,10 @@ class ChatbotMemory(TypedDict):
     # Decisão do Guard Agent
     guard_decision: NotRequired[guard_decision_literal]
 
+    # Recommendation Agent
+    # Decisão do Recommendation Agent
+    classification_decision: NotRequired[agent_literal]
+
 
 class Message(TypedDict):  # Dicionário tipado
     """
