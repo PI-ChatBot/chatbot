@@ -3,12 +3,14 @@ import { Animated, StyleSheet, Text, View, ScrollView, TouchableOpacity, SafeAre
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
+import { supabase } from '../../lib/supabase';
 
 export default function TelaCardapio() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [categoriaAtiva, setCategoriaAtiva] = useState('Todos');
+  const [produtos, setProdutos] = useState([]);
 
   const categorias = [
     'Todos',
@@ -16,57 +18,6 @@ export default function TelaCardapio() {
     'Pratos Feitos',
     'Salgados',
     'Bebidas',
-  ];
-
-  const produtos = [
-    {
-      id: '1',
-      nome: 'Filé de Frango Grelhado',
-      descricao: 'Filé de frango grelhado com arroz, feijão, fritas e salada',
-      preco: 'R$ 28,90',
-      imagem: require('assets/images/filegrelhado.jpg'),
-      categoria: 'Pratos Feitos'
-    },
-    {
-      id: '2',
-      nome: 'Linguiça Toscana Grelhada',
-      descricao: 'Linguiça toscana grelhada com arroz, feijão, fritas e salada',
-      preco: 'R$ 28,99',
-      imagem: require('assets/images/lingtoscana.avif'),
-      categoria: 'Pratos Feitos'
-    },
-    {
-      id: '3',
-      nome: 'Strogonoff de Frango',
-      descricao: 'Strogonoff de frango, com arroz e batata frita',
-      preco: 'R$ 29,99',
-      imagem: require('assets/images/strogonoff.webp'),
-      categoria: 'Pratos Feitos'
-    },
-    {
-      id: '4',
-      nome: 'Nuggets de Frango',
-      descricao: 'Com arroz, feijão, fritas e salada',
-      preco: 'R$ 28,99',
-      imagem: require('assets/images/nuggets.jpg'),
-      categoria: 'Pratos Feitos'
-    },
-    {
-      id: '5',
-      nome: 'Kinder Bueno',
-      descricao: 'Delicioso chocolate com recheio de avelã e creme de leite',
-      preco: 'R$ 12,90',
-      imagem: require('assets/images/kinderbueno.png'),
-      categoria: 'Sobremesas'
-    },
-    {
-      id: '6',
-      nome: 'Salgado comum',
-      descricao: 'Salgado tradicional',
-      preco: 'R$ 8,00',
-      imagem: require('assets/images/salgados.jpg'),
-      categoria: 'Salgados'
-    }
   ];
 
   const produtosFiltrados = categoriaAtiva === 'Todos'
@@ -79,6 +30,17 @@ export default function TelaCardapio() {
       duration: 500,
       useNativeDriver: true,
     }).start();
+
+    async function carregarProdutos() {
+      const { data, error } = await supabase.from('produtos').select('*');
+      if (error) {
+        console.error('Erro ao carregar produtos:', error);
+      } else {
+        setProdutos(data);
+      }
+    }
+
+    carregarProdutos();
   }, []);
 
   const irParaInicio = () => {
@@ -107,7 +69,7 @@ export default function TelaCardapio() {
   const renderProduto = ({ item }) => (
     <Animated.View style={[estilos.produtoItem, { opacity: fadeAnim }]}>
       <Image
-        source={item.imagem}
+        source={{ uri: item.imagem }}
         style={estilos.produtoImagem}
         defaultSource={require('assets/images/Robo.png')}
       />
