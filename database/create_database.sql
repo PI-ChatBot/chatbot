@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS user.administrador(
     nome VARCHAR(100) NOT NULL,
     -- E-mail do administrador
     email VARCHAR(255) NOT NULL UNIQUE,
-    -- Senha (hash) do administrador
-    senha CHAR(60),
+    -- Hash da senha do administrador
+    hash_senha CHAR(60),
     -- Função do administrador (diretor, coordenador, etc)
     funcao VARCHAR(60) NOT NULL,
     -- Se o administrador está ativo ou inativo (demitido)
@@ -178,6 +178,24 @@ CREATE TABLE IF NOT EXISTS restricao.restricao_alimentar_ingrediente(
     CONSTRAINT fk_ingrediente FOREIGN KEY (id_ingrediente) REFERENCES cardapio.ingrediente (id_ingrediente) ON DELETE CASCADE ON UPDATE CASCADE,
 );
 -- Funcionário do restaurante responsável por preparar os pratos
+CREATE TABLE IF NOT EXISTS user.funcionario(
+    -- ID do funcionário (PK)
+    id_funcionario UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- ID do restaurante (FK)
+    id_restaurante UUID NOT NULL,
+    -- Nome do funcionário
+    nome VARCHAR(150) NOT NULL,
+    -- E-mail do funcionário
+    email VARCHAR(255) NOT NULL UNIQUE,
+    -- Hash da senha do funcionário
+    hash_senha CHAR(60),
+    -- Função do funcionário (cozinheiro, atendente, etc)
+    funcao VARCHAR(60) NOT NULL,
+    -- Se o funcionário está ativo ou inativo (demitido)
+    ativo BOOLEAN DEFAULT TRUE,
+    -- FK Restaurante
+    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
+);
 -- Cliente que realiza um pedido
 -- Restrições alimentares do cliente
 -- Pedido realizado ao restaurante
