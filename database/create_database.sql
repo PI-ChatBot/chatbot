@@ -286,3 +286,13 @@ CREATE TABLE IF NOT EXISTS pedido.item_pedido(
     CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE,
 );
 -- Restrições alimentares anotadas no pedido
+CREATE TABLE IF NOT EXISTS restricao.restricao_pedido(
+    -- ID do pedido (FK)
+    id_pedido UUID NOT NULL,
+    -- ID da restrição (FK)
+    id_restricao UUID NOT NULL,
+    -- FK Pedido
+    CONSTRAINT fk_pedido FOREIGN KEY (id_pedido) REFERENCES pedido.pedido (id_pedido) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FK Restrição
+    CONSTRAINT fk_restricao FOREIGN KEY (id_restricao) REFERENCES restricao.restricao_alimentar (id_restricao) ON DELETE CASCADE ON UPDATE CASCADE,
+);
