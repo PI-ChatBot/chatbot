@@ -225,5 +225,45 @@ CREATE TABLE IF NOT EXISTS restricao.restricao_cliente(
     CONSTRAINT fk_restricao FOREIGN KEY (id_restricao) REFERENCES restricao.restricao_alimentar (id_restricao) ON DELETE CASCADE ON UPDATE CASCADE,
 );
 -- Pedido realizado ao restaurante
+CREATE TABLE IF NOT EXISTS pedido.pedido(
+    -- ID do pedido (PK)
+    id_pedido UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- ID do restaurante (FK)
+    id_restaurante UUID NOT NULL,
+    -- ID do funcionário (FK)
+    id_funcionario UUID NULL,
+    -- ID do cliente (FK)
+    id_cliente UUID NULL,
+    -- Nome do cliente
+    nome_cliente VARCHAR(150) NOT NULL,
+    -- Status do pedido (pendente, em preparo, pronto, entregue, cancelado)
+    status VARCHAR(20) NOT NULL CHECK (
+        status IN (
+            'pendente',
+            'em_preparo',
+            'pronto',
+            'entregue',
+            'cancelado'
+        )
+    ),
+    -- Subtotal do pedido
+    subtotal NUMERIC(10, 2) NOT NULL CHECK (subtotal >= 0),
+    -- Desconto do pedido
+    desconto NUMERIC(10, 2) DEFAULT NULL CHECK (desconto >= 0),
+    -- Código de retirada do pedido
+    codigo_retirada VARCHAR(5) NOT NULL,
+    -- Avaliação do pedido (1 a 5)
+    avaliacao INT DEFAULT NULL CHECK (
+        avaliacao >= 1
+        AND avaliacao <= 5
+    ),
+    -- FKs:
+    -- FK Restaurante
+    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FK Funcionário
+    CONSTRAINT fk_funcionario FOREIGN KEY (id_funcionario) REFERENCES user.funcionario (id_funcionario) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FK Cliente
+    CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES user.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
+);
 -- Item no pedido
 -- Restrições alimentares anotadas no pedido
