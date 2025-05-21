@@ -1,8 +1,12 @@
--- Script DDL (PostgreSQL) para criar o banco de dados
--- Criar banco de dados
-CREATE DATABASE IF NOT EXISTS `polichat`;
--- Usar o banco de dados
-USE `polichat`;
+-- Criar schemas
+CREATE SCHEMA IF NOT EXISTS local;
+CREATE SCHEMA IF NOT EXISTS usuario;
+CREATE SCHEMA IF NOT EXISTS info;
+CREATE SCHEMA IF NOT EXISTS cardapio;
+CREATE SCHEMA IF NOT EXISTS pedido;
+CREATE SCHEMA IF NOT EXISTS restricao;
+-- -----------------------------------------------------
+-- Criar tabelas
 -- Extensão uuid-ossp: gera UUIDs para PKs
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- Unidade do Colégio
@@ -25,10 +29,10 @@ CREATE TABLE IF NOT EXISTS local.restaurante (
     -- Localização do restaurante
     localizacao VARCHAR(70) NOT NULL,
     -- FK Unidade
-    CONSTRAINT fk_unidade FOREIGN KEY (id_unidade) REFERENCES local.unidade (id_unidade) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_unidade FOREIGN KEY (id_unidade) REFERENCES local.unidade (id_unidade) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Administrador do colégio responsável por gerenciar unidades e restaurantes
-CREATE TABLE IF NOT EXISTS user.administrador(
+CREATE TABLE IF NOT EXISTS usuario.administrador(
     -- ID do administrador
     id_administrador UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     -- Nome do administrador
@@ -40,7 +44,7 @@ CREATE TABLE IF NOT EXISTS user.administrador(
     -- Função do administrador (diretor, coordenador, etc)
     funcao VARCHAR(60) NOT NULL,
     -- Se o administrador está ativo ou inativo (demitido)
-    ativo BOOLEAN DEFAULT TRUE,
+    ativo BOOLEAN DEFAULT TRUE
 );
 -- Relação entre unidade e administrador
 CREATE TABLE IF NOT EXISTS local.unidade_administrador(
@@ -51,7 +55,7 @@ CREATE TABLE IF NOT EXISTS local.unidade_administrador(
     -- FK Unidade
     CONSTRAINT fk_unidade FOREIGN KEY (id_unidade) REFERENCES local.unidade (id_unidade) ON DELETE CASCADE ON UPDATE CASCADE,
     -- FK Administrador
-    CONSTRAINT fk_administrador FOREIGN KEY (id_administrador) REFERENCES user.administrador (id_administrador) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_administrador FOREIGN KEY (id_administrador) REFERENCES usuario.administrador (id_administrador) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Horário de funcionamento do restaurante
 CREATE TABLE IF NOT EXISTS info.horario_funcionamento(
@@ -69,7 +73,7 @@ CREATE TABLE IF NOT EXISTS info.horario_funcionamento(
     -- Hora de fechamento
     hora_fechamento TIME NOT NULL,
     -- FK Restaurante
-    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Telefones do restaurante
 CREATE TABLE IF NOT EXISTS info.telefone(
@@ -84,7 +88,7 @@ CREATE TABLE IF NOT EXISTS info.telefone(
     -- Se possui WhatsApp
     whatsapp BOOLEAN DEFAULT FALSE,
     -- FK Restaurante
-    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Categoria dos itens
 CREATE TABLE IF NOT EXISTS cardapio.categoria(
@@ -93,7 +97,7 @@ CREATE TABLE IF NOT EXISTS cardapio.categoria(
     -- Nome da categoria
     nome VARCHAR(100) NOT NULL UNIQUE,
     -- Ícone ou imagem da categoria (URI)
-    icone VARCHAR(255) DEFAULT NULL,
+    icone VARCHAR(255) DEFAULT NULL
 );
 -- Item do cardápio do restaurante
 CREATE TABLE IF NOT EXISTS cardapio.item(
@@ -118,7 +122,7 @@ CREATE TABLE IF NOT EXISTS cardapio.item(
     -- FK Restaurante
     CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
     -- FK Categoria
-    CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES cardapio.categoria (id_categoria) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES cardapio.categoria (id_categoria) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Ingrediente do item do cardápio
 CREATE TABLE IF NOT EXISTS cardapio.ingrediente(
@@ -127,7 +131,7 @@ CREATE TABLE IF NOT EXISTS cardapio.ingrediente(
     -- Nome do ingrediente
     nome VARCHAR(100) NOT NULL,
     -- Imagem (URI)
-    imagem VARCHAR(255) DEFAULT NULL,
+    imagem VARCHAR(255) DEFAULT NULL
 );
 -- Relação entre item do cardápio e ingrediente
 CREATE TABLE IF NOT EXISTS cardapio.item_ingrediente(
@@ -140,7 +144,7 @@ CREATE TABLE IF NOT EXISTS cardapio.item_ingrediente(
     -- FK Item
     CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE,
     -- FK Ingrediente
-    CONSTRAINT fk_ingrediente FOREIGN KEY (id_ingrediente) REFERENCES cardapio.ingrediente (id_ingrediente) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_ingrediente FOREIGN KEY (id_ingrediente) REFERENCES cardapio.ingrediente (id_ingrediente) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Relação de composição entre itens do cardápio
 CREATE TABLE IF NOT EXISTS cardapio.item_composicao(
@@ -155,7 +159,7 @@ CREATE TABLE IF NOT EXISTS cardapio.item_composicao(
     -- FK Item
     CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE,
     -- FK Item Composto
-    CONSTRAINT fk_item_composto FOREIGN KEY (id_item_composto) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_item_composto FOREIGN KEY (id_item_composto) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Restrição alimentar
 CREATE TABLE IF NOT EXISTS restricao.restricao_alimentar(
@@ -164,7 +168,7 @@ CREATE TABLE IF NOT EXISTS restricao.restricao_alimentar(
     -- Nome da restrição
     nome VARCHAR(100) NOT NULL UNIQUE,
     -- Ícone ou imagem da restrição (URI)
-    icone VARCHAR(255) DEFAULT NULL,
+    icone VARCHAR(255) DEFAULT NULL
 );
 -- Relação entre restrição alimentar e ingrediente
 CREATE TABLE IF NOT EXISTS restricao.restricao_alimentar_ingrediente(
@@ -175,10 +179,10 @@ CREATE TABLE IF NOT EXISTS restricao.restricao_alimentar_ingrediente(
     -- FK Restrição
     CONSTRAINT fk_restricao FOREIGN KEY (id_restricao) REFERENCES restricao.restricao_alimentar (id_restricao) ON DELETE CASCADE ON UPDATE CASCADE,
     -- FK Ingrediente
-    CONSTRAINT fk_ingrediente FOREIGN KEY (id_ingrediente) REFERENCES cardapio.ingrediente (id_ingrediente) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_ingrediente FOREIGN KEY (id_ingrediente) REFERENCES cardapio.ingrediente (id_ingrediente) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Funcionário do restaurante responsável por preparar os pratos
-CREATE TABLE IF NOT EXISTS user.funcionario(
+CREATE TABLE IF NOT EXISTS usuario.funcionario(
     -- ID do funcionário (PK)
     id_funcionario UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     -- ID do restaurante (FK)
@@ -194,10 +198,10 @@ CREATE TABLE IF NOT EXISTS user.funcionario(
     -- Se o funcionário está ativo ou inativo (demitido)
     ativo BOOLEAN DEFAULT TRUE,
     -- FK Restaurante
-    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Cliente que realiza um pedido
-CREATE TABLE IF NOT EXISTS user.cliente(
+CREATE TABLE IF NOT EXISTS usuario.cliente(
     -- ID do cliente (PK)
     id_cliente UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     -- Nome do cliente
@@ -211,7 +215,7 @@ CREATE TABLE IF NOT EXISTS user.cliente(
     -- Tipo de cliente (aluno, professor, coordenador, etc)
     tipo_cliente VARCHAR(25) NOT NULL,
     -- Se o cliente está ativo ou inativo (desativado)
-    ativo BOOLEAN DEFAULT TRUE,
+    ativo BOOLEAN DEFAULT TRUE
 );
 -- Restrições alimentares do cliente
 CREATE TABLE IF NOT EXISTS restricao.restricao_cliente(
@@ -220,9 +224,9 @@ CREATE TABLE IF NOT EXISTS restricao.restricao_cliente(
     -- ID da restrição (FK)
     id_restricao UUID NOT NULL,
     -- FK Cliente
-    CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES user.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES usuario.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
     -- FK Restrição
-    CONSTRAINT fk_restricao FOREIGN KEY (id_restricao) REFERENCES restricao.restricao_alimentar (id_restricao) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_restricao FOREIGN KEY (id_restricao) REFERENCES restricao.restricao_alimentar (id_restricao) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Pedido realizado ao restaurante
 CREATE TABLE IF NOT EXISTS pedido.pedido(
@@ -261,9 +265,9 @@ CREATE TABLE IF NOT EXISTS pedido.pedido(
     -- FK Restaurante
     CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
     -- FK Funcionário
-    CONSTRAINT fk_funcionario FOREIGN KEY (id_funcionario) REFERENCES user.funcionario (id_funcionario) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_funcionario FOREIGN KEY (id_funcionario) REFERENCES usuario.funcionario (id_funcionario) ON DELETE CASCADE ON UPDATE CASCADE,
     -- FK Cliente
-    CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES user.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES usuario.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Item no pedido
 CREATE TABLE IF NOT EXISTS pedido.item_pedido(
@@ -283,7 +287,7 @@ CREATE TABLE IF NOT EXISTS pedido.item_pedido(
     -- FK Pedido
     CONSTRAINT fk_pedido FOREIGN KEY (id_pedido) REFERENCES pedido.pedido (id_pedido) ON DELETE CASCADE ON UPDATE CASCADE,
     -- FK Item
-    CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Restrições alimentares anotadas no pedido
 CREATE TABLE IF NOT EXISTS restricao.restricao_pedido(
@@ -294,5 +298,5 @@ CREATE TABLE IF NOT EXISTS restricao.restricao_pedido(
     -- FK Pedido
     CONSTRAINT fk_pedido FOREIGN KEY (id_pedido) REFERENCES pedido.pedido (id_pedido) ON DELETE CASCADE ON UPDATE CASCADE,
     -- FK Restrição
-    CONSTRAINT fk_restricao FOREIGN KEY (id_restricao) REFERENCES restricao.restricao_alimentar (id_restricao) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_restricao FOREIGN KEY (id_restricao) REFERENCES restricao.restricao_alimentar (id_restricao) ON DELETE CASCADE ON UPDATE CASCADE
 );
