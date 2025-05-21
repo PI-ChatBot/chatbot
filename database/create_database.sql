@@ -266,4 +266,23 @@ CREATE TABLE IF NOT EXISTS pedido.pedido(
     CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES user.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
 );
 -- Item no pedido
+CREATE TABLE IF NOT EXISTS pedido.item_pedido(
+    -- ID do item no pedido (PK)
+    id_item_pedido UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- ID do pedido (FK)
+    id_pedido UUID NOT NULL,
+    -- ID do item (FK)
+    id_item UUID NOT NULL,
+    -- Quantidade
+    quantidade INT NOT NULL CHECK (quantidade > 0),
+    -- Preço no pedido (em caso de alteração de preço)
+    preco NUMERIC(10, 2) NOT NULL CHECK (preco >= 0),
+    -- Observações
+    observacoes TEXT DEFAULT NULL,
+    -- FKs:
+    -- FK Pedido
+    CONSTRAINT fk_pedido FOREIGN KEY (id_pedido) REFERENCES pedido.pedido (id_pedido) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FK Item
+    CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES cardapio.item (id_item) ON DELETE CASCADE ON UPDATE CASCADE,
+);
 -- Restrições alimentares anotadas no pedido
