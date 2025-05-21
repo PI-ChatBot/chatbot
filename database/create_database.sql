@@ -214,6 +214,16 @@ CREATE TABLE IF NOT EXISTS user.cliente(
     ativo BOOLEAN DEFAULT TRUE,
 );
 -- Restrições alimentares do cliente
+CREATE TABLE IF NOT EXISTS restricao.restricao_cliente(
+    -- ID do cliente (FK)
+    id_cliente UUID NOT NULL,
+    -- ID da restrição (FK)
+    id_restricao UUID NOT NULL,
+    -- FK Cliente
+    CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES user.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FK Restrição
+    CONSTRAINT fk_restricao FOREIGN KEY (id_restricao) REFERENCES restricao.restricao_alimentar (id_restricao) ON DELETE CASCADE ON UPDATE CASCADE,
+);
 -- Pedido realizado ao restaurante
 -- Item no pedido
 -- Restrições alimentares anotadas no pedido
