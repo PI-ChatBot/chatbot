@@ -197,6 +197,22 @@ CREATE TABLE IF NOT EXISTS user.funcionario(
     CONSTRAINT fk_restaurante FOREIGN KEY (id_restaurante) REFERENCES local.restaurante (id_restaurante) ON DELETE CASCADE ON UPDATE CASCADE,
 );
 -- Cliente que realiza um pedido
+CREATE TABLE IF NOT EXISTS user.cliente(
+    -- ID do cliente (PK)
+    id_cliente UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    -- Nome do cliente
+    nome VARCHAR(150) NOT NULL,
+    -- E-mail do cliente
+    email VARCHAR(255) NOT NULL UNIQUE,
+    -- Hash da senha do cliente
+    hash_senha CHAR(60),
+    -- Data de nascimento do cliente
+    data_nascimento DATE NOT NULL,
+    -- Tipo de cliente (aluno, professor, coordenador, etc)
+    tipo_cliente VARCHAR(25) NOT NULL,
+    -- Se o cliente está ativo ou inativo (desativado)
+    ativo BOOLEAN DEFAULT TRUE,
+);
 -- Restrições alimentares do cliente
 -- Pedido realizado ao restaurante
 -- Item no pedido
