@@ -1,3 +1,4 @@
+-- Script DDL (PostgreSQL) para criar o banco de dados
 -- Criar banco de dados
 CREATE DATABASE IF NOT EXISTS `polichat`;
 -- Usar o banco de dados
@@ -166,7 +167,16 @@ CREATE TABLE IF NOT EXISTS restricao.restricao_alimentar(
     icone VARCHAR(255) DEFAULT NULL,
 );
 -- Relação entre restrição alimentar e ingrediente
-
+CREATE TABLE IF NOT EXISTS restricao.restricao_alimentar_ingrediente(
+    -- ID da restrição (FK)
+    id_restricao UUID NOT NULL,
+    -- ID do ingrediente (FK)
+    id_ingrediente UUID NOT NULL,
+    -- FK Restrição
+    CONSTRAINT fk_restricao FOREIGN KEY (id_restricao) REFERENCES restricao.restricao_alimentar (id_restricao) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FK Ingrediente
+    CONSTRAINT fk_ingrediente FOREIGN KEY (id_ingrediente) REFERENCES cardapio.ingrediente (id_ingrediente) ON DELETE CASCADE ON UPDATE CASCADE,
+);
 -- Funcionário do restaurante responsável por preparar os pratos
 -- Cliente que realiza um pedido
 -- Restrições alimentares do cliente
