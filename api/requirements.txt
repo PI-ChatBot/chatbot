@@ -1,4 +1,6 @@
 fastapi[standard]
+sqlmodel
+psycopg2-binary
 
 pathlib==1.0.1
 

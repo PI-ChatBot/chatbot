@@ -23,8 +23,8 @@ if api_dir not in sys.path:
 from agents import ( # importação dos agentes # noqa: E402
     GuardAgent,
     ClassificationAgent
-) 
-from api_types import Message, agent_literal  # noqa: E402
+)
+from api_types import Message  # noqa: E402
 # fmt: on
 
 # Função principal
