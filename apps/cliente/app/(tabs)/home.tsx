@@ -69,7 +69,6 @@ export default function TelaHome() {
             <Text style={estilos.textoBloco}>FAQ</Text>
           </TouchableOpacity>
         </View>
-
         {/* Botão Flutuante - Robô */}
         <TouchableOpacity
           style={estilos.roboBotao}
@@ -106,6 +105,7 @@ const estilos = StyleSheet.create({
     flex: 1,
     padding: 24,
     zIndex: 1,
+    paddingBottom: 80, 
   },
   topo: {
     flexDirection: 'row',
