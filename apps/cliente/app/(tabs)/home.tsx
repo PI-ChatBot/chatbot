@@ -32,7 +32,7 @@ export default function TelaHome() {
         <Text style={estilos.saudacao}>Olá, Mateus</Text>
 
         <TouchableOpacity
-          onPress={() => irPara('/pedido')}
+          onPress={() => irPara('/chat.tsx')}
           style={estilos.botaoPedido}
           activeOpacity={0.8}
         >
@@ -42,11 +42,12 @@ export default function TelaHome() {
             overflow: 'visible', 
             backgroundColor: '#fff', 
             marginLeft: 2, 
-            marginTop: 2, // desce um pouco o robô
+            marginTop: -7,
+            marginBottom: -12 // desce um pouco o robô
           }}>
             <Image
-              source={require('@/assets/images/Robo2.png')}
-              style={{ width: 48, height: 48, }}
+              source={require('@/assets/images/headrobo.png')}
+              style={{ width: 45, height: 43, marginRight: 20 }}
               resizeMode="cover"
             />
           </View>
@@ -64,17 +65,17 @@ export default function TelaHome() {
         <View style={estilos.blocos}>
           <TouchableOpacity style={estilos.bloco} onPress={() => irPara('/cardapio')}>
             <MaterialIcons name="restaurant-menu" size={28} color="#FF7043" style={estilos.iconeBloco} />
-            <Text style={estilos.textoBloco}>cardápio</Text>
+            <Text style={estilos.textoBloco}>Cardápio</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={estilos.bloco} onPress={() => irPara('/promocoes')}>
             <MaterialIcons name="percent" size={28} color="#faa41f" style={estilos.iconeBloco} />
-            <Text style={estilos.textoBloco}>promos</Text>
+            <Text style={estilos.textoBloco}>Promoções</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={estilos.bloco} onPress={() => irPara('/funcionamento')}>
             <MaterialIcons name="access-time" size={28} color="#4CAF50" style={estilos.iconeBloco} />
-            <Text style={estilos.textoBloco}>funcionamento</Text>
+            <Text style={estilos.textoBloco}>Funcionamento</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={estilos.bloco} onPress={() => irPara('/faq')}>
@@ -127,8 +128,9 @@ const estilos = StyleSheet.create({
   saudacao: {
     fontSize: 22,
     fontWeight: '600',
-    marginTop: 16,
+    marginTop: 10,
     color: '#ffffff',
+    marginBottom: 10,
   },
   fotoUsuario: {
     width: 68,
