@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Href, useRouter } from 'expo-router';
 
 export default function TelaHome() {
   const router = useRouter();
 
-  const irPara = (rota) => {
+  const irPara = (rota : Href) => {
     router.push(rota);
   };
 
@@ -30,8 +30,8 @@ export default function TelaHome() {
 
         <Text style={estilos.saudacao}>Olá, Mateus</Text>
 
-        <TouchableOpacity 
-          onPress={() => irPara('/pedido')} 
+        <TouchableOpacity
+          onPress={() => irPara('/pedido')}
           style={estilos.botaoPedido}
           activeOpacity={0.8}
         >
@@ -69,6 +69,16 @@ export default function TelaHome() {
             <Text style={estilos.textoBloco}>FAQ</Text>
           </TouchableOpacity>
         </View>
+        {/* Botão Flutuante - Robô */}
+        <TouchableOpacity
+          style={estilos.roboBotao}
+          onPress={() => irPara('/pedido')}
+          activeOpacity={0.7}
+        >
+          <View style={estilos.circuloRobo}>
+            <Image source={require('@/assets/images/Robo2.png')} style={estilos.imgRoboMelhor} />
+          </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -216,5 +226,29 @@ const estilos = StyleSheet.create({
     fontSize: 17,
     fontWeight: '500',
     color: '#444',
+  },
+  roboBotao: {
+    alignSelf: 'center',
+    marginTop: 50,
+    marginBottom: 16,
+  },
+  circuloRobo: {
+    width: 80,
+    height: 80,
+    backgroundColor: '#faa41f',
+    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  imgRoboMelhor: {
+    width: 65,
+    height: 75,
+    borderRadius: 27,
+    overflow: 'hidden',
   },
 });
