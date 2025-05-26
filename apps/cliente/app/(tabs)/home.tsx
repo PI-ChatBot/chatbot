@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 import { Href, useRouter } from 'expo-router';
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; // Adicione esta linha
 
 export default function TelaHome() {
   const router = useRouter();
@@ -36,7 +37,19 @@ export default function TelaHome() {
           activeOpacity={0.8}
         >
           <Text style={estilos.textoBotaoPedido}>Quero realizar meu pedido</Text>
-          <Image source={require('@/assets/images/Robo2.png')} style={estilos.iconBotaoGrande} />
+          <View style={{ 
+            borderRadius: 0, 
+            overflow: 'visible', 
+            backgroundColor: '#fff', 
+            marginLeft: 2, 
+            marginTop: 2, // desce um pouco o robô
+          }}>
+            <Image
+              source={require('@/assets/images/Robo2.png')}
+              style={{ width: 48, height: 48, }}
+              resizeMode="cover"
+            />
+          </View>
         </TouchableOpacity>
 
         {/* Status do pedido */}
@@ -50,35 +63,25 @@ export default function TelaHome() {
         {/* Blocos de Acesso */}
         <View style={estilos.blocos}>
           <TouchableOpacity style={estilos.bloco} onPress={() => irPara('/cardapio')}>
-            <Image source={require('@/assets/images/garfofaca.png')} style={estilos.iconeBloco} />
+            <MaterialIcons name="restaurant-menu" size={28} color="#FF7043" style={estilos.iconeBloco} />
             <Text style={estilos.textoBloco}>cardápio</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={estilos.bloco} onPress={() => irPara('/promocoes')}>
-            <Image source={require('@/assets/images/promos.png')} style={estilos.iconeBloco} />
+            <MaterialIcons name="percent" size={28} color="#faa41f" style={estilos.iconeBloco} />
             <Text style={estilos.textoBloco}>promos</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={estilos.bloco} onPress={() => irPara('/funcionamento')}>
-            <Image source={require('@/assets/images/relogio.png')} style={estilos.iconeBloco} />
+            <MaterialIcons name="access-time" size={28} color="#4CAF50" style={estilos.iconeBloco} />
             <Text style={estilos.textoBloco}>funcionamento</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={estilos.bloco} onPress={() => irPara('/faq')}>
-            <Image source={require('@/assets/images/info.png')} style={estilos.iconeBloco} />
+            <MaterialIcons name="info-outline" size={28} color="#42A5F5" style={estilos.iconeBloco} />
             <Text style={estilos.textoBloco}>FAQ</Text>
           </TouchableOpacity>
         </View>
-        {/* Botão Flutuante - Robô */}
-        <TouchableOpacity
-          style={estilos.roboBotao}
-          onPress={() => irPara('/pedido')}
-          activeOpacity={0.7}
-        >
-          <View style={estilos.circuloRobo}>
-            <Image source={require('@/assets/images/Robo2.png')} style={estilos.imgRoboMelhor} />
-          </View>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -169,11 +172,6 @@ const estilos = StyleSheet.create({
     fontWeight: '600',
     flex: 1,
   },
-  iconBotaoGrande: {
-    width: 36,
-    height: 36,
-    marginLeft: 8,
-  },
   cardStatus: {
     backgroundColor: '#f5f5f5',
     padding: 18,
@@ -226,29 +224,5 @@ const estilos = StyleSheet.create({
     fontSize: 17,
     fontWeight: '500',
     color: '#444',
-  },
-  roboBotao: {
-    alignSelf: 'center',
-    marginTop: 50,
-    marginBottom: 16,
-  },
-  circuloRobo: {
-    width: 80,
-    height: 80,
-    backgroundColor: '#faa41f',
-    borderRadius: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  imgRoboMelhor: {
-    width: 65,
-    height: 75,
-    borderRadius: 27,
-    overflow: 'hidden',
   },
 });
