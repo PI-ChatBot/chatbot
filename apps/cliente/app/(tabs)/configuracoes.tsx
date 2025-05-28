@@ -53,7 +53,6 @@ export default function TelaConfiguracao() {
       ]
     );
   };
-  
 
   return (
     <SafeAreaView style={estilos.container}>
@@ -70,11 +69,9 @@ export default function TelaConfiguracao() {
           />
         </Animated.View>
 
-        <Animated.View style={{ opacity: fadeAnim, marginBottom: 24 }}>
-          <Text style={estilos.titulo}>Configurações</Text>
-        </Animated.View>
+        <Text style={estilos.titulo}>Configurações</Text>
 
-        <Animated.View style={{ opacity: fadeAnim }}>
+        <View style={{ position: 'relative', width: '100%' }}>
           <View style={estilos.formGroup}>
             <Text style={estilos.label}>Telefone</Text>
             <TextInput
@@ -163,7 +160,8 @@ export default function TelaConfiguracao() {
               editable={editando}
             />
           </View>
-        </Animated.View>
+          {!editando && <View style={estilos.overlay} />}
+        </View>
 
         {senhaErro ? (
           <Text style={{ color: 'red', marginBottom: 10, alignSelf: 'flex-start' }}>{senhaErro}</Text>
@@ -190,7 +188,7 @@ export default function TelaConfiguracao() {
         )}
 
         <TouchableOpacity
-          style={[estilos.botao, { backgroundColor: '#e57373', marginTop: 12 }]}
+          style={[estilos.botao, { backgroundColor: '#e57373', marginTop: 20 }]}
           onPress={handleSair}
         >
           <Text style={estilos.textoBotao}>Sair</Text>
@@ -219,11 +217,20 @@ const estilos = StyleSheet.create({
     color: '#78aeb4',
     fontWeight: '500',
   },
+  logoContainer: {
+    width: 90,
+    height: 110,
+    marginBottom: 16,
+  },
+  logo: {
+    width: '100%',
+    height: '100%',
+  },
   titulo: {
     fontSize: 28,
     fontWeight: '600',
     color: '#78aeb4',
-    textAlign: 'center',
+    marginBottom: 24,
   },
   formGroup: {
     width: '100%',
@@ -243,6 +250,7 @@ const estilos = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     backgroundColor: '#f8f8f8',
+    width: '100%',
   },
   inputLongo: {
     minHeight: 80,
@@ -253,6 +261,7 @@ const estilos = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 24,
+    marginTop: 20,
     width: '100%',
     alignItems: 'center',
   },
@@ -261,13 +270,14 @@ const estilos = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
   },
-  logoContainer: {
-    width: 90,
-    height: 110,
-    marginBottom: 16,
-  },
-  logo: {
-    width: '100%',
-    height: '100%',
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    borderRadius: 10,
+    zIndex: 2,
   },
 });
