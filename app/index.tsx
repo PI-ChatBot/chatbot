@@ -25,57 +25,49 @@ export default function HomeScreen() {
     {
       id: '1',
       nome: 'João Silva',
-      prato: 'Macarrão',
-      imagem: require('../assets/images/Robo.png'),
+      pratos: [{prato: 'Macarrão', imagem: require('../assets/images/Robo.png'), quantidade: 1}, {prato: 'Manga', imagem: require('../assets/images/Robo.png'), quantidade: 1}],
       horario: '12:45',
     },
     {
       id: '2',
       nome: 'Maria Souza',
-      prato: 'Peixe frito',
-      imagem: require('../assets/images/Robo.png'),
+      pratos: [{prato: 'Macarrão', imagem: require('../assets/images/Robo.png'), quantidade: 1}, {prato: 'Manga', imagem: require('../assets/images/Robo.png'), quantidade: 1}],
       horario: '12:50',
     },
     {
       id: '3',
       nome: 'Felipe Dias',
-      prato: 'Frango Assado',
-      imagem: require('../assets/images/Robo.png'),
+      pratos: [{prato: 'Macarrão', imagem: require('../assets/images/Robo.png'), quantidade: 1}, {prato: 'Manga', imagem: require('../assets/images/Robo.png'), quantidade: 1}],
       horario: '13:00',
     },
     {
       id: '4',
       nome: 'Felipe Dias',
-      prato: 'Frango Assado',
-      imagem: require('../assets/images/Robo.png'),
+      pratos: [{prato: 'Macarrão', imagem: require('../assets/images/Robo.png'), quantidade: 1}, {prato: 'Manga', imagem: require('../assets/images/Robo.png'), quantidade: 1}],
       horario: '13:00',
     },
     {
       id: '5',
       nome: 'Felipe Dias',
-      prato: 'Frango Assado',
-      imagem: require('../assets/images/Robo.png'),
+      pratos: [{prato: 'Macarrão', imagem: require('../assets/images/Robo.png'), quantidade: 1}, {prato: 'Manga', imagem: require('../assets/images/Robo.png'), quantidade: 1}],
       horario: '13:00',
     },
     {
       id: '6',
       nome: 'Felipe Dias',
-      prato: 'Frango Assado',
-      imagem: require('../assets/images/Robo.png'),
+      pratos: [{prato: 'Macarrão', imagem: require('../assets/images/Robo.png'), quantidade: 1}, {prato: 'Manga', imagem: require('../assets/images/Robo.png'), quantidade: 1}],
       horario: '13:00',
     },
     {
       id: '7',
       nome: 'Felipe Dias',
-      prato: 'Frango Assado',
-      imagem: require('../assets/images/Robo.png'),
+      pratos: [{prato: 'Macarrão', imagem: require('../assets/images/Robo.png'), quantidade: 1}, {prato: 'Manga', imagem: require('../assets/images/Robo.png'), quantidade: 1}],
       horario: '13:00',
     },
     {
       id: '8',
       nome: 'Felipe Dias',
-      prato: 'Frango Assado',
-      imagem: require('../assets/images/Robo.png'),
+      pratos: [{prato: 'Macarrão', imagem: require('../assets/images/Robo.png'), quantidade: 1}, {prato: 'Manga', imagem: require('../assets/images/Robo.png'), quantidade: 1}],
       horario: '13:00',
     },
   ];
@@ -109,18 +101,36 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.containerPedidos}>
           {pedidos.map((pedido) => (
             <View key={pedido.id} style={styles.card}>
-              <Image source={pedido.imagem} style={styles.imagem} />
-              <View style={styles.info}>
-                <Text style={styles.nome}>{pedido.prato}</Text>
-                <Text style={styles.nome}>{pedido.nome}</Text>                
-                <Text style={styles.horario}>Horário: {pedido.horario}</Text>
+              <View style={styles.viewTextoPedido}>
+                <Text style={styles.textoPedido}>Pedido {pedido.id}</Text>
               </View>
-              <TouchableOpacity
-                style={styles.botaoConcluir}
-                onPress={() => concluirPedido(pedido.id)}
-              >
-                <Text style={styles.botaoTexto}>Concluir</Text>
-              </TouchableOpacity>
+              <View style={styles.cardRow}>
+                <View style={styles.grupoColumn}>
+                  {pedido.pratos.map((item) => (
+                    <View style={styles.grupo}>
+                      <Image  
+                        source={item.imagem} 
+                        style={styles.imagem} 
+                      />
+                      <Text style={styles.nome}>{item.prato}</Text>
+                    </View>
+                  ))}
+                </View>
+                <View style={styles.info}>
+                  <View>
+                    <Text style={styles.nome}>{pedido.nome}</Text>
+                  </View>       
+                  <View>
+                    <Text style={styles.horario}>Horário: {pedido.horario}</Text>
+                  </View>
+                </View>
+                <TouchableOpacity
+                  style={styles.botaoConcluir}
+                  onPress={() => concluirPedido(pedido.id)}
+                >
+                  <Text style={styles.botaoTexto}>Concluir</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           ))}
       </ScrollView>
@@ -187,13 +197,28 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   card: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flex:1,
     backgroundColor: '#eaeaea',
     padding: 10,
     marginBottom: 10,
     marginHorizontal: 10,
     borderRadius: 8,
+  },
+  viewTextoPedido: {
+    alignItems: 'center'
+  },
+  cardRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  grupoColumn: {
+    flexDirection: 'column',
+  },
+  grupo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20
   },
   imagem: {
     width: 100,
@@ -203,13 +228,16 @@ const styles = StyleSheet.create({
     marginLeft: 40
   },
   info: {
-    flex: 1,
-    margin: 10,
+    justifyContent: 'center',
   },
   nome: {
     fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 5,
+  },
+  textoPedido: {
+    fontSize: 25,
+    fontWeight: 'bold'
   },
   horario: {
     fontSize: 25,
@@ -217,12 +245,13 @@ const styles = StyleSheet.create({
   },
   botaoConcluir: {
     backgroundColor: '#28a745',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 15,
+    marginRight: 15
   },
   botaoTexto: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 15,
   },
 });
