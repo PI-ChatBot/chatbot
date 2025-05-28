@@ -1,5 +1,5 @@
-import React, {useRef, useEffect, useState, useMemo, useCallback } from 'react';
-import { Animated, Image, SafeAreaView, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
+import React, {useRef, useEffect, useState} from 'react';
+import { Animated, Image, SafeAreaView, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { fazerCadastro } from '@/lib/data';
 
@@ -7,9 +7,15 @@ export default function TelaCadastro() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const router = useRouter();
 
+  const [primeiroNome, setPrimeiroNome] = useState("");
+  const [sobrenome, setSobrenome] = useState("");
+  const [telefone, setTelefone] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [senhaErro, setSenhaErro] = useState("");
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -21,6 +27,51 @@ export default function TelaCadastro() {
 
   const irParaInicio = () => {
     router.replace('/(tabs)');
+  };
+
+  // Permite apenas números no telefone
+  const handleTelefoneChange = (text: string) => {
+    const onlyNumbers = text.replace(/[^0-9]/g, '');
+    setTelefone(onlyNumbers);
+  };
+
+  const handleCadastro = async () => {
+    if (
+      !primeiroNome.trim() ||
+      !sobrenome.trim() ||
+      !telefone.trim() ||
+      !username.trim() ||
+      !password.trim() ||
+      !confirmPassword.trim()
+    ) {
+      setSenhaErro("Preencha todos os campos obrigatórios corretamente.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setSenhaErro("As senhas não coincidem.");
+      return;
+    }
+    if (!/^\d+$/.test(telefone)) {
+      setSenhaErro("O telefone deve conter apenas números.");
+      return;
+    }
+    setSenhaErro("");
+    try {
+      await fazerCadastro(username, password);
+      Alert.alert(
+        "Conta criada com sucesso",
+        "Sua conta foi criada!",
+        [
+          {
+            text: "OK",
+            onPress: () => router.replace('/(tabs)'),
+          },
+        ],
+        { cancelable: false }
+      );
+    } catch (e) {
+      setSenhaErro("Erro ao criar conta. Tente novamente.");
+    }
   };
 
   return (
@@ -48,6 +99,8 @@ export default function TelaCadastro() {
             placeholder="Como o chatbot deve te chamar?"
             style={estilos.input}
             placeholderTextColor="#aaa"
+            value={primeiroNome}
+            onChangeText={setPrimeiroNome}
           />
         </View>
 
@@ -57,6 +110,8 @@ export default function TelaCadastro() {
             placeholder="Digite seu sobrenome"
             style={estilos.input}
             placeholderTextColor="#aaa"
+            value={sobrenome}
+            onChangeText={setSobrenome}
           />
         </View>
 
@@ -88,15 +143,18 @@ export default function TelaCadastro() {
             style={estilos.input}
             keyboardType="phone-pad"
             placeholderTextColor="#aaa"
+            value={telefone}
+            onChangeText={handleTelefoneChange}
+            maxLength={11}
           />
         </View>
 
         <View style={estilos.formGroup}>
-          <Text style={estilos.label}>E-mail</Text>
+          <Text style={estilos.label}>E-mail Institucional</Text>
           <TextInput
             placeholder="seunome@email.com"
             value={username}
-            onChangeText={text => setUsername(text)}
+            onChangeText={setUsername}
             style={estilos.input}
             keyboardType="email-address"
             placeholderTextColor="#aaa"
@@ -107,16 +165,44 @@ export default function TelaCadastro() {
           <Text style={estilos.label}>Senha</Text>
           <TextInput
             value={password}
-            onChangeText={text => setPassword(text)}
+            onChangeText={setPassword}
             placeholder='*******'
             style={estilos.input}
-            keyboardType="visible-password"
+            secureTextEntry={!showPassword}
             placeholderTextColor="#aaa"
           />
+          <TouchableOpacity onPress={() => setShowPassword(v => !v)} style={{ marginTop: 6 }}>
+            <Text style={{ color: '#78aeb4', fontWeight: 'bold' }}>
+              {showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+            </Text>
+          </TouchableOpacity>
         </View>
 
+        <View style={estilos.formGroup}>
+          <Text style={estilos.label}>Confirmar senha</Text>
+          <TextInput
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            placeholder='*******'
+            style={estilos.input}
+            secureTextEntry={!showConfirmPassword}
+            placeholderTextColor="#aaa"
+          />
+          <TouchableOpacity onPress={() => setShowConfirmPassword(v => !v)} style={{ marginTop: 6 }}>
+            <Text style={{ color: '#78aeb4', fontWeight: 'bold' }}>
+              {showConfirmPassword ? 'Ocultar senha' : 'Mostrar senha'}
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity style={estilos.botao} onPress={async () => await fazerCadastro(username, password)}>
+        {senhaErro ? (
+          <Text style={{ color: 'red', marginBottom: 10, alignSelf: 'flex-start' }}>{senhaErro}</Text>
+        ) : null}
+
+        <TouchableOpacity
+          style={estilos.botao}
+          onPress={handleCadastro}
+        >
           <Text style={estilos.textoBotao}>Criar Conta</Text>
         </TouchableOpacity>
       </ScrollView>
