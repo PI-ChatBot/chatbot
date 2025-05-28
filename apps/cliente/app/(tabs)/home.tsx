@@ -32,7 +32,7 @@ export default function TelaHome() {
         <Text style={estilos.saudacao}>Olá, Mateus</Text>
 
         <TouchableOpacity
-          onPress={() => irPara('/chat.tsx')}
+          onPress={() => irPara('/(tabs)/chat')}
           style={estilos.botaoPedido}
           activeOpacity={0.8}
         >

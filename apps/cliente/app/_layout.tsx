@@ -23,12 +23,12 @@ export default function Layout() {
           <View style={styles.barraNavegacao}>
             <TouchableOpacity
               style={styles.botaoNavegacao}
-              onPress={() => irPara('/chat')}
+              onPress={() => irPara('/(tabs)/chat')}
             >
               <Feather
                 name="message-circle"
                 size={24}
-                color={pathname === '/chat' ? '#78aeb4' : '#666'}
+                color={pathname === '/(tabs)/chat' ? '#78aeb4' : '#666'}
               />
             </TouchableOpacity>
 
