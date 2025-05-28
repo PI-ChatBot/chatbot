@@ -141,22 +141,12 @@ const estilos = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
     marginRight: 50,
-    marginTop: 16,
+    marginTop: 48,
+    marginBottom: -25
   },
   iniciaisUsuario: {
     color: '#fff',
     fontWeight: 'bold',
-  },
-  statusOnline: {
-    width: 10,
-    height: 10,
-    backgroundColor: '#2ecc71',
-    borderRadius: 5,
-    position: 'absolute',
-    bottom: 2,
-    right: 2,
-    borderWidth: 1,
-    borderColor: '#fff',
   },
   botaoPedido: {
     backgroundColor: '#ffffff',
@@ -166,7 +156,7 @@ const estilos = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 12,
+    marginTop: 18,
   },
   textoBotaoPedido: {
     fontSize: 18,
