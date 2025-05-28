@@ -16,8 +16,7 @@ export default function TelaUnidade() {
 
   const handleContinuar = () => {
     if (podeContinuar) {
-      // redirecionar para próxima etapa
-      router.push('');
+      router.push('/(tabs)/home');
     }
   };
 
@@ -33,11 +32,9 @@ export default function TelaUnidade() {
     router.replace('/(tabs)/home');
   };
 
-  const unidades = ['Unidade Campinas', 'Unidade São José', 'Unidade São Paulo'];
+  const unidades = ['Unidade SP'];
   const restaurantesPorUnidade: { [key: string]: string[] } = {
-    'Unidade Campinas': ['Cantina da Lu', 'Lanches Rápidos'],
-    'Unidade São José': ['Refeições do Zé', 'Veggie Time'],
-    'Unidade São Paulo': ['Restaurante da Vila', 'Pão & Ponto'],
+    'Unidade SP': ['Cafeteria Nova Geração'],
   };
 
   const selecionarUnidade = (unidade: string) => {

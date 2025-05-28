@@ -6,11 +6,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const horarios = [
   { id: '0', dia: 'Domingo', horario: 'Fechado' },
-  { id: '1', dia: 'Segunda-feira', horario: '08:00 - 18:00' },
-  { id: '2', dia: 'Terça-feira', horario: '08:00 - 18:00' },
-  { id: '3', dia: 'Quarta-feira', horario: '08:00 - 18:00' },
-  { id: '4', dia: 'Quinta-feira', horario: '08:00 - 18:00' },
-  { id: '5', dia: 'Sexta-feira', horario: '08:00 - 18:00' },
+  { id: '1', dia: 'Segunda-feira', horario: '07:00 - 17:00' },
+  { id: '2', dia: 'Terça-feira', horario: '07:00 - 17:00' },
+  { id: '3', dia: 'Quarta-feira', horario: '07:00 - 17:00' },
+  { id: '4', dia: 'Quinta-feira', horario: '07:00 - 17:00' },
+  { id: '5', dia: 'Sexta-feira', horario: '07:00 - 17:00' },
   { id: '6', dia: 'Sábado', horario: '09:00 - 14:00' },
 ];
 
