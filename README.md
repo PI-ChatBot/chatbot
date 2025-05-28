@@ -1,37 +1,3 @@
-<h1 align="center">Projeto Integrador Interdisciplinar:<br>Desenvolvimento de Chatbot para os Restaurantes do Colégio Poliedro</h1>
-
-<!-- Introdução -->
-<p align="justify">Este projeto universitário foi desenvolvido como parte da disciplina <strong>Projeto Integrador Interdisciplinar - Ciência da Computação (CIC204)</strong> dos cursos de <strong>Ciência da Computação</strong> e <strong>Inteligência Artificial e Ciência de Dados</strong> do Instituto Mauá de Tecnologia.</p>
-<p align="justify">O projeto visa desenvolver um sistema integrado de gestão de pedidos para o restaurante do <strong>Colégio Poliedro</strong>, com a implementação de um chatbot para otimizar a experiência dos clientes. O objetivo principal é facilitar o processo de pedidos no restaurante e oferecer uma forma eficiente, moderna e humanizada para os clientes interagirem com o sistema.</p>
-
-<!-- Parceria -->
-
-## 🤝 Parceria
-
-<div align="center" style="display: flex; flex-direction: row; align-items: center; width: 100%; justify-content: center; gap: 16px; flex-wrap: wrap;">
-    <!-- IMT -->
-    <a href="https://www.maua.br" target="_blank">
-        <img height="112px" src="./docs/images/logos/logo-IMT.png" alt="Instituto Mauá de Tecnologia">
-    </a>
-    <!-- Poliedro -->
-    <a href="https://www.colegiopoliedro.com.br" target="_blank">
-        <img height="112px" src="./docs/images/logos/logo-Poliedro.svg" alt="Colégio Poliedro">
-    </a>
-</div>
-
-<!-- Integrantes -->
-
-## 🧑🏻‍💻 Integrantes do Projeto
-
-|                                   Aluno                                    |     RA     |
-| :------------------------------------------------------------------------: | :--------: |
-|        [Alexandre Raminelli](https://github.com/alexandreraminelli)        | 24.01625-0 |
-| [Henrique Yuri Cawamura Seppelfelt](https://github.com/HenriqueSeppelfelt) | 24.00545-2 |
-|      [Mateus Martins Gonçalves Dóro ](https://github.com/mateusmats)       | 24.00553-3 |
-|            [Pedro Correia ](https://github.com/PedroCorreia73)             | 24.00845-0 |
-
----
-
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
@@ -47,7 +13,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 2. Start the app
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
 In the output, you'll find options to open the app in a
