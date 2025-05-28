@@ -32,6 +32,95 @@
 
 ---
 
+<!-- Instruções para configurar variáveis de ambiente -->
+
+## Configurando variáveis de ambiente
+
+### Variáveis de ambiente do chatbot
+
+1. **Navegue até a pasta `api/chatbot`:**
+
+```bash
+cd .\api\chatbot
+```
+
+2. **Copie o arquivo `.env.example` para `.env`:**
+
+```bash
+cp .env.example .env
+```
+
+3. **Configure as variáveis de ambiente no `api/chatbot/.env`:**
+
+- `CHATBOT_API_KEY`: Chave de API para autenticação com o provedor do chatbot.
+- `CHATBOT_URL`: URL base do provedor do chatbot.
+- `MODEL_NAME`: Nome do modelo de linguagem utilizado pelo chatbot.
+
+#### Recomendação: OpenRouter
+
+Se estiver testando esse projeto, recomendados utilizar o OpenRouter como provedor de chatbot. Para isso, crie uma conta gratuita em [OpenRouter](https://openrouter.ai/) e obtenha sua chave de API.
+
+Também recomendados utilizar o modelo gratuito ["Meta: Llama 3.1 8B Instruct"](https://openrouter.ai/meta-llama/llama-3.1-8b-instruct:free).
+
+Depois, configure as variáveis de ambiente conforme abaixo:
+
+```env
+CHATBOT_API_KEY=your_openrouter_api_key
+
+CHATBOT_URL=https://api.openrouter.ai/v1
+
+MODEL_NAME=meta-llama/llama-3.1-8b-instruct:free # ou outro modelo de sua escolha
+```
+
+---
+
+<!-- Instruções para iniciar o servidor FastAPI -->
+
+## Executando o servidor FastAPI
+
+### Pré-requisitos
+
+- Python 3.8 ou superior
+- pip (gerenciador de pacotes do Python)
+
+### Passos para execução
+
+1. **Navegue até a pasta `api/`:**
+
+```bash
+cd .\api\
+```
+
+2. **Instale as dependências do projeto:**
+
+```bash
+pip install -r requirements.txt
+```
+
+3. **Configure as variáveis de ambiente** (instruções acima)
+
+4. **Inicie o servidor:**
+
+```bash
+uvicorn main:app --reload
+```
+
+5. **Acesse o servidor:**
+
+- **API:** http://localhost:8000
+- **Documentação interativa (Swagger)**: http://localhost:8000/docs
+- **Documentação alternativa**: http://localhost:8000/redoc
+
+## Endpoints disponíveis
+
+- `GET /` - Endpoint de teste
+- `POST /cadastro` - Cadastro de usuários
+- `POST /login` - Autenticação de usuários
+- `POST /chatbot` - Interação com o chatbot
+- `GET /cozinha/pedidos` - Obter pedidos (requer autenticação)
+
+---
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
