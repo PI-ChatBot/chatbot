@@ -211,6 +211,8 @@ const estilos = StyleSheet.create({
   botaoVoltar: {
     alignSelf: 'flex-start',
     marginBottom: 12,
+    marginTop: -14
+
   },
   textoVoltar: {
     fontSize: 16,
