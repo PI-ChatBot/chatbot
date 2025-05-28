@@ -34,7 +34,7 @@
 
 <!-- Instruções para configurar variáveis de ambiente -->
 
-## Configurando variáveis de ambiente
+## ⚙️ Configurando variáveis de ambiente
 
 ### Variáveis de ambiente do chatbot
 
@@ -76,7 +76,7 @@ MODEL_NAME=meta-llama/llama-3.1-8b-instruct:free # ou outro modelo de sua escolh
 
 <!-- Instruções para iniciar o servidor FastAPI -->
 
-## Executando o servidor FastAPI
+## ⚡ Executando o servidor FastAPI
 
 ### Pré-requisitos
 
