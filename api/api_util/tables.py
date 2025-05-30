@@ -2,7 +2,8 @@ import uuid
 from pydantic.functional_validators import AfterValidator
 from sqlalchemy import Time
 from sqlalchemy.sql.annotation import Annotated
-from sqlmodel import Date, Field, Numeric, SQLModel, Text
+from sqlmodel import Field, Numeric, SQLModel, Text
+from datetime import _Date
 
 
 class Unidade(SQLModel, table=True):
@@ -99,7 +100,7 @@ class Cliente(SQLModel, table = True):
     nome : str = Field(max_length=150)
     email : str = Field(max_length=255)
     hash_senha : str = Field(max_length=60, min_length=60)
-    data_nascimento : Date = Field()
+    data_nascimento : _Date = Field()
     tipo_cliente : str = Field(max_length = 25)
     ativo : bool = Field(default = True)
 

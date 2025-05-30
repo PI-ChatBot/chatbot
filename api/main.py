@@ -29,8 +29,13 @@ async def cadastrar(request : Request):
     request_json = await request.json()
     body = json.loads(request_json["body"])
     cadastro = CadastroModel(
-        username = body["username"],
-        password = body["password"]
+        primeiro_nome = body["primeiro_nome"],
+        sobrenome = body["sobrenome"],
+        data_nascimento=datetime.strptime(body["data_nascimento"], "%Y-%m-%d").date(),
+        tipo_cliente=body["tipo_cliente"],
+        telefone=body["telefone"],
+        email=body["email"],
+        senha = body["senha"]
     )
     cadastrado = Cadastro.fazer_cadastro(cadastro)
     if cadastrado is not None:
@@ -45,8 +50,8 @@ async def fazer_login(request : Request):
     request_json = await request.json()
     body = json.loads(request_json["body"])
     login = LoginModel(
-        username = body["username"],
-        password = body["password"]
+        email = body["email"],
+        senha = body["senha"]
     )
     token = Login.fazer_login(login)
     if token == None:
