@@ -1,6 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Animated, Image, SafeAreaView, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { Animated, Image, SafeAreaView, StyleSheet, Text, TextInput, View, TouchableOpacity, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
+import { fazerLogin } from '@/lib/data';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 export default function TelaLogin() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -17,6 +21,30 @@ export default function TelaLogin() {
     }).start();
   }, []);
 
+  const handleLogin = async () => {
+    try {
+      let data: { token: string, nome: string } = await fazerLogin(email, senha);
+      console.log(data);
+      Alert.alert(
+        "Conta criada com sucesso",
+        "Sua conta foi criada!",
+        [
+          {
+            text: "OK",
+            onPress: () => router.replace('/(tabs)'),
+          },
+        ],
+        { cancelable: false }
+      );
+      if (data["token"] && data["nome"]) {
+        await AsyncStorage.setItem("token", data["token"]);
+        await AsyncStorage.setItem("nome", data["nome"]);
+        router.replace("/(tabs)/home");
+      }
+    } catch (e) {
+    }
+  }
+
   const irParaInicio = () => {
     router.replace('/(tabs)/home');
   };
@@ -28,71 +56,72 @@ export default function TelaLogin() {
   const isFormValid = email.trim() !== '' && senha.trim() !== '';
 
   return (
-    <SafeAreaView style={estilos.container}>
-      <View style={estilos.scrollContainer}>
-        <TouchableOpacity onPress={() => router.back()} style={estilos.botaoVoltar}>
-          <Text style={estilos.textoVoltar}>← Voltar</Text>
-        </TouchableOpacity>
+      <SafeAreaView style={estilos.container
+      } >
+        <View style={estilos.scrollContainer}>
+          <TouchableOpacity onPress={() => router.back()} style={estilos.botaoVoltar}>
+            <Text style={estilos.textoVoltar}>← Voltar</Text>
+          </TouchableOpacity>
 
-        <View style={estilos.innerContainer}>
-          <Animated.View style={{ ...estilos.logoContainer, opacity: fadeAnim }}>
-            <Image 
-              source={require('@/assets/images/Robo2.png')} 
-              style={estilos.logo}
-              resizeMode="contain"
-            />
-          </Animated.View>
+          <View style={estilos.innerContainer}>
+            <Animated.View style={{ ...estilos.logoContainer, opacity: fadeAnim }}>
+              <Image
+                source={require('@/assets/images/Robo2.png')}
+                style={estilos.logo}
+                resizeMode="contain"
+              />
+            </Animated.View>
 
-          <Text style={estilos.titulo}>Entrar</Text>
+            <Text style={estilos.titulo}>Entrar</Text>
 
-          <View style={estilos.formGroup}>
-            <Text style={estilos.label}>E-mail</Text>
-            <TextInput
-              placeholder="seunome@email.com"
-              style={estilos.input}
-              keyboardType="email-address"
-              placeholderTextColor="#aaa"
-              value={email}
-              onChangeText={setEmail}
-            />
-          </View>
-
-          <View style={estilos.formGroup}>
-            <Text style={estilos.label}>Senha</Text>
-            <TextInput
-              placeholder="Digite sua senha"
-              style={estilos.input}
-              secureTextEntry
-              placeholderTextColor="#aaa"
-              value={senha}
-              onChangeText={setSenha}
-            />
-          </View>
-
-          {/* Checkbox: lembrar senha */}
-          <TouchableOpacity style={estilos.checkboxContainer} onPress={toggleLembrarSenha}>
-            <View style={[estilos.checkbox, lembrarSenha && estilos.checkboxMarcado]}>
-              {lembrarSenha && <Text style={estilos.checkboxX}>✓</Text>}
+            <View style={estilos.formGroup}>
+              <Text style={estilos.label}>E-mail</Text>
+              <TextInput
+                placeholder="seunome@email.com"
+                style={estilos.input}
+                keyboardType="email-address"
+                placeholderTextColor="#aaa"
+                value={email}
+                onChangeText={setEmail}
+              />
             </View>
-            <Text style={estilos.labelCheckbox}>Lembrar minha senha</Text>
-          </TouchableOpacity>
 
-          <TouchableOpacity 
-            style={[estilos.botao, !isFormValid && { backgroundColor: '#ccc' }]} 
-            onPress={irParaInicio} 
-            disabled={!isFormValid}
-          >
-            <Text style={estilos.textoBotao}>Login</Text>
-          </TouchableOpacity>
+            <View style={estilos.formGroup}>
+              <Text style={estilos.label}>Senha</Text>
+              <TextInput
+                placeholder="Digite sua senha"
+                style={estilos.input}
+                secureTextEntry
+                placeholderTextColor="#aaa"
+                value={senha}
+                onChangeText={setSenha}
+              />
+            </View>
 
-          <TouchableOpacity onPress={() => router.push('/recuperarsenha')}>
-            <Text style={estilos.textoRecuperarSenha}>Esqueceu sua senha?</Text>
-          </TouchableOpacity>
+            {/* Checkbox: lembrar senha */}
+            <TouchableOpacity style={estilos.checkboxContainer} onPress={toggleLembrarSenha}>
+              <View style={[estilos.checkbox, lembrarSenha && estilos.checkboxMarcado]}>
+                {lembrarSenha && <Text style={estilos.checkboxX}>✓</Text>}
+              </View>
+              <Text style={estilos.labelCheckbox}>Lembrar minha senha</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[estilos.botao, !isFormValid && { backgroundColor: '#ccc' }]}
+              onPress={handleLogin}
+              disabled={!isFormValid}
+            >
+              <Text style={estilos.textoBotao}>Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => router.push('/recuperarsenha')}>
+              <Text style={estilos.textoRecuperarSenha}>Esqueceu sua senha?</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
-  );
+      </SafeAreaView >);
 }
+
 
 const estilos = StyleSheet.create({
   container: {

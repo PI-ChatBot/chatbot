@@ -10,7 +10,8 @@ export default function TelaCadastro() {
   const [primeiroNome, setPrimeiroNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [username, setUsername] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -40,7 +41,7 @@ export default function TelaCadastro() {
       !primeiroNome.trim() ||
       !sobrenome.trim() ||
       !telefone.trim() ||
-      !username.trim() ||
+      !email.trim() ||
       !password.trim() ||
       !confirmPassword.trim()
     ) {
@@ -57,7 +58,7 @@ export default function TelaCadastro() {
     }
     setSenhaErro("");
     try {
-      await fazerCadastro(username, password);
+      await fazerCadastro(primeiroNome,sobrenome,new Date(dataNascimento),"cliente",telefone,email,password);
       Alert.alert(
         "Conta criada com sucesso",
         "Sua conta foi criada!",
@@ -150,11 +151,25 @@ export default function TelaCadastro() {
         </View>
 
         <View style={estilos.formGroup}>
+          <Text style={estilos.label}>Data Nascimento</Text>
+          <TextInput
+          placeholder="YYYY-MM-DD"
+          style={estilos.input}
+          keyboardType="default"
+          placeholderTextColor="#aaa"
+          value={dataNascimento}
+          onChangeText={setDataNascimento}
+
+          maxLength={11}
+          />
+        </View>
+
+        <View style={estilos.formGroup}>
           <Text style={estilos.label}>E-mail Institucional</Text>
           <TextInput
             placeholder="seunome@email.com"
-            value={username}
-            onChangeText={setUsername}
+            value={email}
+            onChangeText={setEmail}
             style={estilos.input}
             keyboardType="email-address"
             placeholderTextColor="#aaa"

@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 import { Href, useRouter } from 'expo-router';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; // Adicione esta linha
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function TelaHome() {
-  const router = useRouter();
 
+  const [nome, setNome] = useState("");
+  useEffect(() => {
+    async function getData() {
+      let token = await AsyncStorage.getItem("token");
+      let nomeData = await AsyncStorage.getItem("nome");
+      console.log(token);
+      console.log(nomeData);
+      setNome(nomeData!);
+    }
+    getData();
+  },);
+  const router = useRouter();
   const irPara = (rota : Href) => {
     router.push(rota);
   };
@@ -24,12 +36,12 @@ export default function TelaHome() {
           </View>
 
           <TouchableOpacity onPress={() => irPara('/configuracoes')} style={estilos.fotoUsuario}>
-            <Text style={estilos.iniciaisUsuario}>JD</Text>
+            <Text style={estilos.iniciaisUsuario}>{nome.split(" ").map((v)=> v[0])}</Text>
             <View style={estilos.statusOnline} />
           </TouchableOpacity>
         </View>
 
-        <Text style={estilos.saudacao}>Olá, Mateus</Text>
+        <Text style={estilos.saudacao}>Olá, {nome}</Text>
 
         <TouchableOpacity
           onPress={() => irPara('/(tabs)/chat')}
@@ -37,11 +49,11 @@ export default function TelaHome() {
           activeOpacity={0.8}
         >
           <Text style={estilos.textoBotaoPedido}>Quero realizar meu pedido</Text>
-          <View style={{ 
-            borderRadius: 0, 
-            overflow: 'visible', 
-            backgroundColor: '#fff', 
-            marginLeft: 2, 
+          <View style={{
+            borderRadius: 0,
+            overflow: 'visible',
+            backgroundColor: '#fff',
+            marginLeft: 2,
             marginTop: -7,
             marginBottom: -12 // desce um pouco o robô
           }}>
@@ -109,7 +121,7 @@ const estilos = StyleSheet.create({
     flex: 1,
     padding: 24,
     zIndex: 1,
-    paddingBottom: 80, 
+    paddingBottom: 80,
   },
   topo: {
     flexDirection: 'row',
