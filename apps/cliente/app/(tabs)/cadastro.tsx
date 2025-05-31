@@ -70,6 +70,7 @@ export default function TelaCadastro() {
         ],
         { cancelable: false }
       );
+      router.replace("/(tabs)")
     } catch (e) {
       setSenhaErro("Erro ao criar conta. Tente novamente.");
     }
