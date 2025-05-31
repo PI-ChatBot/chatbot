@@ -6,7 +6,7 @@ from datetime import date, timedelta, timezone, datetime
 import dotenv
 import os
 
-from api_util.db import get_session
+from api_util.db import engine
 from api_util.tables import Cliente
 
 dotenv.load_dotenv()
@@ -42,19 +42,22 @@ class CadastroModel(BaseModel):
 class Cadastro:
     @classmethod
     def fazer_cadastro(cls, cadastro: CadastroModel):
-        session = get_session()
+        session = Session(engine)
+        print(cadastro)
         try:
-            if isinstance(session, Session):
-                cliente = Cliente(
-                nome=cadastro.primeiro_nome + " " + cadastro.sobrenome,
-                email=cadastro.email,
-                data_nascimento=cadastro.data_nascimento,
-                hash_senha=get_password_hash(cadastro.senha),
-                tipo_cliente=cadastro.tipo_cliente)
-                session.add(cliente)
-                session.commit()
+            print("teste")
+            cliente = Cliente(
+            nome=cadastro.primeiro_nome + " " + cadastro.sobrenome,
+            email=cadastro.email,
+            data_nascimento=cadastro.data_nascimento,
+            hash_senha=get_password_hash(cadastro.senha),
+            tipo_cliente=cadastro.tipo_cliente)
+            print(cliente)
+            session.add(cliente)
+            session.commit()
+            return True
         except:
-            pass
+            return None
         finally:
             session.close()
 
@@ -62,21 +65,21 @@ class Cadastro:
 class Login:
     @classmethod
     def fazer_login(cls, login : LoginModel):
-        session = get_session()
+        session = Session(engine)
         try:
-            if isinstance(session, Session):
-                statement = select(Cliente).where(Cliente.email == login.email)
-                cliente = session.exec(statement).one()
-                if verify_password(login.senha, cliente.hash_senha):
-                    return create_access_token(data={
-                        "nome" : cliente.nome,
-                        "email" : cliente.email,
-                        "tipo_cliente":cliente.tipo_cliente
-                    }, expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+            statement = select(Cliente).where(Cliente.email == login.email)
+            cliente = session.exec(statement).one()
+            if verify_password(login.senha, cliente.hash_senha):
+                return (create_access_token(data={
+                    "nome" : cliente.nome,
+                    "email" : cliente.email,
+                    "tipo_cliente":cliente.tipo_cliente
+                }, expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)), cliente.nome)
         except:
-            return None
+            return (None, None)
         finally:
             session.close()
+        return (None, None)
 
 
 def verify_password(plain_password, hashed_password):

@@ -28,6 +28,7 @@ async def root():
 async def cadastrar(request : Request):
     request_json = await request.json()
     body = json.loads(request_json["body"])
+    print(body)
     cadastro = CadastroModel(
         primeiro_nome = body["primeiro_nome"],
         sobrenome = body["sobrenome"],
@@ -42,7 +43,6 @@ async def cadastrar(request : Request):
         return {"message" : "Cadastro feito com sucesso"}
     else:
         return {"message" : "Houve um erro ao realizar o cadastro"}
-    return cadastro
 
 
 @app.post("/login")
@@ -53,11 +53,11 @@ async def fazer_login(request : Request):
         email = body["email"],
         senha = body["senha"]
     )
-    token = Login.fazer_login(login)
+    (token, nome) = Login.fazer_login(login)
     if token == None:
         return {"message": "Login inválido"}
     else:
-        return {"token" : token}
+        return {"token" : token, "nome" : nome}
 
 
 @app.post("/chatbot")
