@@ -1,9 +1,8 @@
 from pydantic import BaseModel
 from sqlmodel import Session, select
-from datetime import _Date
 from passlib.context import CryptContext
 import jwt
-from datetime import datetime, timedelta, timezone
+from datetime import date, timedelta, timezone, datetime
 import dotenv
 import os
 
@@ -38,7 +37,7 @@ class CadastroModel(BaseModel):
     sobrenome : str
     telefone : str
     tipo_cliente : str
-    data_nascimento : _Date
+    data_nascimento : date
 
 class Cadastro:
     @classmethod
