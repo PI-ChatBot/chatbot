@@ -1,4 +1,4 @@
-from agents import (  # importação dos agentes
+from chatbot.agents import (  # importação dos agentes
     AgentProtocol,
     GuardAgent,
     ClassificationAgent,
@@ -42,6 +42,11 @@ class AgentController:
     def get_response(self, input):
         '''
         Método para obter resposta do LLM.
+        Executa os agentes em sequência (Guard Agent, Classification Agent e o agente escolhido).	
+
+        :param input: Dicionário com a entrada do usuário.
+
+        :return: Resposta do agente escolhido.
         '''
 
         # Extrair input do usuário para ser usado com serverless

@@ -5,98 +5,108 @@ from fastapi.middleware.cors import CORSMiddleware
 from api_util.login import *
 import json
 from chatbot.agents.guard_agent import GuardAgent
-from chatbot.agents.classification_agent import ClassificationAgent
+from chatbot.agents import ClassificationAgent
 from api_types.message_type import Message
 from datetime import datetime
 from typing import List
+from api_types import ChatRequestBaseModel
+from chatbot import AgentController
 
 app = FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 app.add_middleware(CORSMiddleware,
-    allow_origins="*",
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+                   allow_origins="*",
+                   allow_credentials=True,
+                   allow_methods=["*"],
+                   allow_headers=["*"],
+                   )
+
+# Instanciar Agent Controller globalmente
+agent_controller = AgentController()
 
 
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
+
 @app.post("/cadastro")
-async def cadastrar(request : Request):
+async def cadastrar(request: Request):
     request_json = await request.json()
     body = json.loads(request_json["body"])
     print(body)
     cadastro = CadastroModel(
-        primeiro_nome = body["primeiro_nome"],
-        sobrenome = body["sobrenome"],
-        data_nascimento=datetime.strptime(body["data_nascimento"], "%Y-%m-%d").date(),
+        primeiro_nome=body["primeiro_nome"],
+        sobrenome=body["sobrenome"],
+        data_nascimento=datetime.strptime(
+            body["data_nascimento"], "%Y-%m-%d").date(),
         tipo_cliente=body["tipo_cliente"],
         telefone=body["telefone"],
         email=body["email"],
-        senha = body["senha"]
+        senha=body["senha"]
     )
     cadastrado = Cadastro.fazer_cadastro(cadastro)
     if cadastrado is not None:
-        return {"message" : "Cadastro feito com sucesso"}
+        return {"message": "Cadastro feito com sucesso"}
     else:
-        return {"message" : "Houve um erro ao realizar o cadastro"}
+        return {"message": "Houve um erro ao realizar o cadastro"}
 
 
 @app.post("/login")
-async def fazer_login(request : Request):
+async def fazer_login(request: Request):
     request_json = await request.json()
     body = json.loads(request_json["body"])
     login = LoginModel(
-        email = body["email"],
-        senha = body["senha"]
+        email=body["email"],
+        senha=body["senha"]
     )
     (token, nome) = Login.fazer_login(login)
     if token == None:
         return {"message": "Login inválido"}
     else:
-        return {"token" : token, "nome" : nome}
+        return {"token": token, "nome": nome}
 
 
 @app.post("/chatbot")
-async def receber_chat():
-    # Instanciar agentes
-    guard_agent = GuardAgent()
-    classification_agent = ClassificationAgent()
+async def receber_chat(chat_request: ChatRequestBaseModel):
+    '''
+    Endpoint principal para o chatbot.
+    Recebe mensagens do usuário, executa os agentes e retorna a resposta do chatbot escolhido.
+    '''
 
-    # Lista de mensagens
-    messages: List[Message] = []
+    try:
+        # Verificar se o token é válido
+        messages_dict = [
+            {'role': msg.role, 'content': msg.content}
+            for msg in chat_request.messages
+        ]
 
-    # Exibir histórico de mensagens entre o usuário e chatbot
-    print("\n\n Mensagens: ***************")
-    for message in messages:
-        print(f'{message["role"]}: {message["content"]}')
+        #
+        input_data = {
+            'input': {
+                'messages': messages_dict
+            }
+        }
 
-    # Input da entrada do usuário
-    prompt = input("Usuário: ")
-    # adicionar a lista de msgs
-    messages.append({'role': 'user', 'content': prompt})
+        # Obter resposta do Agent Controller
+        response = agent_controller.get_response(input_data)
+        # Se não retornar resposta
+        if response is None:
+            return {
+                "error": "Mensagem não permitida pelo sistema de segurança."
+            }
 
-    # 1º Executar Guard Agent
-    guard_agent_response = guard_agent.get_response(messages)
-    print("\n\tResposta do Guard Agent:", guard_agent_response)  # debug
-    # Se não for permitido, exibir mensagem e reiniciar loop
-    memory = guard_agent_response.get('memory', {})
-    if memory.get('guard_decision') == 'not allowed':
-        messages.append(guard_agent_response)
+        return {
+            "success": True,
+            "response": response
+        }
 
-    # 2º Executar Classification Agent
-    classification_agent_response = classification_agent.get_response(
-        messages)
-    # Agente escolhido
-    chosen_agent = classification_agent_response.get(
-        'memory', {}).get('classification_decision')
-    print("\tResposta do Classification Agent:",  # debug
-            classification_agent_response)
-    print("\tAgente escolhido:",  # debug
-            chosen_agent)
+    except Exception as e:
+        return {
+            "success": False,
+            "error": f"Erro interno do servidor: {str(e)}"
+        }
+
 
 @app.get("/cozinha/pedidos")
 async def obter_pedidos(token: Annotated[str, Depends(oauth2_scheme)]):
