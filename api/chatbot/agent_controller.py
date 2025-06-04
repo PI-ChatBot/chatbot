@@ -1,5 +1,4 @@
 from chatbot.agents import (  # importação dos agentes
-    AgentProtocol,
     GuardAgent,
     ClassificationAgent,
     DetailsAgent,

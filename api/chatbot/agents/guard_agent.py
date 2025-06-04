@@ -28,7 +28,8 @@ class GuardAgentResponse(TypedDict):  # Tipagem da resposta do Guard Agent
 class GuardAgent:
     '''
     Agente de guarda para o chatbot.
-    Este agente é responsável por verificar se a solicitação do usuário é válida para o contexto do aplicativo, ou seja, .
+
+    Este agente é responsável por verificar se a solicitação do usuário é válida para o contexto do aplicativo.
     Se a solicitação do usuário for válida, o agente de guarda permite que a solicitação prossiga pro próximo agente. Caso contrário, ele rejeita a solicitação e exibe uma mensagem pro usuário.
 
     Attributes
