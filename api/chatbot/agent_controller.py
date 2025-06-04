@@ -29,7 +29,7 @@ class AgentController:
         self.guard_agent = GuardAgent()  # guarda
         self.classification_agent = ClassificationAgent()  # classificação
         # ... (RecommendationAgent)
-        self.agent_dict: Dict[agent_types, AgentProtocol] = {  # agentes pós-classificação
+        self.agent_dict: Dict[agent_types, Any] = {  # agentes pós-classificação
             "details_agent": DetailsAgent(),
             "recommendation_agent": RecommendationAgent(),  # TODO: ajustar depois
             # TODO: add RecommendationAgent como método depois
@@ -50,17 +50,15 @@ class AgentController:
 
         # Extrair input do usuário para ser usado com serverless
         job_input = input['input']
-        messages = job_input['messages']
-
-        # Executar o Guard Agent
+        messages = job_input['messages']        # Executar o Guard Agent
         # 1º Executar Guard Agent
         guard_agent_response = self.guard_agent.get_response(messages)
         print("\n\tResposta do Guard Agent:", guard_agent_response)  # debug
-        # Se não for permitido, exibir mensagem e reiniciar loop
+
+        # Se não for permitido, retornar mensagem do guard agent
         memory = guard_agent_response.get('memory', {})
         if memory.get('guard_decision') == 'not allowed':
-            messages.append(guard_agent_response)
-            return  # encerrar método
+            return guard_agent_response
 
         # 2º Executar Classification Agent
         classification_agent_response = self.classification_agent.get_response(
