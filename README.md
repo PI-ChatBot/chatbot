@@ -36,12 +36,10 @@
 
 ## ⚙️ Configurando variáveis de ambiente
 
-### Variáveis de ambiente do chatbot
-
-1. **Navegue até a pasta `api/chatbot`:**
+1. **Navegue até a pasta `api/`:**
 
 ```bash
-cd .\api\chatbot
+cd ./api
 ```
 
 2. **Copie o arquivo `.env.example` para `.env`:**
@@ -50,15 +48,29 @@ cd .\api\chatbot
 cp .env.example .env
 ```
 
-3. **Configure as variáveis de ambiente no `api/chatbot/.env`:**
+3. **Configure as variáveis de ambiente no `api/.env`:**
+
+<!-- Variáveis de ambiente do banco de dados -->
+
+3.1. **Conexão com o banco de dados:**
+
+- `DATABASE_URL`: URL de conexão com o banco de dados PostgreSQL. O formato é `postgresql://<usuário>:<senha>@<host>:<porta>/<nome_do_banco>`.
+
+- `SECRET_KEY`: Chave secreta para criptografia de dados sensíveis, como senhas.
+
+<!-- Variáveis de ambiente do chatbot -->
+
+3.2. **Conexão com o LLM:**
 
 - `CHATBOT_API_KEY`: Chave de API para autenticação com o provedor do chatbot.
 - `CHATBOT_URL`: URL base do provedor do chatbot.
 - `MODEL_NAME`: Nome do modelo de linguagem utilizado pelo chatbot.
 
-#### Recomendação: OpenRouter
+<!-- Instruções para usar o OpenRouter -->
 
-Se estiver testando esse projeto, recomendados utilizar o OpenRouter como provedor de chatbot. Para isso, crie uma conta gratuita em [OpenRouter](https://openrouter.ai/) e obtenha sua chave de API.
+### Recomendação: OpenRouter
+
+Se estiver testando esse projeto, recomendados utilizar o OpenRouter como provedor de modelo de LLM. Para isso, crie uma conta gratuita em [OpenRouter](https://openrouter.ai/) e obtenha sua chave de API.
 
 Também recomendados utilizar o modelo gratuito ["Meta: Llama 3.1 8B Instruct"](https://openrouter.ai/meta-llama/llama-3.1-8b-instruct:free).
 
