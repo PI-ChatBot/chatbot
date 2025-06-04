@@ -131,8 +131,6 @@ uvicorn main:app --reload
 - `POST /chatbot` - Interação com o chatbot
 - `GET /cozinha/pedidos` - Obter pedidos (requer autenticação)
 
----
-
 ## 🧪 Testando a API
 
 ### Executar o Script de Testes
@@ -156,6 +154,8 @@ Esse script irá:
 1. ✅ Verificar se a API está rodando
 2. 🧪 Testar todos os endpoints
 3. 💬 Oferecer um modo de chat interativo
+
+---
 
 # Welcome to your Expo app 👋
 
