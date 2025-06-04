@@ -1,6 +1,11 @@
+'''
+Literais para os agentes do chatbot.
+'''
+
 from typing import Literal
 
-agent_literal = Literal[  # Literal com os tipos de agentes
+# Literal com os tipos de agentes
+agent_types = Literal[
     'guard_agent',
     'classification_agent',
     'details_agent',
@@ -9,4 +14,4 @@ agent_literal = Literal[  # Literal com os tipos de agentes
 ]
 
 # Literal de decisão do Guard Agent
-guard_decision_literal = Literal['allowed', 'not allowed']
+guard_decisions = Literal['allowed', 'not allowed']

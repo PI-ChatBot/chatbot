@@ -1,40 +1,22 @@
-# Modelo de dados das mensagens
-from typing import List, Literal, TypedDict, Optional
+'''
+Tipagem das mensagens do chatbot, conforme a especificação do OpenAI API.
+'''
+
+from typing import Optional, TypedDict
 
 from pydantic import BaseModel
 from typing_extensions import NotRequired
 
-from api_types import agent_literal, guard_decision_literal
+from .chatbot_memory import ChatbotMemory
+from .message_literals import message_role
 
-MessageRole = Literal['user', 'assistant', 'system']  # Papéis possíveis
-
-
-class ChatbotMemory(TypedDict):
-    '''
-    Estrutura de dados para a memória do chatbot.
-    Esta estrutura é usada para armazenar informações relevantes sobre o agente utilizado e outros dados que podem ser necessários durante a conversa.
-
-    Attributes
-    ----------
-    agent: agent_literal
-        O agente utilizado no momento. Este campo é importante para manter o contexto da conversa e garantir que o modelo de linguagem tenha acesso às informações corretas.
-
-    guard_decision
-    '''
-    agent: agent_literal  # Agente usado
-
-    # Guard Agent
-    # Decisão do Guard Agent
-    guard_decision: NotRequired[guard_decision_literal]
-
-    # Recommendation Agent
-    # Decisão do Recommendation Agent
-    classification_decision: NotRequired[agent_literal]
+# Dicionário tipado
 
 
-class Message(TypedDict):  # Dicionário tipado de mensagens
+class MessageDict(TypedDict):
     """
-    Tipo de dados para mensagens do chatbot.
+    Dicionário tipado para mensagens do chatbot.
+
     Esta estrutura de dicionário é utilizada para definir o formato das mensagens que serão trocadas entre o usuário e o modelo de linguagem.
 
     Attributes
@@ -55,16 +37,19 @@ class Message(TypedDict):  # Dicionário tipado de mensagens
         A memória é utilizada para manter o contexto da conversa e garantir que o modelo de linguagem tenha acesso às informações necessárias para gerar respostas coerentes e relevantes.
     """
     # Papel da mensagem
-    role: MessageRole
+    role: message_role
     # Conteúdo da mensagem
     content: str
-    # Memória do chatbot
+    # Memória do chatbot (opcional)
     memory: NotRequired[ChatbotMemory]
 
+# Base Model
 
-class MessageBaseModel(BaseModel):  # Base Model para mensagens
+
+class MessageModel(BaseModel):
     """
-    Tipo de dados para mensagens do chatbot.
+    Modelo base para mensagens do chatbot.
+
     Esta estrutura de dicionário é utilizada para definir o formato das mensagens que serão trocadas entre o usuário e o modelo de linguagem.
 
     Attributes
@@ -85,22 +70,8 @@ class MessageBaseModel(BaseModel):  # Base Model para mensagens
         A memória é utilizada para manter o contexto da conversa e garantir que o modelo de linguagem tenha acesso às informações necessárias para gerar respostas coerentes e relevantes.
     """
     # Papel da mensagem
-    role: MessageRole
+    role: message_role
     # Conteúdo da mensagem
     content: str
     # Memória do chatbot (opcional)
     memory: Optional[ChatbotMemory] = None
-
-
-class ChatRequest(TypedDict):
-    '''
-    Modelo de dados para requisições de chat.
-    '''
-    messages: List[Message]
-
-
-class ChatRequestBaseModel(BaseModel):
-    '''
-    Modelo de dados para requisições de chat.
-    '''
-    messages: List[MessageBaseModel]

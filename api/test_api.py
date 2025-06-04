@@ -1,8 +1,9 @@
 
-import requests
 import json
-from api_types import ChatRequest, Message
 from typing import List
+
+import requests
+from api_types import ChatRequestDict, MessageDict
 
 # URL base da API
 BASE_URL = "http://localhost:8000"
@@ -37,7 +38,7 @@ def test_chatbot_endpoint():
     print("\n🤖 Testando o endpoint /chatbot...")
 
     # Dados do teste
-    test_data: ChatRequest = {
+    test_data: ChatRequestDict = {
         'messages': [
             {
                 'role': 'user',
@@ -70,7 +71,7 @@ def interactive_chatbot():
     Modo de teste interativo para testar a API do chatbot via CLI.
     '''
 
-    messages: List[Message] = []  # histórico de mensagens
+    messages: List[MessageDict] = []  # histórico de mensagens
     print("\n💬 Modo interativo do chatbot. Digite 'sair' para encerrar.")
 
     # Loop para simular o chat

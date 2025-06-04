@@ -4,7 +4,7 @@ from copy import deepcopy
 from typing import List, Literal, TypedDict
 
 import dotenv
-from api_types import Message, guard_decision_literal
+from api_types import MessageDict, guard_decisions
 from openai import OpenAI
 
 from .utils import double_check_json_output, get_chatbot_response
@@ -18,7 +18,7 @@ class GuardAgentResponse(TypedDict):  # Tipagem da resposta do Guard Agent
     Esta estrutura é usada para definir o formato da resposta que o agente de guarda deve retornar.
     '''
     chain_of_thought: str  # cadeia de pensamento
-    decision: guard_decision_literal  # decisão
+    decision: guard_decisions  # decisão
     message: Literal['Desculpe, não posso ajudar com isso. Posso te ajudar com seu pedido?', ""]
 
 
@@ -50,7 +50,7 @@ class GuardAgent:
         self.model_name: str = os.getenv("MODEL_NAME")  # type: ignore
 
     # Método para obter resposta do agente
-    def get_response(self, messages: List[Message]) -> Message:
+    def get_response(self, messages: List[MessageDict]) -> MessageDict:
         messages = deepcopy(messages)  # evitar efeitos colaterais
 
         # System prompt do Guard Agent
@@ -78,7 +78,7 @@ class GuardAgent:
             """
 
         # Incluir as últimas 3 mensagens anteriores
-        input_messages: List[Message] = [
+        input_messages: List[MessageDict] = [
             # type: ignore
             {'role': 'system', 'content': system_prompt}] + messages[-3:]
 
@@ -88,12 +88,12 @@ class GuardAgent:
         chatbot_output = double_check_json_output(
             self.client, self.model_name, chatbot_output)
         # Pós-processamento
-        output: Message = self.postprocess(chatbot_output)
+        output: MessageDict = self.postprocess(chatbot_output)
         # Retornar resposta
         return output
 
     # Método para pós-processar a resposta do agente
-    def postprocess(self, output: str) -> Message:
+    def postprocess(self, output: str) -> MessageDict:
         '''
         Método para pós-processar a resposta do agente de guarda.
         Este método é responsável por converter a resposta do agente de guarda em um formato JSON estruturado e garantir que a resposta esteja no formato correto.
@@ -113,7 +113,7 @@ class GuardAgent:
             output_dict: GuardAgentResponse = json.loads(output)
 
             # Montar resposta do Guard Agent
-            dict_output: Message = {
+            dict_output: MessageDict = {
                 'role': 'assistant',
                 'content': output_dict['message'],
                 'memory': {

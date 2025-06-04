@@ -4,7 +4,7 @@ from copy import deepcopy
 from typing import List, Literal, TypedDict
 
 import dotenv
-from api_types import Message, agent_literal
+from api_types import MessageDict, agent_types
 from openai import OpenAI
 
 from .utils import double_check_json_output, get_chatbot_response
@@ -19,7 +19,7 @@ class ClassificationAgentResponse(TypedDict):
     Esta estrutura é usada para definir o formato da resposta que o agente de classificação deve retornar.
     '''
     chain_of_thought: str  # cadeia de pensamento
-    decision: agent_literal  # decisão
+    decision: agent_types  # decisão
     message: Literal[""]
 
 
@@ -48,7 +48,7 @@ class ClassificationAgent:
         self.model_name: str = os.getenv("MODEL_NAME")  # type: ignore
 
     # Método para obter resposta do agente
-    def get_response(self, messages: List[Message]) -> Message:
+    def get_response(self, messages: List[MessageDict]) -> MessageDict:
         '''
         Método para obter a resposta do agente de classificação.
         Este método recebe uma lista de mensagens e retorna a resposta do agente de classificação.
@@ -78,8 +78,9 @@ class ClassificationAgent:
         """
 
         # Incluir as últimas 3 mensagens do usuário com o system prompt
-        system_message: Message = {'role': 'system', 'content': system_prompt}
-        input_messages: List[Message] = [system_message] + messages[-3:]
+        system_message: MessageDict = {
+            'role': 'system', 'content': system_prompt}
+        input_messages: List[MessageDict] = [system_message] + messages[-3:]
 
         # Obter resposta do chatbot
         chatbot_output = get_chatbot_response(
@@ -93,7 +94,7 @@ class ClassificationAgent:
         return output
 
     # Método para pós-processamento
-    def postprocess(self, output: str) -> Message:
+    def postprocess(self, output: str) -> MessageDict:
         '''
         Método para pós-processar a resposta do agente de classificação.
         Este método recebe a saída do agente e a formata como um dicionário.
@@ -113,7 +114,7 @@ class ClassificationAgent:
             output_dict: ClassificationAgentResponse = json.loads(output)
 
             # Montar resposta do Classification Agent
-            dict_output: Message = {
+            dict_output: MessageDict = {
                 'role': 'assistant',
                 'content': output_dict['message'],
                 'memory': {

@@ -1,12 +1,12 @@
 # Utilitários pro chatbot
 
 from openai import OpenAI
-from api_types import Message
+from api_types import MessageDict
 from typing import List
 
 
 # Função para obter a resposta do chatbot
-def get_chatbot_response(client: OpenAI, model_name: str, messages: List[Message], temperature: float = 0) -> str:
+def get_chatbot_response(client: OpenAI, model_name: str, messages: List[MessageDict], temperature: float = 0) -> str:
     '''
     Função para obter a resposta do chatbot.
     Esta função é responsável por interagir com o modelo de linguagem (LLM) através da API da OpenAI. Ela processa as mensagens de entrada e retorna a resposta gerada pelo modelo.
@@ -25,7 +25,7 @@ def get_chatbot_response(client: OpenAI, model_name: str, messages: List[Message
 
     try:
         # Lista de mensagens enviadas pro modelo
-        input_messages: List[Message] = []
+        input_messages: List[MessageDict] = []
         for message in messages:
             # Adicionar mensagens do parâmetro a lista de mensagens
             input_messages.append({
@@ -93,7 +93,7 @@ def double_check_json_output(client: OpenAI, model_name: str, json_string: str) 
     """
 
     # Usar LLM para corrigir o JSON
-    messages: List[Message] = [{'role': 'user', 'content': prompt}]
+    messages: List[MessageDict] = [{'role': 'user', 'content': prompt}]
     response = get_chatbot_response(client, model_name, messages)
 
     # Se a resposta do LLM estiver vazia, mantenha o JSON original

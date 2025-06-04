@@ -10,7 +10,7 @@ import os
 from typing import Dict, Any
 import pathlib
 import sys
-from api_types import agent_literal
+from api_types import agent_types
 
 # Adicionar caminho do projeto ao sys.path
 folder_path = pathlib.Path(__file__).parent.resolve()
@@ -30,7 +30,7 @@ class AgentController:
         self.guard_agent = GuardAgent()  # guarda
         self.classification_agent = ClassificationAgent()  # classificação
         # ... (RecommendationAgent)
-        self.agent_dict: Dict[agent_literal, AgentProtocol] = {  # agentes pós-classificação
+        self.agent_dict: Dict[agent_types, AgentProtocol] = {  # agentes pós-classificação
             "details_agent": DetailsAgent(),
             "recommendation_agent": RecommendationAgent(),  # TODO: ajustar depois
             # TODO: add RecommendationAgent como método depois

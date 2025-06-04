@@ -6,10 +6,10 @@ from api_util.login import *
 import json
 from chatbot.agents.guard_agent import GuardAgent
 from chatbot.agents import ClassificationAgent
-from api_types.message_type import Message
+from api.api_types.chatbot_types.message_type import MessageDict
 from datetime import datetime
 from typing import List
-from api_types import ChatRequestBaseModel
+from api_types import ChatRequestModel
 from chatbot import AgentController
 
 app = FastAPI()
@@ -68,7 +68,7 @@ async def fazer_login(request: Request):
 
 
 @app.post("/chatbot")
-async def receber_chat(chat_request: ChatRequestBaseModel):
+async def receber_chat(chat_request: ChatRequestModel):
     '''
     Endpoint principal para o chatbot.
     Recebe mensagens do usuário, executa os agentes e retorna a resposta do chatbot escolhido.
