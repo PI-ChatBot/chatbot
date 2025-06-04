@@ -100,7 +100,7 @@ MODEL_NAME=meta-llama/llama-3.1-8b-instruct:free # ou outro modelo de sua escolh
 1. **Navegue até a pasta `api/`:**
 
 ```bash
-cd .\api\
+cd ./api/
 ```
 
 2. **Instale as dependências do projeto:**
@@ -123,7 +123,7 @@ uvicorn main:app --reload
 - **Documentação interativa (Swagger)**: http://localhost:8000/docs
 - **Documentação alternativa**: http://localhost:8000/redoc
 
-## Endpoints disponíveis
+## 📡 Endpoints disponíveis
 
 - `GET /` - Endpoint de teste
 - `POST /cadastro` - Cadastro de usuários
@@ -132,6 +132,30 @@ uvicorn main:app --reload
 - `GET /cozinha/pedidos` - Obter pedidos (requer autenticação)
 
 ---
+
+## 🧪 Testando a API
+
+### Executar o Script de Testes
+
+1. **Siga as instruções acima para iniciar o servidor FastAPI.**
+
+2. **Abra uma nova aba do terminal e navegue até a pasta `api/`:**
+
+```bash
+cd ./api/
+```
+
+3. **Execute o script de testes:**
+
+```bash
+python test_api.py
+```
+
+Esse script irá:
+
+1. ✅ Verificar se a API está rodando
+2. 🧪 Testar todos os endpoints
+3. 💬 Oferecer um modo de chat interativo
 
 # Welcome to your Expo app 👋
 
