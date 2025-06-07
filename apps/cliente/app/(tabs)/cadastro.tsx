@@ -58,7 +58,7 @@ export default function TelaCadastro() {
     }
     setSenhaErro("");
     try {
-      await fazerCadastro(primeiroNome,sobrenome,new Date(dataNascimento),"cliente",telefone,email,password);
+      await fazerCadastro(primeiroNome,sobrenome,new Date(dataNascimento.split("/").reverse().join("-")),"cliente",telefone,email,password);
       Alert.alert(
         "Conta criada com sucesso",
         "Sua conta foi criada!",
@@ -154,14 +154,29 @@ export default function TelaCadastro() {
         <View style={estilos.formGroup}>
           <Text style={estilos.label}>Data Nascimento</Text>
           <TextInput
-          placeholder="YYYY-MM-DD"
+          placeholder="DD/MM/YYYY"
           style={estilos.input}
-          keyboardType="default"
+          keyboardType="numeric"
           placeholderTextColor="#aaa"
           value={dataNascimento}
-          onChangeText={setDataNascimento}
+            onChangeText={(input) => {
+              let newInput = "";
+              for (let i = 0; i < input.length; i++){
+                if(Number.isInteger(Number(input[i]))){
+                  newInput += input[i];
+                }
+              }
+                if(newInput.length > 4){
+                  newInput = newInput.substring(0, 2) + "/" +newInput.substring(2,4) + "/" + newInput.substring(4);
+                }
+                else if(newInput.length > 2){
+                  newInput = newInput.substring(0, 2) + "/" + newInput.substring(2);
+                }
+                setDataNascimento(newInput);
+              }
+            }
 
-          maxLength={11}
+          maxLength={10}
           />
         </View>
 
