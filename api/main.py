@@ -1,11 +1,10 @@
-from typing import Annotated
-from fastapi import Depends, FastAPI, Request
+from fastapi import FastAPI, Request
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
 from api_util.login import *
 import json
 from datetime import datetime
-from api_types import ChatRequestModel
+from api_util.pedido import atualizar_status_pedido, obter_pedidos_no_restaurante
 from chatbot import AgentController
 
 app = FastAPI()
@@ -63,11 +62,15 @@ async def fazer_login(request: Request):
 
 
 @app.post("/chatbot")
-async def receber_chat(chat_request: ChatRequestModel):
+async def receber_chat(request: Request):
     '''
     Endpoint principal para o chatbot.
     Recebe mensagens do usuário, executa os agentes e retorna a resposta do chatbot escolhido.
     '''
+
+    request_json = await request.json()
+    body = json.loads(request_json["body"])
+    chat_request = body["messages"]
 
     try:
         # Verificar se o token é válido
@@ -104,5 +107,27 @@ async def receber_chat(chat_request: ChatRequestModel):
 
 
 @app.get("/cozinha/pedidos")
-async def obter_pedidos(token: Annotated[str, Depends(oauth2_scheme)]):
-    pass
+async def obter_pedidos(request : Request):
+    request_json = await request.json()
+    body = json.loads(request_json["body"])
+    token_funcionario = body["token"]
+
+    pedidos = obter_pedidos_no_restaurante(token_funcionario)
+    if pedidos is not None:
+        return {"pedidos" : list(pedidos)}
+    else:
+        return {"message : erro ao obter os pedidos"}
+
+@app.post("/cozinha/pedidos")
+async def atualizar_pedido(request : Request):
+    request_json = await request.json()
+    body = json.loads(request_json["body"])
+    token_funcionario = body["token"]
+    id_pedido = body["id_pedido"]
+    novo_status = body["status"]
+
+    resultado = atualizar_status_pedido(token_funcionario, id_pedido, novo_status)
+    if resultado is not None:
+        return {"message" : "pedido atualizado com sucesso"}
+    else:
+        return {"message" : "ocorreu um erro ao alterar o status do pedido"}

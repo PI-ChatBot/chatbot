@@ -110,7 +110,7 @@ class RestricaoAlimentarIngrediente(SQLModel, table = True):
 class Funcionario(SQLModel, table=True):
     # metadata = MetaData(schema="usuario")
     id_funcionario : uuid.UUID = Field(default_factory=uuid.uuid4, primary_key= True)
-    id_restaurante : uuid.UUID = Field(foreign_key="restaurante.id_restaurante")
+    id_restaurante : uuid.UUID | None= Field(foreign_key="restaurante.id_restaurante")
     nome : str = Field(max_length=150)
     email : str = Field(max_length=255)
     hash_senha : str = Field(max_length=60, min_length=60)
@@ -137,7 +137,7 @@ class Pedido(SQLModel, table = True):
     # metadata = MetaData(schema="pedido")
     id_pedido : uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     id_restaurante : uuid.UUID = Field(foreign_key="restaurante.id_restaurante")
-    id_funcionario : uuid.UUID = Field(foreign_key="funcionario.id_funcionario")
+    id_funcionario : uuid.UUID | None = Field(foreign_key="funcionario.id_funcionario")
     id_cliente : uuid.UUID = Field(foreign_key="cliente.id_cliente")
     nome_cliente : str = Field(max_length = 150)
     status : Annotated[str,

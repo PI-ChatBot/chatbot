@@ -2,12 +2,12 @@ from pydantic import BaseModel
 from sqlmodel import Session, select
 from passlib.context import CryptContext
 import jwt
-from datetime import date, timedelta, timezone, datetime
+from datetime import timedelta, timezone, datetime
 import dotenv
 import os
 
 from api_util.db import engine
-from api_util.tables import Cliente
+from api_util.tables import Funcionario
 
 dotenv.load_dotenv()
 
@@ -17,43 +17,32 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 120
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-
-class TokenData(BaseModel):
+class CadastroFuncionarioModel(BaseModel):
     nome : str
     email : str
-    tipo_cliente : str
+    senha : str
+    funcao : str
 
-class LoginModel(BaseModel):
+class LoginFuncionarioModel(BaseModel):
     email : str
     senha : str
 
-class CadastroModel(BaseModel):
-    email : str
-    senha: str
-    primeiro_nome : str
-    sobrenome : str
-    telefone : str
-    tipo_cliente : str
-    data_nascimento : date
 
-class Cadastro:
+class CadastroFuncionario:
     @classmethod
-    def fazer_cadastro(cls, cadastro: CadastroModel):
+    def fazer_cadastro(cls, cadastro: CadastroFuncionarioModel):
         session = Session(engine)
         print(cadastro)
         try:
             print("teste")
-            cliente = Cliente(
-            nome=cadastro.primeiro_nome + " " + cadastro.sobrenome,
-            email=cadastro.email,
-            data_nascimento=cadastro.data_nascimento,
-            hash_senha=get_password_hash(cadastro.senha),
-            tipo_cliente=cadastro.tipo_cliente)
-            print(cliente)
-            session.add(cliente)
+            funcionario = Funcionario(
+                id_restaurante= None,
+                nome = cadastro.nome,
+                email = cadastro.email,
+                hash_senha = get_password_hash(cadastro.senha),
+                funcao = cadastro.funcao
+            )
+            session.add(funcionario)
             session.commit()
             return True
         except:
@@ -62,25 +51,24 @@ class Cadastro:
             session.close()
 
 
-class Login:
+class LoginFuncionario:
     @classmethod
-    def fazer_login(cls, login : LoginModel):
+    def fazer_login(cls, login : LoginFuncionarioModel):
         session = Session(engine)
         try:
-            statement = select(Cliente).where(Cliente.email == login.email)
-            cliente = session.exec(statement).one()
-            if verify_password(login.senha, cliente.hash_senha):
+            statement = select(Funcionario).where(Funcionario.email == login.email)
+            funcionario = session.exec(statement).one()
+            if verify_password(login.senha, funcionario.hash_senha):
                 return (create_access_token(data={
-                    "nome" : cliente.nome,
-                    "email" : cliente.email,
-                    "tipo_cliente":cliente.tipo_cliente
-                }, expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)), cliente.nome)
+                    "nome" : funcionario.nome,
+                    "email" : funcionario.email,
+                    "funcao":funcionario.funcao
+                }, expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)), funcionario.nome)
         except:
             return (None, None)
         finally:
             session.close()
         return (None, None)
-
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
@@ -98,13 +86,13 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-def get_current_user(token: str):
+def get_current_funcionario(token: str):
     session = Session(engine)
     payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
     email = payload.get("email")
     if email is None:
         return None
-    user = session.exec(select(Cliente).where(Cliente.email == email)).one()
+    user = session.exec(select(Funcionario).where(Funcionario.email == email)).one()
     if user is None:
         return None
     return user
