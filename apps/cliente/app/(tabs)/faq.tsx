@@ -8,12 +8,12 @@ const perguntasRespostas = [
   {
     id: '1',
     pergunta: 'O que é este aplicativo?',
-    resposta: 'Este aplicativo foi desenvolvido para facilitar o acesso a informações e serviços importantes para nossos usuários.',
+    resposta: 'Este aplicativo foi desenvolvido para facilitar sua experiência com a unidade. Com ele, você pode realizar pedidos de forma prática, visualizar o cardápio completo com todas as opções disponíveis e acompanhar seus pedidos em tempo real. Tudo isso de maneira rápida, intuitiva e no seu tempo.',
   },
   {
     id: '2',
     pergunta: 'Como posso alterar minhas configurações de conta?',
-    resposta: 'Vá até o menu "Perfil", selecione "Configurações" e ajuste as preferências conforme desejar.',
+    resposta: 'Toque no ícone de engrenagem localizado no canto direito da barra fixa da tela para acessar e editar suas configurações de conta.',
   },
   {
     id: '3',
@@ -27,8 +27,8 @@ const perguntasRespostas = [
   },
   {
     id: '5',
-    pergunta: 'Como posso enviar feedback?',
-    resposta: 'Você pode enviar sugestões e comentários através da opção "Fale Conosco" no menu principal.',
+    pergunta: 'Como posso realizar meu pedido?',
+    resposta: 'Para realizar seu pedido, clique no ícone do chat na barra fixa inferior. Você será direcionado ao chatbot, onde poderá consultar o status do seu pedido e realizar novas solicitações se desejar.',
   },
 ];
 
