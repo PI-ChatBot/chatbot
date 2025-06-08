@@ -24,7 +24,7 @@ export async function fazerCadastro(primeiro_nome:string, sobrenome:string, data
     body: JSON.stringify({
       "primeiro_nome" : primeiro_nome,
       "sobrenome":sobrenome,
-      "data_nascimento": data_nascimento.getFullYear() + "-" + String((data_nascimento.getMonth() + 1)).padStart(2, "0")+ "-" + String(data_nascimento.getDate()).padStart(2, "0"),
+      "data_nascimento": data_nascimento.getFullYear() + "-" + String((data_nascimento.getMonth() + 1)).padStart(2, "0")+ "-" + String(data_nascimento.getDate() + 1).padStart(2, "0"),
       "tipo_cliente":tipo_cliente,
       "telefone":telefone,
       "email":email,

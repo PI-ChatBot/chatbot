@@ -25,21 +25,22 @@ export default function TelaLogin() {
     try {
       let data: { token: string, nome: string } = await fazerLogin(email, senha);
       console.log(data);
-      Alert.alert(
-        "Conta criada com sucesso",
-        "Sua conta foi criada!",
-        [
-          {
-            text: "OK",
-            onPress: () => router.replace('/(tabs)'),
-          },
-        ],
-        { cancelable: false }
-      );
       if (data["token"] && data["nome"]) {
         await AsyncStorage.setItem("token", data["token"]);
         await AsyncStorage.setItem("nome", data["nome"]);
         router.replace("/(tabs)/home");
+      }
+      else{
+        Alert.alert(
+          "Erro",
+          "Houve um erro na hora de fazer login",
+          [
+            {
+              text: "OK",
+              onPress: () => {}
+            }
+          ]
+        )
       }
     } catch (e) {
     }

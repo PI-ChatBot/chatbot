@@ -4,11 +4,7 @@ from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
 from api_util.login import *
 import json
-from chatbot.agents.guard_agent import GuardAgent
-from chatbot.agents import ClassificationAgent
-from api.api_types.chatbot_types.message_type import MessageDict
 from datetime import datetime
-from typing import List
 from api_types import ChatRequestModel
 from chatbot import AgentController
 
@@ -34,7 +30,6 @@ async def root():
 async def cadastrar(request: Request):
     request_json = await request.json()
     body = json.loads(request_json["body"])
-    print(body)
     cadastro = CadastroModel(
         primeiro_nome=body["primeiro_nome"],
         sobrenome=body["sobrenome"],
