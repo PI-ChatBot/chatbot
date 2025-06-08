@@ -12,6 +12,7 @@ export default function TelaLogin() {
   const [lembrarSenha, setLembrarSenha] = useState(false);
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -92,11 +93,16 @@ export default function TelaLogin() {
               <TextInput
                 placeholder="Digite sua senha"
                 style={estilos.input}
-                secureTextEntry
+                secureTextEntry={!mostrarSenha}
                 placeholderTextColor="#aaa"
                 value={senha}
                 onChangeText={setSenha}
               />
+              <TouchableOpacity onPress={() => setMostrarSenha(v => !v)} style={{ marginTop: 6 }}>
+                <Text style={{ color: '#78aeb4', fontWeight: 'bold' }}>
+                  {mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
+                </Text>
+              </TouchableOpacity>
             </View>
 
             {/* Checkbox: lembrar senha */}
