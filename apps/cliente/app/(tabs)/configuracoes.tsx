@@ -16,6 +16,8 @@ export default function TelaConfiguracao() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [senhaErro, setSenhaErro] = useState("");
   const [editando, setEditando] = useState(false);
+  const [primeiroNome, setPrimeiroNome] = useState("");
+  const [sobrenome, setSobrenome] = useState("");
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -70,8 +72,32 @@ export default function TelaConfiguracao() {
         </Animated.View>
 
         <Text style={estilos.titulo}>Configurações</Text>
+          <View style={{ position: 'relative', width: '100%' }}>
 
-        <View style={{ position: 'relative', width: '100%' }}>
+        <View style={estilos.formGroup}>
+          <Text style={estilos.label}>Primeiro Nome</Text>
+          <TextInput
+            placeholder="Como o chatbot deve te chamar?"
+            style={estilos.input}
+            placeholderTextColor="#aaa"
+            value={primeiroNome}
+            onChangeText={setPrimeiroNome}
+            editable={editando}
+          />
+        </View>
+
+        <View style={estilos.formGroup}>
+          <Text style={estilos.label}>Sobrenome</Text>
+          <TextInput
+            placeholder="Digite seu sobrenome"
+            style={estilos.input}
+            placeholderTextColor="#aaa"
+            value={sobrenome}
+            onChangeText={setSobrenome}
+            editable={editando}
+          />
+        </View>
+
           <View style={estilos.formGroup}>
             <Text style={estilos.label}>Telefone</Text>
             <TextInput
