@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Animated, Image, StyleSheet, SafeAreaView, TouchableOpacity, View, Text, ScrollView } from 'react-native';
+import { Animated, Image, StyleSheet, SafeAreaView, TouchableOpacity, View, Text, ScrollView, Modal } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { formatDateTime } from './utils/formatDateTime';
+import ConfirmModal from './utils/ConfirmModal';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -79,9 +80,34 @@ export default function HomeScreen() {
     setPedidos(mockPedidos);
   }, []);
 
-  const concluirPedido = (id) => {
-    setPedidos((prev) => prev.filter((pedido) => pedido.id !== id));
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [modalType, setModalType] = useState(null);
+  const [itemId, setItemId] = useState(null);
+
+  const abrirModal = (tipo, id) => {
+    setItemId(id);
+    setModalType(tipo); // Ex: 'cancelar' ou 'confirmar'
+    setModalVisible(true);
   };
+
+  const fecharModal = () => {
+    setModalVisible(false);
+    setModalType(null);
+    setItemId(null);
+  };
+
+  const executarAcao = () => {
+    if (modalType === 'cancelar') {
+      setPedidos((prev) => prev.filter((pedido) => pedido.id !== itemId));
+    } 
+    
+    else if (modalType === 'concluir') {
+      setPedidos((prev) => prev.filter((pedido) => pedido.id !== itemId));
+    }
+
+    fecharModal();
+  };
+
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -102,7 +128,14 @@ export default function HomeScreen() {
           {pedidos.map((pedido) => (
             <View key={pedido.id} style={styles.card}>
               <View style={styles.viewTextoPedido}>
+                <View></View>
                 <Text style={styles.textoPedido}>Pedido {pedido.id}</Text>
+                <TouchableOpacity
+                    style={styles.botaoCancelar}
+                    onPress={() => abrirModal('cancelar', pedido.id)}
+                  >
+                    <Feather name="x" size={20} color="white" />
+                  </TouchableOpacity>
               </View>
               <View style={styles.cardRow}>
                 <View style={styles.grupoColumn}>
@@ -124,16 +157,38 @@ export default function HomeScreen() {
                     <Text style={styles.horario}>Horário: {pedido.horario}</Text>
                   </View>
                 </View>
-                <TouchableOpacity
-                  style={styles.botaoConcluir}
-                  onPress={() => concluirPedido(pedido.id)}
-                >
-                  <Text style={styles.botaoTexto}>Concluir</Text>
-                </TouchableOpacity>
+                <View>
+                  <TouchableOpacity
+                    style={styles.botaoConcluir}
+                    onPress={() => abrirModal('concluir', pedido.id)}
+                  >
+                    <Text style={styles.botaoTexto}>Concluir</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           ))}
       </ScrollView>
+      {/* Os componentes abaixo pertencem ao Modal para confirmar a confirmação ou o cancelamento do pedido. */}
+       <ConfirmModal
+        visible={isModalVisible}
+        tipo = {modalType}
+        message={
+           modalType === 'concluir'
+            ? `Tem certeza de que deseja confirmar o Pedido ${itemId}?`
+            : `Tem certeza de que deseja cancelar o Pedido ${itemId}?`
+            
+        }
+        onConfirm={executarAcao}
+        onCancel={() => setModalVisible(false)}
+        confirmText={
+          modalType === 'concluir'
+          ? 'Concluir Pedido'
+          : 'Cancelar Pedido'
+        }
+        cancelText="Voltar"
+      />
+      {/* Fim do "Alert". */}
     </SafeAreaView>
   );
 }
@@ -173,7 +228,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   tituloPedidos: {
-     fontSize: 45,
+    fontSize: 45,
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
@@ -205,7 +260,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   viewTextoPedido: {
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   cardRow: {
     flexDirection: 'row',
@@ -229,6 +286,8 @@ const styles = StyleSheet.create({
   },
   info: {
     justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 150
   },
   nome: {
     fontSize: 30,
@@ -236,6 +295,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   textoPedido: {
+    marginLeft: 50,
     fontSize: 25,
     fontWeight: 'bold'
   },
@@ -245,13 +305,18 @@ const styles = StyleSheet.create({
   },
   botaoConcluir: {
     backgroundColor: '#28a745',
-    paddingVertical: 10,
+    paddingVertical: 15,
     paddingHorizontal: 15,
     borderRadius: 15,
     marginRight: 15
   },
+  botaoCancelar: {
+    backgroundColor: '#ed4141',
+    paddingHorizontal: 1,
+    borderRadius: 50,
+  },
   botaoTexto: {
     color: 'white',
-    fontSize: 15,
+    fontSize: 25,
   },
 });
