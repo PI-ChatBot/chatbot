@@ -13,7 +13,7 @@
     "nome": "Filé de Frango Grelhado",
     "categoria": "Refeições",
     "descricao": "Filé de frango grelhado com arroz, feijão, fritas e salada.",
-    "ingredientes": [null],
+    "ingredientes": ["Arroz", "Feijão", "Filé de frango", "Fritas", "Salada"],
     "preco": "28.99",
     "preco_especial": null,
     "avaliacao": null,
