@@ -59,17 +59,34 @@ export default function SalaDeChat() {
     }
   }, [mensagens]);
 
-  // Função simulada para chamar API do chatbot
+  // Função para chamar a API real do chatbot
   const chamarAPIChatBot = async (mensagensEntrada: InterfaceMensagem[]) => {
-    // Simulação de resposta por enquanto
-    return new Promise<InterfaceMensagem>((resolve) => {
-      setTimeout(() => {
-        resolve({
-          conteudo: "Esta é uma resposta simulada do chatbot. Substitua pela sua API real.",
+    try {
+      const response = await fetch("http://192.168.0.5:8000/chatbot", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          body: JSON.stringify({
+            messages: mensagensEntrada
+          })
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.response) {
+        return {
+          conteudo: data.response,
           papel: 'assistente'
-        });
-      }, 1500);
-    });
+        };
+      } else {
+        throw new Error(data.error || "Erro na resposta do chatbot.");
+      }
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
   };
 
   const lidarComEnvioMensagem = async () => {
