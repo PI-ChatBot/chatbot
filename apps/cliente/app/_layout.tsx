@@ -28,7 +28,7 @@ export default function Layout() {
               <Feather
                 name="message-circle"
                 size={24}
-                color={pathname === '/(tabs)/chat' ? '#78aeb4' : '#666'}
+                color={pathname === '/chat' ? '#78aeb4' : '#666'}
               />
             </TouchableOpacity>
 

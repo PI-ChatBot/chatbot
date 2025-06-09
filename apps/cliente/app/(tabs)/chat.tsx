@@ -11,10 +11,12 @@ import {
   Alert, 
   Image,
   KeyboardAvoidingView,
-  Platform 
+  Platform,
+  PanResponder,
+  Dimensions
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Feather } from '@expo/vector-icons';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 // Interface para as mensagens
 interface InterfaceMensagem {
@@ -23,7 +25,7 @@ interface InterfaceMensagem {
 }
 
 export default function SalaDeChat() {
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const robotAnim = useRef(new Animated.Value(0)).current;
   const router = useRouter();
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -31,13 +33,22 @@ export default function SalaDeChat() {
   const [estaDigitando, setEstaDigitando] = useState<boolean>(false);
   const [textoMensagem, setTextoMensagem] = useState('');
 
+  // Animação do robô quando estiver digitando
   useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-  }, []);
+    if (estaDigitando) {
+      Animated.timing(robotAnim, {
+        toValue: -9,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(robotAnim, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [estaDigitando]);
 
   useEffect(() => {
     // Scroll para o final quando novas mensagens chegarem
@@ -114,7 +125,12 @@ export default function SalaDeChat() {
             <Text style={estilos.textoVoltar}>← Voltar</Text>
           </TouchableOpacity>
 
-          <Animated.View style={{ ...estilos.logoContainer, opacity: fadeAnim }}>
+          <Animated.View style={[
+            estilos.logoContainer,
+            {
+              transform: [{ translateY: robotAnim }]
+            }
+          ]}>
             <Image
               source={require('@/assets/images/headrobo.png')}
               style={estilos.logo}
@@ -200,6 +216,7 @@ const estilos = StyleSheet.create({
   botaoVoltar: {
     alignSelf: 'flex-start',
     marginBottom: 12,
+    marginTop: -20,
   },
   textoVoltar: {
     fontSize: 16,
@@ -210,20 +227,37 @@ const estilos = StyleSheet.create({
     width: 70,
     height: 85,
     marginBottom: 12,
-    zIndex: 2,
+    zIndex: 0,
     position: 'relative',
   },
   logo: {
     width: '100%',
     height: '100%',
-    marginLeft: 230,
+    marginLeft: 280,
+    marginTop: 20,
   },
   titulo: {
     fontSize: 34,
     fontWeight: '600',
     color: '#78aeb4',
-    marginTop: -64,
-    marginLeft: 30,
+    marginTop: -50,
+    marginBottom: -12,
+    marginLeft: -2,
+  },
+  menuPopup: {
+    position: 'absolute',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 25,
+    padding: 8,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    zIndex: 10,
+  },
+  menuButton: {
+    padding: 8,
   },
   chatContainer: {
     flex: 1,
