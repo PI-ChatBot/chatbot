@@ -1,0 +1,62 @@
+[
+  {
+    "nome": "Filé de Frango à Parmegiana",
+    "categoria": "Refeições",
+    "descricao": "Com arroz, fritas e salada.",
+    "ingredientes": [null],
+    "preco": "33.99",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianalsMFoEaRbwC09LKwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hbHNNRm9FYVJid0MwOUxLd2VicC5qcGVnIiwiaWF0IjoxNzQ5NDc3NjQ5LCJleHAiOjE3ODEwMTM2NDl9.A8WM9OlfPuvg32-spWxAj0Wh7KAzv5Qy70_RwuWVRD4"
+  },
+  {
+    "nome": "Filé de Frango Grelhado",
+    "categoria": "Refeições",
+    "descricao": "Filé de frango grelhado com arroz, feijão, fritas e salada.",
+    "ingredientes": [null],
+    "preco": "28.99",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaAgMWfgSfMlZkc72webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hQWdNV2ZnU2ZNbFprYzcyd2VicC5qcGVnIiwiaWF0IjoxNzQ5NDc3MzgxLCJleHAiOjE3ODEwMTMzODF9.4rnp11dDte-_CHDlfott0JNeGPsV1K7RXpBpXRLgYx8"
+  },
+  {
+    "nome": "Linguiça Calabresa Acebolada",
+    "categoria": "Refeições",
+    "descricao": "Com arroz, feijão, fritas e salada.",
+    "ingredientes": [null],
+    "preco": "28.99",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianat7An8IXa9yO3N1Jwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdDdBbjhJWGE5eU8zTjFKd2VicC5qcGVnIiwiaWF0IjoxNzQ5NDc3NzI1LCJleHAiOjE3ODEwMTM3MjV9.x4AKn3CHFfRxx3H3duzQX2tDAtLquVMmdV7IXUMIOsc"
+  },
+  {
+    "nome": "Linguiça Toscana Grelhada",
+    "categoria": "Refeições",
+    "descricao": "Linguiça toscana grelhada com arroz, feijão, fritas e salada.",
+    "ingredientes": [null],
+    "preco": "28.99",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana8k4icceXnW4IKF8webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hOGs0aWNjZVhuVzRJS0Y4d2VicC5qcGVnIiwiaWF0IjoxNzQ5NDc3NDg5LCJleHAiOjE3ODEwMTM0ODl9.Pr8HNE_LaBOv2SEUTRvaDcT6kuyiPKrzaqj6d47Ckxc"
+  },
+  {
+    "nome": "Omelete Completo",
+    "categoria": "Refeições",
+    "descricao": "Omelete completo com dois ovos, presunto, queijo, tomate e cebola, arroz, feijão, fritas e salada.",
+    "ingredientes": [null],
+    "preco": "28.99",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaGaCdIPiiXpSVNs2webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hR2FDZElQaWlYcFNWTnMyd2VicC5qcGVnIiwiaWF0IjoxNzQ5NDc3NTY5LCJleHAiOjE3ODEwMTM1Njl9.IrJVkud4YSynyTA1I5l9iKPx4TniESviIHKu8IOkrlo"
+  },
+  {
+    "nome": "Strogonoff de carne",
+    "categoria": "Refeições",
+    "descricao": "com arroz, e batata frita...",
+    "ingredientes": [null],
+    "preco": "30.99",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianauLlPbu0ESXOjtyYwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdUxsUGJ1MEVTWE9qdHlZd2VicC5qcGVnIiwiaWF0IjoxNzQ5NDc3Nzg5LCJleHAiOjE3ODEwMTM3ODl9.b1ZN7ffSWmpb4r0BX3fwUvu4kww0HAW5RO7h15QyENU"
+  }
+]
