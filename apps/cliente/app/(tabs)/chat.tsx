@@ -37,7 +37,7 @@ export default function SalaDeChat() {
   useEffect(() => {
     if (estaDigitando) {
       Animated.timing(robotAnim, {
-        toValue: -9,
+        toValue: -12,
         duration: 500,
         useNativeDriver: true,
       }).start();
@@ -234,7 +234,7 @@ const estilos = StyleSheet.create({
     width: '100%',
     height: '100%',
     marginLeft: 280,
-    marginTop: 20,
+    marginTop: 25,
   },
   titulo: {
     fontSize: 34,
