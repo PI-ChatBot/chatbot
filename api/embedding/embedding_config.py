@@ -53,9 +53,8 @@ class EmbeddingConfig:
         if not name:  # Se não for encontrado no ENV
             raise ValueError(
                 'PINECONE_INDEX_NAME não encontrado nas variáveis de ambiente.')
-        return name
+        return name    # Nome do modelo de embedding
 
-    # Nome do modelo de embedding
     @property
     def embedding_model_name(self) -> str:
         '''
@@ -66,13 +65,21 @@ class EmbeddingConfig:
             'BAAI/bge-small-en-v1.5'  # modelo padrão se não for especificado no ENV
         )
 
-    # Retornar configurações em um dicionário
-    def dict_config(self) -> EmbeddingConfigDict:
+    # Dimensão dos embeddings
+    @property
+    def embedding_dimension(self) -> int:
+        '''
+        Dimensão dos vetores de embedding.
+        '''
+        return int(os.getenv('EMBEDDING_DIMENSION', '384'))
+
+    # Retornar configurações em um dicionário    def dict_config(self) -> EmbeddingConfigDict:
         '''
         Retorna as configurações de embedding e do Pinecone como um dicionário.
         '''
         return {
             'pinecone_api_key': self.pinecone_api_key,
             'pinecone_index_name': self.pinecone_index_name,
-            'embedding_model_name': self.embedding_model_name
+            'embedding_model_name': self.embedding_model_name,
+            'embedding_dimension': str(self.embedding_dimension)
         }

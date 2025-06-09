@@ -4,7 +4,8 @@ Cliente para interagir com o Pinecone, um serviço de banco de dados vetorial.
 
 import time
 from typing import List, Dict, Any, Optional
-from pinecone import Pinecone, ServerlessSpec, Index
+from pinecone import Pinecone, ServerlessSpec
+from pinecone.data.index import Index
 import pinecone.exceptions
 
 
@@ -32,7 +33,6 @@ class PineconeClient:
         return self._client
 
     # Índice no Pinecone
-    @property
     def create_index(
         self,
         name: str,
@@ -114,10 +114,20 @@ class PineconeClient:
         '''
         # Obtém o índice
         index = self.get_index(index_name)
+
+        # Converte os vetores para o formato aceito pelo Pinecone
+        formatted_vectors = []
+        for v in vectors:
+            # Espera-se que cada dict tenha as chaves: 'id', 'values' e opcionalmente 'metadata'
+            if 'metadata' in v:
+                formatted_vectors.append((v['id'], v['values'], v['metadata']))
+            else:
+                formatted_vectors.append((v['id'], v['values']))
+
         # Insere ou atualiza os vetores
-        index.upsert(vectors=vectors, namespace=namespace)
+        index.upsert(vectors=formatted_vectors, namespace=namespace)
         print(
-            f'Inseridos {len(vectors)} vetores no índice "{index_name}" no namespace "{namespace}".')
+            f'Inseridos {len(formatted_vectors)} vetores no índice "{index_name}" no namespace "{namespace}".')
 
     # Consultar vetores
     def query_vectors(
@@ -127,7 +137,7 @@ class PineconeClient:
             top_k: int = 5,
             namespace: str = 'default',
             include_metadata: bool = True
-    ) -> Dict[str, Any]:
+    ):
         '''
         Consulta vetores no índice especificado.
 
