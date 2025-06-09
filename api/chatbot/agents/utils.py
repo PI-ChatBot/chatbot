@@ -1,8 +1,11 @@
 # Utilitários pro chatbot
 
-from openai import OpenAI
+from typing import List, Union
+
 from api_types import MessageDict
-from typing import List
+from numpy import ndarray
+from openai import OpenAI
+from sentence_transformers import SentenceTransformer
 
 
 # Função para obter a resposta do chatbot
@@ -110,3 +113,26 @@ def double_check_json_output(client: OpenAI, model_name: str, json_string: str) 
         return ""
 
     return response
+
+# Obter embeddings
+
+
+def get_embeddings(embedding_client: SentenceTransformer, texts: Union[str, List[str]]) -> ndarray:
+    '''
+    Função para obter embeddings de um ou mais textos.
+    Esta função utiliza o modelo de embeddings da SentenceTransformer para gerar representações vetoriais dos textos fornecidos.
+
+    :param embedding_client: Cliente de embeddings do SentenceTransformer.
+    :param texts: Texto ou lista de textos para os quais os embeddings serão gerados.
+
+    :return: Lista de embeddings gerados.
+    '''
+    # Se parâmetro for uma string, converte pra lista
+    if isinstance(texts, str):
+        texts = [texts]
+
+    # Gerar embeddings usando o cliente
+    embeddings: ndarray = embedding_client.encode(texts, convert_to_numpy=True)
+
+    # Retornar embeddings
+    return embeddings
