@@ -1,18 +1,28 @@
-fastapi[standard]
-sqlmodel
-psycopg2-binary
-pyjwt
-passlib[bcrypt]
+# Requisitos do projeto
 
-
+# Arquivos
 pathlib==1.0.1
+python-dotenv==1.1.0
+
+# API
+fastapi[standard]
+
+# Autenticação e Criptografia
+passlib[bcrypt]
+pyjwt==2.10.1
+
+# Banco de dados
+sqlmodel==0.0.24
+psycopg2-binary==2.9.10
+
+# Supabase 
+supabase==2.15.2
 
 # Conexão com o LLM
-pandas==2.2.3
-python-dotenv==1.1.0
 openai==1.76.0
-pinecone==6.0.2
+pandas==2.2.3
 
 # Embedding e processamento de linguagem natural
-sentence-transformers==4.0.2
 numpy==2.2.4
+pinecone==6.0.2
+sentence-transformers==4.0.2
