@@ -1,15 +1,17 @@
-from chatbot.agents import (  # importação dos agentes
-    GuardAgent,
-    ClassificationAgent,
-    DetailsAgent,
-    RecommendationAgent,
-    OrderTakingAgent
-)
 import os
-from typing import Dict, Any
 import pathlib
 import sys
+from typing import Any, Dict
+
 from api_types import agent_types
+
+from chatbot.agents import (  # importação dos agentes
+    ClassificationAgent,
+    DetailsAgent,
+    GuardAgent,
+    OrderTakingAgent,
+    RecommendationAgent,
+)
 
 # Adicionar caminho do projeto ao sys.path
 folder_path = pathlib.Path(__file__).parent.resolve()
@@ -30,10 +32,10 @@ class AgentController:
         self.classification_agent = ClassificationAgent()  # classificação
         # ... (RecommendationAgent)
         self.agent_dict: Dict[agent_types, Any] = {  # agentes pós-classificação
-            "details_agent": DetailsAgent(),
-            "recommendation_agent": RecommendationAgent(),  # TODO: ajustar depois
+            "details_agent": DetailsAgent()
+            # "recommendation_agent": RecommendationAgent(),  # TODO: ajustar depois
             # TODO: add RecommendationAgent como método depois
-            "order_taking_agent": OrderTakingAgent()
+            # "order_taking_agent": OrderTakingAgent()
         }
 
     # Método para obter resposta do LLM
@@ -68,6 +70,9 @@ class AgentController:
             'memory', {}).get('classification_decision')
 
         # 3º Executar agente escolhido
+        if chosen_agent is None or chosen_agent not in self.agent_dict:
+            # Verificar se o agente escolhido é válido
+            raise ValueError(f"Agente escolhido inválido: {chosen_agent}")
         agent = self.agent_dict[chosen_agent]
 
         # Obter resposta do agente

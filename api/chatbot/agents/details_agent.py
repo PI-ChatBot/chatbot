@@ -1,10 +1,8 @@
-import json
 import os
 from copy import deepcopy
 from typing import List
 
 import dotenv
-import numpy as np
 from api_types import MessageDict
 from openai import OpenAI
 from pinecone import Pinecone

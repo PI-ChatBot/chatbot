@@ -69,14 +69,21 @@ async def receber_chat(request: Request):
     '''
 
     request_json = await request.json()
-    body = json.loads(request_json["body"])
-    chat_request = body["messages"]
+    
+    # Verificar se os dados estão no formato esperado
+    if "body" in request_json:
+        # Formato serverless (com body como string JSON)
+        body = json.loads(request_json["body"])
+        chat_request = body["messages"]
+    else:
+        # Formato direto (dados JSON diretos)
+        chat_request = request_json
 
     try:
         # Verificar se o token é válido
         messages_dict = [
-            {'role': msg.role, 'content': msg.content}
-            for msg in chat_request.messages
+            {'role': msg['role'], 'content': msg['content']}
+            for msg in chat_request['messages']
         ]
 
         #
