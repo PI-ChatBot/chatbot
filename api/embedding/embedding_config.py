@@ -5,7 +5,7 @@ Configurações do embedding e do Pinecone.
 import os
 from typing import Optional
 
-from api_types import EmbeddingConfigDict
+from api_types.embedding_types.embedding_config import EmbeddingConfigDict
 from dotenv import load_dotenv
 
 
