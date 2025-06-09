@@ -74,6 +74,10 @@ def interactive_chatbot():
     messages: List[MessageDict] = []  # histórico de mensagens
     print("\n💬 Modo interativo do chatbot. Digite 'sair' para encerrar.")
 
+    # Opção de ativar o modo de depuração
+    debug_mode: bool = False
+    print("🔧 Para ativar ou desativar o modo de deputação a qualquer momento, digite 'debug'")
+
     # Loop para simular o chat
     while True:
         user_input = input("🧑 Usuário: ").strip()  # msg do usuário
@@ -82,6 +86,11 @@ def interactive_chatbot():
         if user_input.lower() in ['sair', 'exit', 'quit']:
             print("👋 Encerrando o chat.")
             break
+
+        # Verificar se usuário quer alternar modo de depuração
+        if user_input.lower() in ['debug']:
+            debug_mode = not debug_mode
+            continue
 
         # Se usuário não digitou nada, reinicie o loop
         if not user_input:
@@ -103,6 +112,11 @@ def interactive_chatbot():
             if response.status_code == 200:
                 # Converter resultado em JSON
                 result = response.json()
+
+                # Exibir resultado de depuração se ativado
+                if debug_mode:
+                    print("", result)
+
                 if result.get('success'):
                     # Exibir resposta do chatbot
                     bot_response = result.get(
