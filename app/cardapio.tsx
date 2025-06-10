@@ -6,7 +6,7 @@ import { formatDateTime } from './utils/formatDateTime';
 
 
 const { width } = Dimensions.get('window');
-const ITEM_WIDTH = (width - 48) / 2; // 2 itens por linha + margens
+const ITEM_WIDTH = (width - 48) / 2; 
 
 export default function TelaCardapio(){
     const router = useRouter();

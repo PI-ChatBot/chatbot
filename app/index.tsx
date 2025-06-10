@@ -10,7 +10,7 @@ export default function LoginScreen() {
     const router = useRouter();
     const mockUsers = [
         { email: 'teste@com', password: '123', restaurantId: 'rest_a' },
-        { email: 'maria@restauranteb.com', password: 'senha123', restaurantId: 'rest_b' },
+        { email: 'teste2@com', password: 'senha123', restaurantId: 'rest_b' },
     ];
 
     useEffect(() => {

@@ -6,38 +6,7 @@ import { storage } from './utils/storage';
 import { formatDateTime } from './utils/formatDateTime';
 import ConfirmModal from './utils/ConfirmModal';
 
-export default function TelaPedidos() {
-  const router = useRouter();
-  
-  const irParaCardapio = () => {
-    router.push('/cardapio');
-  }
-
-  const [dateTime, setDateTime] = useState(new Date());
-
-  const [restaurantId, setRestaurantId] = useState<string | null>(null);
-  useEffect(() => {
-    const id = storage.get('restaurantId');
-    if (!id) {
-      setTimeout(() => router.replace('/'), 0); // volta para login se não logado
-    } else {
-      setRestaurantId(id);
-    }
-  }, []);
-
-  const logout = () => {
-    storage.remove('restaurantId');
-    router.replace('/');
-  };
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDateTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-  
-  const mockPedidos = [
+const mockPedidos = [
     {
       id: '1',
       nome: 'João Silva',
@@ -88,6 +57,38 @@ export default function TelaPedidos() {
     },
   ];
 
+export default function TelaPedidos() {
+  const router = useRouter();
+  
+  const irParaCardapio = () => {
+    router.push('/cardapio');
+  }
+
+  const [dateTime, setDateTime] = useState(new Date());
+
+  const [restaurantId, setRestaurantId] = useState<string | null>(null);
+  useEffect(() => {
+    const id = storage.get('restaurantId');
+    if (!id) {
+      setTimeout(() => router.replace('/'), 0); // volta para login se não logado
+    } else {
+      setRestaurantId(id);
+    }
+  }, []);
+
+  const logout = () => {
+    storage.remove('restaurantId');
+    router.replace('/');
+  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDateTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+  
+  
   const [pedidos, setPedidos] = useState([]);
   
   useEffect(() => {
@@ -120,6 +121,10 @@ export default function TelaPedidos() {
       setPedidos((prev) => prev.filter((pedido) => pedido.id !== itemId));
     }
 
+    else if (modalType === 'sair') {
+      logout();
+    }
+
     fecharModal();
   };
 
@@ -127,20 +132,25 @@ export default function TelaPedidos() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.topBar}>
-          <TouchableOpacity onPress={logout}>
-            <Text>Sair</Text>
+          <TouchableOpacity onPress={() => abrirModal('sair', '')} style={styles.botaoSair}>
+            <Text style={styles.buttonText}>Sair</Text>
           </TouchableOpacity>
-          <View style={styles.centerContainer}>
-            <Feather name="calendar" size={20} color="#333" style={styles.icon} />  
-            <Text style={styles.dateText}>{formatDateTime(dateTime)}</Text>
-          </View>
-          <View style={styles.side}>
-            <TouchableOpacity onPress={irParaCardapio} style={styles.button}>
-              <Text style={styles.buttonText}>Cardápio</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.centerContainer}>
+          <Feather name="calendar" size={20} color="#333" style={styles.icon} />  
+          <Text style={styles.dateText}>{formatDateTime(dateTime)}</Text>
+        </View>
+        <View style={styles.side}>
+          <TouchableOpacity onPress={irParaCardapio} style={styles.botaoCardapio}>
+            <Text style={styles.buttonText}>Cardápio</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <Text style={styles.tituloPedidos}>Pedidos</Text>
+      <View style={styles.underContainer}>
+        <Text style={styles.infoRestaurante}>Restaurante [nome do restaurante] {/*storage.get('restaurantId')*/}</Text>
+        <View style={styles.tituloContainer}>
+          <Text style={styles.tituloPedidos}>Pedidos</Text>
+        </View>
+      </View>
       <ScrollView contentContainerStyle={styles.containerPedidos}>
           {pedidos.map((pedido) => (
             <View key={pedido.id} style={styles.card}>
@@ -193,7 +203,9 @@ export default function TelaPedidos() {
         message={
            modalType === 'concluir'
             ? `Tem certeza de que deseja confirmar o Pedido ${itemId}?`
-            : `Tem certeza de que deseja cancelar o Pedido ${itemId}?`
+            : modalType === 'cancelar'
+              ? `Tem certeza de que deseja cancelar o Pedido ${itemId}?`
+              : 'Tem certeza de que deseja sair da sua conta?'
             
         }
         onConfirm={executarAcao}
@@ -201,7 +213,9 @@ export default function TelaPedidos() {
         confirmText={
           modalType === 'concluir'
           ? 'Concluir Pedido'
-          : 'Cancelar Pedido'
+          : modalType === 'cancelar'
+            ?'Cancelar Pedido'
+            : 'Sair da conta'
         }
         cancelText="Voltar"
       />
@@ -235,6 +249,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
+    marginRight: 40,
   },
   icon: {
     marginRight: 6,
@@ -244,15 +259,42 @@ const styles = StyleSheet.create({
     flexShrink: 1, // permite reduzir tamanho se necessário
     textAlign: 'center',
   },
+  underContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+      width: '100%',
+      position: 'relative',
+  },
+  infoRestaurante: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color:'#444',
+    position: 'absolute',
+  },
+  tituloContainer: {
+    flex: 1,
+    alignItems: 'center'
+  },
   tituloPedidos: {
     fontSize: 45,
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
-    textAlign: 'center',
+    marginRight: 0,
     color: '#333',
   },
-  button: {
+  botaoSair: {
+    backgroundColor: '#ed4141',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 5,
+    padding: 10,
+    zIndex: 1, // mantém os botões acima do texto central
+    marginRight: 50 
+  },
+  botaoCardapio: {
     backgroundColor: '#1c8c9e',
     paddingVertical: 6,
     paddingHorizontal: 12,
