@@ -29,7 +29,7 @@ export default function TelaUnidade() {
   }, []);
 
   const irParaInicio = () => {
-    router.replace('/(tabs)/home');
+    router.replace('/');
   };
 
   const unidades = ['Unidade SP'];
@@ -101,9 +101,8 @@ export default function TelaUnidade() {
 
   return (
     <SafeAreaView style={estilos.container}>
+      <View style={estilos.fundoTopo} />
       <ScrollView contentContainerStyle={estilos.scrollContainer} showsVerticalScrollIndicator={false}>
-
-        <View style={estilos.fundoTopo} />
 
         {/* Botão de voltar */}
         <TouchableOpacity onPress={irParaInicio} style={estilos.botaoVoltar}>
@@ -261,10 +260,10 @@ const estilos = StyleSheet.create({
   },
   fundoTopo: {
     position: 'absolute',
-    top: -40,
+    top: -190,
     left: 0,
     right: 0,
-    height: 300,
+    height: 520,
     backgroundColor: '#78aeb4',
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
