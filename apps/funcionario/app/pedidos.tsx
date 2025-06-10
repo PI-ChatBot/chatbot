@@ -2,27 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Animated, Image, StyleSheet, SafeAreaView, TouchableOpacity, View, Text, ScrollView, Modal } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { storage } from './utils/storage';
 import { formatDateTime } from './utils/formatDateTime';
 import ConfirmModal from './utils/ConfirmModal';
 
-export default function HomeScreen() {
-  const router = useRouter();
-  
-  const irParaCardapio = () => {
-    router.push('/cardapio');
-  }
-
-  const [dateTime, setDateTime] = useState(new Date());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDateTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-  
-  const mockPedidos = [
+const mockPedidos2 = [
+    {
+      id: '1',
+      nome: 'Rony Weasley',
+      pratos: [{prato: 'Frango', imagem: require('../assets/images/Robo.png'), quantidade: 1}, {prato: 'Ovo', imagem: require('../assets/images/Robo.png'), quantidade: 1}],
+      horario: '12:45',
+    },
+  ]
+const mockPedidos1 = [
     {
       id: '1',
       nome: 'João Silva',
@@ -73,12 +65,47 @@ export default function HomeScreen() {
     },
   ];
 
-  const [pedidos, setPedidos] = useState([]);
+export default function TelaPedidos() {
+  const router = useRouter();
   
+  const irParaCardapio = () => {
+    router.push('/cardapio');
+  }
+
+  const [dateTime, setDateTime] = useState(new Date());
+
+  const [restaurantId, setRestaurantId] = useState<string | null>(null);
+  useEffect(() => {
+    const id = storage.get('restaurantId');
+    if (!id) {
+      setTimeout(() => router.replace('/'), 0); // volta para login se não logado
+    } else {
+      setRestaurantId(id);
+    }
+  }, []);
+
+  const logout = () => {
+    storage.remove('restaurantId');
+    router.replace('/');
+  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDateTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+  
+  
+  const [pedidos, setPedidos] = useState([]);
+
   useEffect(() => {
     // Aqui você puxaria os dados do banco, mas estamos simulando
-    setPedidos(mockPedidos);
-  }, []);
+    console.log(restaurantId)
+    restaurantId == 'rest_a' 
+    ? setPedidos(mockPedidos1)
+    : setPedidos(mockPedidos2)
+  }, [restaurantId]);
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState(null);
@@ -105,6 +132,10 @@ export default function HomeScreen() {
       setPedidos((prev) => prev.filter((pedido) => pedido.id !== itemId));
     }
 
+    else if (modalType === 'sair') {
+      logout();
+    }
+
     fecharModal();
   };
 
@@ -112,18 +143,25 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.topBar}>
-          <View style={styles.side}></View>
-          <View style={styles.centerContainer}>
-            <Feather name="calendar" size={20} color="#333" style={styles.icon} />  
-            <Text style={styles.dateText}>{formatDateTime(dateTime)}</Text>
-          </View>
-          <View style={styles.side}>
-            <TouchableOpacity onPress={irParaCardapio} style={styles.button}>
-              <Text style={styles.buttonText}>Cardápio</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity onPress={() => abrirModal('sair', '')} style={styles.botaoSair}>
+            <Text style={styles.buttonText}>Sair</Text>
+          </TouchableOpacity>
+        <View style={styles.centerContainer}>
+          <Feather name="calendar" size={20} color="#333" style={styles.icon} />  
+          <Text style={styles.dateText}>{formatDateTime(dateTime)}</Text>
+        </View>
+        <View style={styles.side}>
+          <TouchableOpacity onPress={irParaCardapio} style={styles.botaoCardapio}>
+            <Text style={styles.buttonText}>Cardápio</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <Text style={styles.tituloPedidos}>Pedidos</Text>
+      <View style={styles.underContainer}>
+        <Text style={styles.infoRestaurante}>Restaurante [nome do restaurante] {restaurantId}</Text>
+        <View style={styles.tituloContainer}>
+          <Text style={styles.tituloPedidos}>Pedidos</Text>
+        </View>
+      </View>
       <ScrollView contentContainerStyle={styles.containerPedidos}>
           {pedidos.map((pedido) => (
             <View key={pedido.id} style={styles.card}>
@@ -176,7 +214,9 @@ export default function HomeScreen() {
         message={
            modalType === 'concluir'
             ? `Tem certeza de que deseja confirmar o Pedido ${itemId}?`
-            : `Tem certeza de que deseja cancelar o Pedido ${itemId}?`
+            : modalType === 'cancelar'
+              ? `Tem certeza de que deseja cancelar o Pedido ${itemId}?`
+              : 'Tem certeza de que deseja sair da sua conta?'
             
         }
         onConfirm={executarAcao}
@@ -184,7 +224,9 @@ export default function HomeScreen() {
         confirmText={
           modalType === 'concluir'
           ? 'Concluir Pedido'
-          : 'Cancelar Pedido'
+          : modalType === 'cancelar'
+            ?'Cancelar Pedido'
+            : 'Sair da conta'
         }
         cancelText="Voltar"
       />
@@ -218,6 +260,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
+    marginRight: 40,
   },
   icon: {
     marginRight: 6,
@@ -227,15 +270,42 @@ const styles = StyleSheet.create({
     flexShrink: 1, // permite reduzir tamanho se necessário
     textAlign: 'center',
   },
+  underContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+      width: '100%',
+      position: 'relative',
+  },
+  infoRestaurante: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color:'#444',
+    position: 'absolute',
+  },
+  tituloContainer: {
+    flex: 1,
+    alignItems: 'center'
+  },
   tituloPedidos: {
     fontSize: 45,
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
-    textAlign: 'center',
+    marginRight: 0,
     color: '#333',
   },
-  button: {
+  botaoSair: {
+    backgroundColor: '#ed4141',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 5,
+    padding: 10,
+    zIndex: 1, // mantém os botões acima do texto central
+    marginRight: 50 
+  },
+  botaoCardapio: {
     backgroundColor: '#1c8c9e',
     paddingVertical: 6,
     paddingHorizontal: 12,
