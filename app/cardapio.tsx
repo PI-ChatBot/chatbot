@@ -12,7 +12,7 @@ export default function TelaCardapio(){
     const router = useRouter();
     
     const irParaPedidos = () => {
-    router.push('/');
+    router.push('/pedidos');
     }
     const [dateTime, setDateTime] = useState(new Date());
 
