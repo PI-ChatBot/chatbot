@@ -6,7 +6,15 @@ import { storage } from './utils/storage';
 import { formatDateTime } from './utils/formatDateTime';
 import ConfirmModal from './utils/ConfirmModal';
 
-const mockPedidos = [
+const mockPedidos2 = [
+    {
+      id: '1',
+      nome: 'Rony Weasley',
+      pratos: [{prato: 'Frango', imagem: require('../assets/images/Robo.png'), quantidade: 1}, {prato: 'Ovo', imagem: require('../assets/images/Robo.png'), quantidade: 1}],
+      horario: '12:45',
+    },
+  ]
+const mockPedidos1 = [
     {
       id: '1',
       nome: 'João Silva',
@@ -90,11 +98,14 @@ export default function TelaPedidos() {
   
   
   const [pedidos, setPedidos] = useState([]);
-  
+
   useEffect(() => {
     // Aqui você puxaria os dados do banco, mas estamos simulando
-    setPedidos(mockPedidos);
-  }, []);
+    console.log(restaurantId)
+    restaurantId == 'rest_a' 
+    ? setPedidos(mockPedidos1)
+    : setPedidos(mockPedidos2)
+  }, [restaurantId]);
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState(null);
@@ -146,7 +157,7 @@ export default function TelaPedidos() {
         </View>
       </View>
       <View style={styles.underContainer}>
-        <Text style={styles.infoRestaurante}>Restaurante [nome do restaurante] {/*storage.get('restaurantId')*/}</Text>
+        <Text style={styles.infoRestaurante}>Restaurante [nome do restaurante] {restaurantId}</Text>
         <View style={styles.tituloContainer}>
           <Text style={styles.tituloPedidos}>Pedidos</Text>
         </View>

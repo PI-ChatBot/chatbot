@@ -3,28 +3,9 @@ import { Animated, Image, FlatList, useWindowDimensions, StyleSheet, Dimensions,
 import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { formatDateTime } from './utils/formatDateTime';
+import { storage } from './utils/storage';
 
-
-const { width } = Dimensions.get('window');
-const ITEM_WIDTH = (width - 48) / 2; 
-
-export default function TelaCardapio(){
-    const router = useRouter();
-    
-    const irParaPedidos = () => {
-    router.push('/pedidos');
-    }
-    const [dateTime, setDateTime] = useState(new Date());
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setDateTime(new Date());
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }, []);
-    
-    const pratos = [
+const pratos1 = [
     { id: '1', 
       nome: 'Feijoada',
       preco: 'R$ 35,00',
@@ -76,46 +57,92 @@ export default function TelaCardapio(){
       imagem: require('../assets/images/Robo.png')  
     },
 ];
-    const { width } = useWindowDimensions();
-    const numColumns = 5;
-    const spacing = 10;
-    const totalSpacing = spacing * (numColumns + 1);
-    const itemWidth = (width - totalSpacing) / numColumns;
-    
-    const renderItem = ({ item }) => (
-        <View style={[styles.card, { width: itemWidth, marginHorizontal: spacing / 2 }]}>
-            <Image source={item.imagem } style={styles.imagem} />
-            <Text style={styles.nome} numberOfLines={1}>{item.nome}</Text>
-            <Text style={styles.preco}>{item.preco}</Text>
-        </View>
-    );
+const pratos2 = [
+    { id: '1', 
+      nome: 'Água',
+      preco: 'R$ 5,00',
+      imagem: require('../assets/images/Robo.png') 
+    },
+]
 
-    return(
-        <SafeAreaView style={styles.safeArea}>
-              <View style={styles.topBar}>
-                <View style={styles.side}>
-                  <TouchableOpacity onPress={irParaPedidos} style={styles.button}>
-                    <Text style={styles.buttonText}>Pedidos</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.centerContainer}>
-                  <Feather name="calendar" size={20} color="#333" style={styles.icon} />  
-                  <Text style={styles.dateText}>{formatDateTime(dateTime)}</Text>
-                </View>
-                <View style={styles.side}></View>
-            </View>
-            <Text style={styles.tituloPedidos}>Cardápio</Text>
-            <View style={styles.containerFlatList}>
-                <FlatList
-                    data={pratos}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id}
-                    numColumns={numColumns}
-                    contentContainerStyle={{ padding: spacing }}
-                />
-            </View>
-        </SafeAreaView>
-    );
+const { width } = Dimensions.get('window');
+const ITEM_WIDTH = (width - 48) / 2; 
+
+export default function TelaCardapio(){
+  const router = useRouter();
+  
+  const irParaPedidos = () => {
+  router.push('/pedidos');
+  }
+  const [dateTime, setDateTime] = useState(new Date());
+  const [pratos, setPratos] = useState([]);
+  const [restaurantId, setRestaurantId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const id = storage.get('restaurantId');
+    if (!id) {
+      setTimeout(() => router.replace('/'), 0); // volta para login se não logado
+    } else {
+      setRestaurantId(id);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Aqui você puxaria os dados do banco, mas estamos simulando
+    restaurantId == 'rest_a' 
+    ? setPratos(pratos1)
+    : setPratos(pratos2)
+  }, [restaurantId]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDateTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+  
+  
+  const { width } = useWindowDimensions();
+  const numColumns = 5;
+  const spacing = 10;
+  const totalSpacing = spacing * (numColumns + 1);
+  const itemWidth = (width - totalSpacing) / numColumns;
+  
+  const renderItem = ({ item }) => (
+      <View style={[styles.card, { width: itemWidth, marginHorizontal: spacing / 2 }]}>
+          <Image source={item.imagem } style={styles.imagem} />
+          <Text style={styles.nome} numberOfLines={1}>{item.nome}</Text>
+          <Text style={styles.preco}>{item.preco}</Text>
+      </View>
+  );
+
+  return(
+      <SafeAreaView style={styles.safeArea}>
+            <View style={styles.topBar}>
+              <View style={styles.side}>
+                <TouchableOpacity onPress={irParaPedidos} style={styles.button}>
+                  <Text style={styles.buttonText}>Pedidos</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.centerContainer}>
+                <Feather name="calendar" size={20} color="#333" style={styles.icon} />  
+                <Text style={styles.dateText}>{formatDateTime(dateTime)}</Text>
+              </View>
+              <View style={styles.side}></View>
+          </View>
+          <Text style={styles.tituloPedidos}>Cardápio</Text>
+          <View style={styles.containerFlatList}>
+              <FlatList
+                  data={pratos}
+                  renderItem={renderItem}
+                  keyExtractor={(item) => item.id}
+                  numColumns={numColumns}
+                  contentContainerStyle={{ padding: spacing }}
+              />
+          </View>
+      </SafeAreaView>
+  );
 }
 const styles = StyleSheet.create({
    safeArea: {
@@ -138,7 +165,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   centerContainer: {
-    flex: 1, // ocupa todo espaço entre os lados
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -167,7 +193,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     zIndex: 1, // mantém os botões acima do texto central
-    marginLeft: 50 
+    marginLeft: 50, 
   },
   buttonText: {
     fontSize: 16,
