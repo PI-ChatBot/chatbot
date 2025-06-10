@@ -32,7 +32,7 @@ export default function TelaHome() {
         <View style={estilos.topo}>
           <View>
             <Text style={estilos.local}>Vila Mariana, São Paulo</Text>
-            <Text style={estilos.nomeLoja}>PoliLanches</Text>
+            <Text style={estilos.nomeLoja}>Cafeteria Nova Geração</Text>
           </View>
 
           <TouchableOpacity onPress={() => irPara('/configuracoes')} style={estilos.fotoUsuario}>
