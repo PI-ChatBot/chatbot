@@ -1,5 +1,365 @@
 [
   {
+    "nome": "Açaí 180ml",
+    "categoria": "Açaí",
+    "descricao": "Acompanha: granola, leite condensado, leite em pó, amendoim e banana.",
+    "ingredientes": [null],
+    "preco": "17.50",
+    "preco_especial": "15.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana6G6G5qh0LCY3xXWwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hNkc2RzVxaDBMQ1kzeFhXd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyOTc1LCJleHAiOjE3ODExODg5NzV9.EvntxBwPSnkfFdEXbe0fFEplvOE-3kb8bPu6328ySWs"
+  },
+  {
+    "nome": "Açaí 300ml",
+    "categoria": "Açaí",
+    "descricao": "Acompanha: granola, leite condensado, leite em pó, amendoim e banana.",
+    "ingredientes": [null],
+    "preco": "20.00",
+    "preco_especial": "18.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana0zritrvhchfplkywebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hMHpyaXRydmhjaGZwbGt5d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzMDQyLCJleHAiOjE3ODExODkwNDJ9.l6DbXBK0RIQjKOreBHrsoidPHXzdU7zdlyxANCTKhcU"
+  },
+  {
+    "nome": "Açaí 400ml",
+    "categoria": "Açaí",
+    "descricao": "Acompanha: granola, leite condensado, leite em pó, amendoim e banana.",
+    "ingredientes": [null],
+    "preco": "23.50",
+    "preco_especial": "21.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianasctp2sl6t2uo4dpwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hc2N0cDJzbDZ0MnVvNGRwd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzMTA5LCJleHAiOjE3ODExODkxMDl9.n8lDAOlG3oAkSZ12bI3iymovtbY3zm4IN-SvvcKYr5M"
+  },
+  {
+    "nome": "Água com Gás 500ml",
+    "categoria": "Bebidas",
+    "descricao": "Garrafa de água com gás com 500ml.",
+    "ingredientes": [null],
+    "preco": "5.00",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianauXd0gH8bQMZ61ARwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdVhkMGdIOGJRTVo2MUFSd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwMDU4LCJleHAiOjE3ODExODYwNTh9.UWCQOiUJbm8GA_NKyJjeIfKkS2jBzUugdLLjuIFGWTM"
+  },
+  {
+    "nome": "Água de Coco 200ml",
+    "categoria": "Bebidas",
+    "descricao": "Caixa de água de coco com 200ml.",
+    "ingredientes": [null],
+    "preco": "6.00",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaVXaSomtAwgTIIZKwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hVlhhU29tdEF3Z1RJSVpLd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwMjA1LCJleHAiOjE3ODExODYyMDV9.fjuOnb2DWJKSXVovsZBRjRhm4CrRlbNU8eBZBFMKQRU"
+  },
+  {
+    "nome": "Água Quente 180ml",
+    "categoria": "Bebidas Quentes",
+    "descricao": "Caneca de água quente com 180ml.",
+    "ingredientes": [null],
+    "preco": "2.50",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaGafYlsDhJgRqKEuwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hR2FmWWxzRGhKZ1JxS0V1d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyMzEwLCJleHAiOjE3ODExODgzMTB9._PIBoKi-lAaN8VDaGf5Pmxf-x2MwSWxC7q_daT3Y99w"
+  },
+  {
+    "nome": "Água sem Gás 500ml",
+    "categoria": "Bebidas",
+    "descricao": "Uma garrafa de água sem gás com 500ml.",
+    "ingredientes": [null],
+    "preco": "4.50",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana3z7nlR7VxZXxRAkwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hM3o3bmxSN1Z4Wlh4UkFrd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5OTg0LCJleHAiOjE3ODExODU5ODR9.UtY9bmkgoW1Naqa3TNAyxmK_y3je5iGjI2tl_3L4N8M"
+  },
+  {
+    "nome": "Americano",
+    "categoria": "Sanduíches",
+    "descricao": "Pão francês, presunto, queijo prato, ovo, tomate, alface e maionese.",
+    "ingredientes": [null],
+    "preco": "18.50",
+    "preco_especial": "17.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianapu0Ni88GUPw1mqVwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hcHUwTmk4OEdVUHcxbXFWd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzNTA1LCJleHAiOjE3ODExODk1MDV9.yv4rKAVLduHbzOMRp4vLjVZtaZKUgcUKSO330I1QmAY"
+  },
+  {
+    "nome": "Banana",
+    "categoria": "Frutas",
+    "descricao": "Uma banana.",
+    "ingredientes": [null],
+    "preco": "3.00",
+    "preco_especial": "2.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaKvHCGqoNugqs9OTwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hS3ZIQ0dxb051Z3FzOU9Ud2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyMjM4LCJleHAiOjE3ODExODgyMzh9.Mq6lADyGTbss1tXhOhbERtH3D8-FL5e2tgDSpQOD7Ug"
+  },
+  {
+    "nome": "Barra de Chocolate Lacta",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate da marca Lacta.\nSabor da escolha do cliente:\n- Chocolate ao Leite (20g)\n- Chocolate Branco (20g)\n- Laka Oreo (20g)\n- Diamante Negro (20g)",
+    "ingredientes": [null],
+    "preco": "6.50",
+    "preco_especial": "5.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianawqjyuyp3kb3gyuywebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hd3FqeXV5cDNrYjNneXV5d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzOTI1LCJleHAiOjE3ODExODk5MjV9.LaBvvLElAk73x6gy2ziA9VqgnfKUk8oHSKHmkuDVGWo"
+  },
+  {
+    "nome": "Baton ao Leite",
+    "categoria": "Doces",
+    "descricao": "Baton ao Leite.",
+    "ingredientes": [null],
+    "preco": "4.50",
+    "preco_especial": "4.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaccvvS8hMK9fVRDZwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hY2N2dlM4aE1LOWZWUkRad2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0MDYyLCJleHAiOjE3ODExOTAwNjJ9.AvjV6xMejJvZ_XC1H_hze72lA2ZNV_HdCWi3VKe4cN0"
+  },
+  {
+    "nome": "Bauru",
+    "categoria": "Sanduíches",
+    "descricao": "Pão francês, presunto, queijo prato e tomate.",
+    "ingredientes": [null],
+    "preco": "16.50",
+    "preco_especial": "15.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaSgsQNlFsFoG1mI4webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hU2dzUU5sRnNGb0cxbUk0d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzNDYyLCJleHAiOjE3ODExODk0NjJ9.HbOL-Pyc9cwCf-wimZ1pNQsOsghx_vGriyyWaPetfxc"
+  },
+  {
+    "nome": "Bebida gelada 3 corações",
+    "categoria": "Bebidas",
+    "descricao": "Bebida gelada '3 corações'.\nSabor da escolha do cliente na retirada.",
+    "ingredientes": [null],
+    "preco": "13.00",
+    "preco_especial": "12.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianavdnkq4uni3gfaepwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdmRua3E0dW5pM2dmYWVwd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxMDkwLCJleHAiOjE3ODExODcwOTB9.ErcqXTze6qIhZp7xm85LFE6cMAuLxDpJIY4XJDSzbb0"
+  },
+  {
+    "nome": "Bebida gelada Nestle",
+    "categoria": "Bebidas",
+    "descricao": "Sabores da escolha do cliente na retirada: \n- Nescau,\n- Neston,\n- Alpino.\n\n",
+    "ingredientes": [null],
+    "preco": "13.00",
+    "preco_especial": "11.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana5zkiesxb0f2gh4fwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hNXpraWVzeGIwZjJnaDRmd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxMDYzLCJleHAiOjE3ODExODcwNjN9.i6VjjBRYId7bBZNHVrTlxhuBtTuiuxt1tQE-EqdH-8Q"
+  },
+  {
+    "nome": "Bebidas Quentes Baristo",
+    "categoria": "Bebidas Quentes",
+    "descricao": "Copo de bebida quente da marca 'Baristo'.\nOpções:\n- Cappuccino Tradicional\n- Cappuccino Canela\n- Mokaccino\n- Chocolate",
+    "ingredientes": [null],
+    "preco": "12.50",
+    "preco_especial": "10.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaSlx2zWfGHAVyd5Wwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hU2x4MnpXZkdIQVZ5ZDVXd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyODA2LCJleHAiOjE3ODExODg4MDZ9.6aZRsG8lhduLT5ni8Z0GNCgaMYgcK98nFcS73HSeanM"
+  },
+  {
+    "nome": "Bis Extra (45g)",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Bis Extra.\nSabor escolhido pelo cliente na retirada:\n- Normal\n- Black\n- Oreo",
+    "ingredientes": [null],
+    "preco": "6.50",
+    "preco_especial": "6.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianayuqqd8ccdzi4kcfwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5heXVxcWQ4Y2Nkemk0a2Nmd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0Nzc3LCJleHAiOjE3ODExOTA3Nzd9.f3bIRUb-0v0jzD93535XQ6zRLHeI_L097Mup7mwOCZE"
+  },
+  {
+    "nome": "Bolacha Club Social Original",
+    "categoria": "Doces",
+    "descricao": "Bolacha Club Social, sabor original.",
+    "ingredientes": [null],
+    "preco": "3.50",
+    "preco_especial": "3.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaA0XvT1aelnDna0Ywebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hQTBYdlQxYWVsbkRuYTBZd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0MTE5LCJleHAiOjE3ODExOTAxMTl9.Bhk_iIqaBWFyu5UoRSyaNIr6x1U8M0cV7xh9TfcRC0I"
+  },
+  {
+    "nome": "Bolacha Oreo",
+    "categoria": "Doces",
+    "descricao": "Bolacha Oreo.",
+    "ingredientes": [null],
+    "preco": "4.00",
+    "preco_especial": "3.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaY6L3emSkgHpqJjfwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hWTZMM2VtU2tnSHBxSmpmd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0MTYxLCJleHAiOjE3ODExOTAxNjF9.BxRoB-7_rqumzCSDn2-s7RI5Wugv_nPRTncZ9mJ9nwY"
+  },
+  {
+    "nome": "Bolo de Pote",
+    "categoria": "Diversos",
+    "descricao": "Bolo de pote de brigadeiro.",
+    "ingredientes": [null],
+    "preco": "15.00",
+    "preco_especial": "10.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianawjwcmJO0TJFTwpUwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hd2p3Y21KTzBUSkZUd3BVd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5MzYyLCJleHAiOjE3ODExODUzNjJ9.BPEFp8VzMuKVhqMvrzr6gc3vioEzUZLU893xguB5xv4"
+  },
+  {
+    "nome": "Bolo Fatia",
+    "categoria": "Diversos",
+    "descricao": "Uma fatia de bolo de cenoura.",
+    "ingredientes": [null],
+    "preco": "8.00",
+    "preco_especial": "7.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaGjGD5DGiYtwPO1bwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hR2pHRDVER2lZdHdQTzFid2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5Mjg3LCJleHAiOjE3ODExODUyODd9.Rzme9PE1H1cAqVIC3-ne-c-2hSecSCKcFHb5z_NtI08"
+  },
+  {
+    "nome": "Bombom Ouro Branco",
+    "categoria": "Doces",
+    "descricao": "Bombom Ouro Branco.",
+    "ingredientes": [null],
+    "preco": "3.50",
+    "preco_especial": "3.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana5ZEpt6RhYk7o1jMwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hNVpFcHQ2UmhZazdvMWpNd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0MDI0LCJleHAiOjE3ODExOTAwMjR9.3rGrNHqIPreESKGfGfnAhy7ZParnPp0Ac49kDCXHW7s"
+  },
+  {
+    "nome": "Bombom Sonho de Valsa",
+    "categoria": "Doces",
+    "descricao": "Bombom Sonho de Valsa.",
+    "ingredientes": [null],
+    "preco": "3.50",
+    "preco_especial": "3.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaz1K7fmJefsek6pLwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hejFLN2ZtSmVmc2VrNnBMd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzOTg2LCJleHAiOjE3ODExODk5ODZ9.oY6NWgUo1cf09FFj8xB5qLC445sVGFvopE7T3CGm5XY"
+  },
+  {
+    "nome": "Brownie",
+    "categoria": "Diversos",
+    "descricao": "Brownie de chocolate.",
+    "ingredientes": [null],
+    "preco": "15.00",
+    "preco_especial": "12.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaRtWKUQQ9tkYHZOWwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hUnRXS1VRUTl0a1lIWk9Xd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5NDI2LCJleHAiOjE3ODExODU0MjZ9.UF48Sx6mJShL6s-uvM6Tx41Iq69SknP2Tw8XqobwGy4"
+  },
+  {
+    "nome": "Café com Leite Grande 300ml",
+    "categoria": "Bebidas Quentes",
+    "descricao": "Copo grande (300ml) de café com leite.",
+    "ingredientes": [null],
+    "preco": "9.50",
+    "preco_especial": "7.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianakKOa0WqhtyjKQCzwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5ha0tPYTBXcWh0eWpLUUN6d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyNzMzLCJleHAiOjE3ODExODg3MzN9.mrKMUftERJo2SKYToD0ads-j7t2HutaKOa6P9yJkYJ4"
+  },
+  {
+    "nome": "Café com Leite Médio 180ml",
+    "categoria": "Bebidas Quentes",
+    "descricao": "Copo médio (180ml) de café com leite.",
+    "ingredientes": [null],
+    "preco": "8.50",
+    "preco_especial": "6.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaUltR2oI0hVGh7KKwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hVWx0UjJvSTBoVkdoN0tLd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyNjYxLCJleHAiOjE3ODExODg2NjF9.INZ_zkHD95MDimB1nZsx-mbwq04ZWr9s7yNa3kOVuMs"
+  },
+  {
+    "nome": "Café Comum Grande 300ml",
+    "categoria": "Bebidas Quentes",
+    "descricao": "Copo grande (300ml) de café comum.",
+    "ingredientes": [null],
+    "preco": "8.50",
+    "preco_especial": "6.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana4Q9tBILNuYWujwKwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hNFE5dEJJTE51WVd1andLd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyNTYwLCJleHAiOjE3ODExODg1NjB9.oGeybcHUHWioEWmP_gax8CmD9Sr_a4i9DavJkdNAgpw"
+  },
+  {
+    "nome": "Café Comum Médio 180ml",
+    "categoria": "Bebidas Quentes",
+    "descricao": "Copo médio (180ml) de café comum.",
+    "ingredientes": [null],
+    "preco": "7.50",
+    "preco_especial": "5.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianav201FSTSuCPwRgQwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdjIwMUZTVFN1Q1B3UmdRd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyNDQ3LCJleHAiOjE3ODExODg0NDd9.pS_XTNLjBlKuYrGQRXpphIh7Fv2xUTHHUT8s3vHZipo"
+  },
+  {
+    "nome": "Café Expresso",
+    "categoria": "Bebidas Quentes",
+    "descricao": "Xícara de café expresso.",
+    "ingredientes": [null],
+    "preco": "7.50",
+    "preco_especial": "6.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianadf47n8iAKkgPXavwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hZGY0N244aUFLa2dQWGF2d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyNTkxLCJleHAiOjE3ODExODg1OTF9.TlmdP3p8qXgDWbjLEjeGIYXBfZ1MZva1Iiy84XgbPEs"
+  },
+  {
+    "nome": "Café Expresso Duplo Baristo",
+    "categoria": "Bebidas Quentes",
+    "descricao": "Copo de café expresso duplo da marca Baristo.",
+    "ingredientes": [null],
+    "preco": "10.00",
+    "preco_especial": "8.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianavXzcL1o0be540O7webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdlh6Y0wxbzBiZTU0ME83d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyOTE0LCJleHAiOjE3ODExODg5MTR9.PiCUUdSNYUwXgcKFVfwYZaYdd4BdkdoyK4Qg_vKQe7c"
+  },
+  {
+    "nome": "Chá Gelado garrafa 500ml",
+    "categoria": "Bebidas",
+    "descricao": "Garrafa de chá gelado Ice Tea Leão com 500ml.",
+    "ingredientes": [null],
+    "preco": "9.00",
+    "preco_especial": "8.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianarmmwr4xgoeqtrsmwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hcm1td3I0eGdvZXF0cnNtd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwNzk2LCJleHAiOjE3ODExODY3OTZ9.49oG2o-FusxF2NWdxCFFnVLXbe_oqTiRWVmSf43TzJk"
+  },
+  {
+    "nome": "Chá Gelado lata 350ml",
+    "categoria": "Bebidas",
+    "descricao": "Late de chá gelado com 350ml.",
+    "ingredientes": [null],
+    "preco": "9.00",
+    "preco_especial": "8.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianadvxikp7n0hwys2nwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hZHZ4aWtwN24waHd5czJud2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwNzIzLCJleHAiOjE3ODExODY3MjN9.B1dRRW8h1KYEp25gDXlY-m-7vV879jadgiaxmL_4wB8"
+  },
+  {
+    "nome": "Chá Matte Copo 300ml",
+    "categoria": "Bebidas",
+    "descricao": "Copo de Chá Matte Leão de 300ml.",
+    "ingredientes": [null],
+    "preco": "7.00",
+    "preco_especial": "6.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaMwGhaeFFblo4Hwawebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hTXdHaGFlRkZibG80SHdhd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwNjU5LCJleHAiOjE3ODExODY2NTl9.QquJbbuUhBaDJjDfvX0wck8l7sQshRGH2b1dBmmh84Q"
+  },
+  {
+    "nome": "Chocolate Nestle Classic (25g)",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Nestle Classic ao leite.",
+    "ingredientes": [null],
+    "preco": "4.50",
+    "preco_especial": "4.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana1ubm0vl5nrlpcdmwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hMXVibTB2bDVucmxwY2Rtd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0Njg1LCJleHAiOjE3ODExOTA2ODV9.cTFfQ-DJFKaXi7PBkLCKjOLUJsDJO1zPT555JAPMDPA"
+  },
+  {
+    "nome": "Chocolate Nutella\n",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Nutella.",
+    "ingredientes": [null],
+    "preco": "6.50",
+    "preco_especial": "6.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianasz4woglj5uzeoouwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hc3o0d29nbGo1dXplb291d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0NTk0LCJleHAiOjE3ODExOTA1OTR9.JSuoFLj2c4Uv0OC42H7NuwPaIooQoc_1W4dfUbIt5kM"
+  },
+  {
+    "nome": "Chocolate Trento 32g",
+    "categoria": "Doces",
+    "descricao": "Chocolate da marca Trento com 32 gramas.\nSabor da escolha do cliente na retirada.",
+    "ingredientes": [null],
+    "preco": "5.50",
+    "preco_especial": "5.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana8gxrry0094jnhmiwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hOGd4cnJ5MDA5NGpuaG1pd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0Mjc2LCJleHAiOjE3ODExOTAyNzZ9.GoKsCd7FEd6UZxqILA9-T_qaCWZeNpWrfZMkgxp6U20"
+  },
+  {
+    "nome": "Chokito",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Chokito.",
+    "ingredientes": [null],
+    "preco": "5.50",
+    "preco_especial": "5.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaTEr8brjnvG4dC0zwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hVEVyOGJyam52RzRkQzB6d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU1MDY0LCJleHAiOjE3ODExOTEwNjR9.6feoTM1YAADtACbkUVpEj35Rz9y9vxeEuKcqiRmUXv4"
+  },
+  {
     "nome": "Filé de Frango à Parmegiana",
     "categoria": "Refeições",
     "descricao": "Com arroz, fritas e salada.",
@@ -18,6 +378,56 @@
     "preco_especial": null,
     "avaliacao": null,
     "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaAgMWfgSfMlZkc72webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hQWdNV2ZnU2ZNbFprYzcyd2VicC5qcGVnIiwiaWF0IjoxNzQ5NDc3MzgxLCJleHAiOjE3ODEwMTMzODF9.4rnp11dDte-_CHDlfott0JNeGPsV1K7RXpBpXRLgYx8"
+  },
+  {
+    "nome": "Guaraviton 500 ml",
+    "categoria": "Bebidas",
+    "descricao": "Garrafa de Guaraviton com 500ml.",
+    "ingredientes": [null],
+    "preco": "6.00",
+    "preco_especial": "5.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana64Wusm9DSM8fjXIwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hNjRXdXNtOURTTThmalhJd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxMTYxLCJleHAiOjE3ODExODcxNjF9.byX6CSqmgL6lNbBQbKYRSRYBbPTqNTfS-4hzxJWu7PI"
+  },
+  {
+    "nome": "H2OH! 500ml",
+    "categoria": "Bebidas",
+    "descricao": "Garrafa de H2OH com 500ml.",
+    "ingredientes": [null],
+    "preco": "10.00",
+    "preco_especial": "9.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaSeN4vThvkJFQ2R9webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hU2VONHZUaHZrSkZRMlI5d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwODUwLCJleHAiOjE3ODExODY4NTB9.W9kh_G83T-cG2F5eZT-MfN1ao0FTXZvI9Hvwua-tEW8"
+  },
+  {
+    "nome": "Kinder Bueno",
+    "categoria": "Doces",
+    "descricao": "Barrinhas crocantes de wafer, cobertas com chocolate ao leite e com um cremoso e delicioso recheio de leite e avelãs.",
+    "ingredientes": [null],
+    "preco": "12.50",
+    "preco_especial": "12.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaikmfb9hq62mwhifwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5haWttZmI5aHE2Mm13aGlmd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0NDM0LCJleHAiOjE3ODExOTA0MzR9.hJn7H4Bht_zlMQ9hsS5ys7jv4tfrtzFYL9e-AJcNE5Y"
+  },
+  {
+    "nome": "Kit Kat (41,5g)\n\n",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Kit Kat.",
+    "ingredientes": [null],
+    "preco": "6.50",
+    "preco_especial": "6.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaIoXPzdUU2QpUjPqwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hSW9YUHpkVVUyUXBValBxd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0OTI4LCJleHAiOjE3ODExOTA5Mjh9.o0InuL-BDj3rzuMT9Mvwz1NUJgerBPiu7KOSKSSrFmw"
+  },
+  {
+    "nome": "Leite Quente 180ml",
+    "categoria": "Bebidas Quentes",
+    "descricao": "Caneca de leite quente com 180ml",
+    "ingredientes": [null],
+    "preco": "4.50",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianasxe4sOhkACjPHWlwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hc3hlNHNPaGtBQ2pQSFdsd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyMzc4LCJleHAiOjE3ODExODgzNzh9.fqtXBJ9GklmH6vzgw-_6OeqF70cNTX0REuTPxZShDso"
   },
   {
     "nome": "Linguiça Calabresa Acebolada",
@@ -40,6 +450,46 @@
     "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana8k4icceXnW4IKF8webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hOGs0aWNjZVhuVzRJS0Y4d2VicC5qcGVnIiwiaWF0IjoxNzQ5NDc3NDg5LCJleHAiOjE3ODEwMTM0ODl9.Pr8HNE_LaBOv2SEUTRvaDcT6kuyiPKrzaqj6d47Ckxc"
   },
   {
+    "nome": "Mini Pão de Queijo (5 Unidades)",
+    "categoria": "Diversos",
+    "descricao": "5 unidades de mini pão de queijo.",
+    "ingredientes": [null],
+    "preco": "6.00",
+    "preco_especial": "5.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana8aFhQ1SXnxx8xg6webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hOGFGaFExU1hueHg4eGc2d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5MDk2LCJleHAiOjE3ODExODUwOTZ9.vCzS4YGAwKoXIx3wz18UqWu4vNwVBBpRHwpTEbToMQc"
+  },
+  {
+    "nome": "Misto Frio",
+    "categoria": "Sanduíches",
+    "descricao": "Pão francês, presunto e queijo prato.",
+    "ingredientes": [null],
+    "preco": "16.50",
+    "preco_especial": "14.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianavSBkq3FAdeyY9uKwebp%20(1).jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdlNCa3EzRkFkZXlZOXVLd2VicCAoMSkuanBlZyIsImlhdCI6MTc0OTY1MzM2MywiZXhwIjoxNzgxMTg5MzYzfQ.a1cXsPK93929NGDaf3a3f7lDHaXFbI7aYADcd8VmxcM"
+  },
+  {
+    "nome": "Misto Quente",
+    "categoria": "Sanduíches",
+    "descricao": "Pão francês, presunto e queijo prato.",
+    "ingredientes": [null],
+    "preco": "15.50",
+    "preco_especial": "14.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianavSBkq3FAdeyY9uKwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdlNCa3EzRkFkZXlZOXVLd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzMzAwLCJleHAiOjE3ODExODkzMDB9.IE6D6EB3_TtppYBQAwNybeVTtXxnnA9qx7qKA8qv8c4"
+  },
+  {
+    "nome": "Nescau",
+    "categoria": "Bebidas",
+    "descricao": "Caixa de achocolatado Nescau.",
+    "ingredientes": [null],
+    "preco": "5.00",
+    "preco_especial": "6.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaL5BhQiCOhB2Jcnowebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hTDVCaFFpQ09oQjJKY25vd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwMzEzLCJleHAiOjE3ODExODYzMTN9.hjl6TT7CWQkQKjL88H2QihpTxe_DybPwbOaeCLpOoOo"
+  },
+  {
     "nome": "Omelete Completo",
     "categoria": "Refeições",
     "descricao": "Omelete completo com dois ovos, presunto, queijo, tomate e cebola, arroz, feijão, fritas e salada.",
@@ -50,6 +500,186 @@
     "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaGaCdIPiiXpSVNs2webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hR2FDZElQaWlYcFNWTnMyd2VicC5qcGVnIiwiaWF0IjoxNzQ5NDc3NTY5LCJleHAiOjE3ODEwMTM1Njl9.IrJVkud4YSynyTA1I5l9iKPx4TniESviIHKu8IOkrlo"
   },
   {
+    "nome": "Palha italiana",
+    "categoria": "Doces",
+    "descricao": "Sabores escolhidos durante a retirada:\n- Oréo\n- Brigadeiro",
+    "ingredientes": [null],
+    "preco": "11.50",
+    "preco_especial": "11.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianayslcz7zbylmpaiawebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5heXNsY3o3emJ5bG1wYWlhd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0ODUyLCJleHAiOjE3ODExOTA4NTJ9.zr9MTLryjOMHNJwOvwIDw7abBmP4tk1lS01gf7VmI1E"
+  },
+  {
+    "nome": "Pão com Ovo",
+    "categoria": "Sanduíches",
+    "descricao": "Pão francês e dois ovos.",
+    "ingredientes": [null],
+    "preco": "12.50",
+    "preco_especial": "11.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaPjfrOQWOixZnkJ9webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hUGpmck9RV09peFpua0o5d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzMjYyLCJleHAiOjE3ODExODkyNjJ9.Jmk3wTWFugY5eyXPSzofBNVw14__bMscy2IiyaG9s70"
+  },
+  {
+    "nome": "Pão de Queijo (Unidade)\n\n",
+    "categoria": "Diversos",
+    "descricao": "Pão de queijo grande.",
+    "ingredientes": [null],
+    "preco": "6.00",
+    "preco_especial": "5.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana9YoqiqCFxeqSFLFwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hOVlvcWlxQ0Z4ZXFTRkxGd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ4ODUxLCJleHAiOjE3ODExODQ4NTF9.TrAi7b-fB6gOXs8EfhramKD7Y_E4qKZRL2rIawZ9qw4"
+  },
+  {
+    "nome": "Pão na Chapa com Manteiga",
+    "categoria": "Sanduíches",
+    "descricao": "Pão na Chapa com Manteiga.",
+    "ingredientes": [null],
+    "preco": "8.50",
+    "preco_especial": "7.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianarHFKAwgceTEr7BNwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hckhGS0F3Z2NlVEVyN0JOd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzMTc5LCJleHAiOjE3ODExODkxNzl9.mWc7BsWfdNrSRUQg7RZ43BZJ4jUaFLeGmL6YVvXkc90"
+  },
+  {
+    "nome": "Pão na Chapa com Requeijão",
+    "categoria": "Sanduíches",
+    "descricao": "Pão na Chapa com Requeijão.",
+    "ingredientes": [null],
+    "preco": "12.50",
+    "preco_especial": "10.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaABNnREAARYw1ah0webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hQUJOblJFQUFSWXcxYWgwd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzMjE5LCJleHAiOjE3ODExODkyMTl9.r42fZPAEEMCgKvQATxdFmaQiYqv7uvnrd2hkkJBb51o"
+  },
+  {
+    "nome": "Powerade 500ml",
+    "categoria": "Bebidas",
+    "descricao": "Garrafa de Powerade com 500ml.\nSabor da escolha do usuário na retirada.",
+    "ingredientes": [null],
+    "preco": "9.00",
+    "preco_especial": "8.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaTeiOLEsdNkRbqJvwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hVGVpT0xFc2ROa1JicUp2d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwOTIyLCJleHAiOjE3ODExODY5MjJ9.ZQ8W8-qIfOO0ImqjPz2WsLvoAeUs1BRmKxDXPks7f3k"
+  },
+  {
+    "nome": "Prestigio",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Prestigio com coco.",
+    "ingredientes": [null],
+    "preco": "5.50",
+    "preco_especial": "5.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaFiOlBQ09JhlLQZEwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hRmlPbEJRMDlKaGxMUVpFd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0ODk4LCJleHAiOjE3ODExOTA4OTh9.RBAzz-hN3YscbSjFqA1arzPHZ_vUQVKvSNdub3dMrUY"
+  },
+  {
+    "nome": "Refrigerantes 200ml",
+    "categoria": "Bebidas",
+    "descricao": "Garrafa de refrigerante de 200ml.\nEscolha do cliente entre as opções na retirada, como Pepsi, Fanta, Coca-cola, Soda ou Sukita.",
+    "ingredientes": [null],
+    "preco": "5.00",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana5z7HV9vZCUDJQdEwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hNXo3SFY5dlpDVURKUWRFd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwMTM0LCJleHAiOjE3ODExODYxMzR9.KILYSJ81L1ZMY2aIHNnhRcsQU2X9gr9Hpxcj_hEhlgQ"
+  },
+  {
+    "nome": "Refrigerantes 350ml",
+    "categoria": "Bebidas",
+    "descricao": "Lata de refrigerante de 350ml.\nEscolha do cliente na retirada:\n- Coca-cola\n- Sprite\n- Fanta laranja\n- Fanta uva\n- Guaraná ",
+    "ingredientes": [null],
+    "preco": "7.00",
+    "preco_especial": null,
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaRUfyije8VzgHk3Jwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hUlVmeWlqZThWemdIazNKd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwNDkxLCJleHAiOjE3ODExODY0OTF9.sFd9nx9hhmxMzKmqI64KvVEa6Shu6EKiBNZsZXGbzo4"
+  },
+  {
+    "nome": "Salada caeser",
+    "categoria": "Saladas",
+    "descricao": "com alface americana, croutons, queijo parmesão e file de frango.",
+    "ingredientes": [null],
+    "preco": "30.00",
+    "preco_especial": "27.99",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianalljdofjj6tmpevcwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hbGxqZG9mamo2dG1wZXZjd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5NzU3LCJleHAiOjE3ODExODU3NTd9.ldfbChiPeuKVSjA8x58fPZpuAS1ZZIzCG9ZaQNQhN2k"
+  },
+  {
+    "nome": "Salada com atum",
+    "categoria": "Saladas",
+    "descricao": "Alface crespa, pepino, alface americana , tomate e cenoura ralada.",
+    "ingredientes": [null],
+    "preco": "30.00",
+    "preco_especial": "26.99",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaIznF9CO8yxGYFyiwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hSXpuRjlDTzh5eEdZRnlpd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5ODMxLCJleHAiOjE3ODExODU4MzF9.d1QPhEZZXJlbOFDW3ubpVTkX_z9EVhP3sbCc5bpsEWI"
+  },
+  {
+    "nome": "Salada com file de frango",
+    "categoria": "Saladas",
+    "descricao": "Alface crespa e americana, tomate, tomate, cenoura, pepino e rúcula. Acompanha filé de frango grelhado, atum ralado ou omelete de presunto e queijo. Escolha sua opção.",
+    "ingredientes": [null],
+    "preco": "30.00",
+    "preco_especial": "26.99",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana3fHrY2WveT43klOwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hM2ZIclkyV3ZlVDQza2xPd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5Njk2LCJleHAiOjE3ODExODU2OTZ9.Q8EQ23SAjGvI7wdoSAzBV9XXteWfWk4CE-6gJNtJdN4"
+  },
+  {
+    "nome": "Salada com kibe vegano ou quiche",
+    "categoria": "Saladas",
+    "descricao": "Alface crespa, pepino, alface Americana, tomate e cenoura ralada Kibe vegano ou quiche.",
+    "ingredientes": [null],
+    "preco": "35.00",
+    "preco_especial": "31.99",
+    "avaliacao": null,
+    "imagem_url": null
+  },
+  {
+    "nome": "Salada com omelete",
+    "categoria": "Saladas",
+    "descricao": "Alface crespa, pepino, alface Americana, tomate e cenoura ralada omelete: dois ovos, presunto, queijo e tomate..",
+    "ingredientes": [null],
+    "preco": "30.00",
+    "preco_especial": "26.99",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianax37mu1ptwmkspruwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5heDM3bXUxcHR3bWtzcHJ1d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5ODgyLCJleHAiOjE3ODExODU4ODJ9.D-ylFPjuURS89cl2n8pIzfG76bVcnYsSTqOGAR7aohM"
+  },
+  {
+    "nome": "Salgado Comum",
+    "categoria": "Diversos",
+    "descricao": "Um salgado da escolha do cliente, como coxinha, bauru ou quibe.",
+    "ingredientes": [null],
+    "preco": "8.00",
+    "preco_especial": "7.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianadp3YJxEq2vbi0fRwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hZHAzWUp4RXEydmJpMGZSd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5MTcwLCJleHAiOjE3ODExODUxNzB9.ZrEKXrrRT2NNYd2MJIkAwdyZXKZyx2erPrIkwkOgPe4"
+  },
+  {
+    "nome": "Salgado vegano",
+    "categoria": "Diversos",
+    "descricao": "Kibe vegano ou quiche vegana.",
+    "ingredientes": [null],
+    "preco": "15.00",
+    "preco_especial": "12.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianajcl2sgbezjjh8jiwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hamNsMnNnYmV6ampoOGppd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5NjI5LCJleHAiOjE3ODExODU2Mjl9.mb75ocvXf-Is2L1seIjvp3gLxWom2m2Nvm-zIR54vok"
+  },
+  {
+    "nome": "Snickers",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Snickers.",
+    "ingredientes": [null],
+    "preco": "6.50",
+    "preco_especial": "6.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaCYcPTEglULIJoarwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hQ1ljUFRFZ2xVTElKb2Fyd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU1MTAyLCJleHAiOjE3ODExOTExMDJ9.mppbfZ71gV0fwu11J7dp2Syn-4qcQQSfbOwtfj9jgVk"
+  },
+  {
+    "nome": "Stikadinho (12g)",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Stikadinho com recheio de morango.",
+    "ingredientes": [null],
+    "preco": "3.50",
+    "preco_especial": "3.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaRG4cywCDyjXX50Owebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hUkc0Y3l3Q0R5alhYNTBPd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU1MjIyLCJleHAiOjE3ODExOTEyMjJ9.7KClvoBIfy3a_T0Jht79F2zETiVSzAaXCvYmslD6ctw"
+  },
+  {
     "nome": "Strogonoff de carne",
     "categoria": "Refeições",
     "descricao": "com arroz, e batata frita...",
@@ -58,5 +688,235 @@
     "preco_especial": null,
     "avaliacao": null,
     "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianauLlPbu0ESXOjtyYwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdUxsUGJ1MEVTWE9qdHlZd2VicC5qcGVnIiwiaWF0IjoxNzQ5NDc3Nzg5LCJleHAiOjE3ODEwMTM3ODl9.b1ZN7ffSWmpb4r0BX3fwUvu4kww0HAW5RO7h15QyENU"
+  },
+  {
+    "nome": "Suco Açaí com Água",
+    "categoria": "Sucos",
+    "descricao": "Copo de suco de açaí com água",
+    "ingredientes": [null],
+    "preco": "15.00",
+    "preco_especial": "13.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaFPmY7mqNiAwya8Ywebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hRlBtWTdtcU5pQXd5YThZd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxNzAwLCJleHAiOjE3ODExODc3MDB9.GqAt9ldCMoBZRsNgt2API4YD5zH_kpypMPNNPa-jcMc"
+  },
+  {
+    "nome": "Suco Açaí com Leite",
+    "categoria": "Sucos",
+    "descricao": "Copo de suco de açaí com leite.",
+    "ingredientes": [null],
+    "preco": "16.00",
+    "preco_especial": "14.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaaXfISuW2wtwj7fwwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hYVhmSVN1VzJ3dHdqN2Z3d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxNzYzLCJleHAiOjE3ODExODc3NjN9.LB71210rYSF1vWAlfe-rR3yXEbqTQw-NgpPhAEJo-ag"
+  },
+  {
+    "nome": "Suco Açaí com Leite e Banana",
+    "categoria": "Sucos",
+    "descricao": "Copo de suco de açaí com leite e banana.",
+    "ingredientes": [null],
+    "preco": "18.00",
+    "preco_especial": "16.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaJNfzP5bePIn6aCBwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hSk5melA1YmVQSW42YUNCd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxNzk2LCJleHAiOjE3ODExODc3OTZ9._ORj851prR-pqtYb3oGdJFEtck02zu21hJSWu0tpdqM"
+  },
+  {
+    "nome": "Suco caixinha Maguary 200ml",
+    "categoria": "Sucos",
+    "descricao": "Suco de caixinha da marca Maguary com 200ml.\nSabores da escolha do usuário na retirada:\n- Uva\n- Tangerina\n- Pêssego\n- Laranja",
+    "ingredientes": [null],
+    "preco": "5.00",
+    "preco_especial": "4.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaudkmg2us2wkzaapwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdWRrbWcydXMyd2t6YWFwd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxMjYwLCJleHAiOjE3ODExODcyNjB9.1_8Wd4e_OO2qMHSOpPf71_MMMD1l0rGZ3_Q2faPngEI"
+  },
+  {
+    "nome": "Suco caixinha prats 200 ml",
+    "categoria": "Sucos",
+    "descricao": "Suco de caixinha da marca 'Prats' com 200ml.\nSabores escolhidos pelo cliente durante a retirada:\n- Uva\n- Laranja",
+    "ingredientes": [null],
+    "preco": "6.00",
+    "preco_especial": "5.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaxUD7SZVPPP0aIKqwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5heFVEN1NaVlBQUDBhSUtxd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyMDU0LCJleHAiOjE3ODExODgwNTR9.iJq3tK9mnU_oyZg5XOWBOyecNG1ppy-Pjs5640tylGY"
+  },
+  {
+    "nome": "Suco lata 290ml",
+    "categoria": "Sucos",
+    "descricao": "Lata de suco Del Valle com 290ml.\nSabor da escolha do usuário durante a retirada.",
+    "ingredientes": [null],
+    "preco": "7.00",
+    "preco_especial": "6.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana50ieaeTSNnwHrCqwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hNTBpZWFlVFNObndIckNxd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxMzYwLCJleHAiOjE3ODExODczNjB9.Skb30YTQuPkM3MBVKupjtO3J6P-xKGW7IxNtxUV4TOU"
+  },
+  {
+    "nome": "Suco Natural com Água (2 Sabores)",
+    "categoria": "Sucos",
+    "descricao": "Copo de suco natural com água com 2 sabores.\nSabores da escolha do cliente durante a retirada.",
+    "ingredientes": [null],
+    "preco": "15.00",
+    "preco_especial": "12.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaakDpzmJVXL7my9Fwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hYWtEcHptSlZYTDdteTlGd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxOTc2LCJleHAiOjE3ODExODc5NzZ9.qgITOzwpWqD1o4-uVCLoznfApIuSVGxxu5HEGDO3XNg"
+  },
+  {
+    "nome": "Suco Natural com Água 400ml",
+    "categoria": "Sucos",
+    "descricao": "Copo de suco natural com água de 400ml.\nSabor da escolha do usuário durante a retirada.",
+    "ingredientes": [null],
+    "preco": "11.00",
+    "preco_especial": "9.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaTxua9inxLsabQHbwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hVHh1YTlpbnhMc2FiUUhid2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxNTUyLCJleHAiOjE3ODExODc1NTJ9.2fMj-OjQkP-Xab5AK8o-n54FslOeXSv8DULBO2Udu94"
+  },
+  {
+    "nome": "Suco Natural com Leite 400ml\n\n",
+    "categoria": "Sucos",
+    "descricao": "Copo de suco natural com leite de 400ml.\nSabor da escolha do usuário durante a retirada.",
+    "ingredientes": [null],
+    "preco": "14.00",
+    "preco_especial": "12.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaN17zDb7mxuf4ekrwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hTjE3ekRiN214dWY0ZWtyd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxNjIyLCJleHAiOjE3ODExODc2MjJ9.NPFqjyD1txl951CON8A2fycaYz7zm20VBcQOyRuS2DI"
+  },
+  {
+    "nome": "Suco Natural Garrafa 300ml",
+    "categoria": "Sucos",
+    "descricao": "Garrafa de suco natural com 300ml.\nSabor da escolha do cliente durante a retirada.",
+    "ingredientes": [null],
+    "preco": "9.00",
+    "preco_especial": "8.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana3DQzE7tcD4pdsx0webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hM0RRekU3dGNENHBkc3gwd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUxNDQ2LCJleHAiOjE3ODExODc0NDZ9.sN_EoV-oVDiYcW6AunaJ1_ms0vUsd6PyIfx28WDG2I4"
+  },
+  {
+    "nome": "Sucos prats 300 ml",
+    "categoria": "Sucos",
+    "descricao": "Garrafa de suco da marca 'Prats' com 300ml.\nSabores escolhidos pelo cliente durante a retirada:\n- Laranja\n- Uva\n- Limão\n- Goiaba\n- Laranja com acerola",
+    "ingredientes": [null],
+    "preco": "10.00",
+    "preco_especial": "9.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana7ZbJlvCxDdhDND5webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hN1piSmx2Q3hEZGhETkQ1d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUyMTYxLCJleHAiOjE3ODExODgxNjF9.b-b1vW8gml2A12anFNRMvA-RdsTkkLDZnmnVTI_s4CE"
+  },
+  {
+    "nome": "Suflair",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Suflair",
+    "ingredientes": [null],
+    "preco": "7.50",
+    "preco_especial": "7.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianagemozrx3t9epxcywebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hZ2Vtb3pyeDN0OWVweGN5d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0NTQ0LCJleHAiOjE3ODExOTA1NDR9.7xr2h37XS4mI6z_pMEzhzzVGyf2a-Hz8rW0oGbOh2c0"
+  },
+  {
+    "nome": "Talento",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Talento.\nSabor da escolha do cliente durante a retirada.",
+    "ingredientes": [null],
+    "preco": "5.00",
+    "preco_especial": "4.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianan9SWNGTHWUjikUywebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hbjlTV05HVEhXVWppa1V5d2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU1MTY3LCJleHAiOjE3ODExOTExNjd9.2HtJBLNDTU3QPDzojBRSCSFeToe0P2w3Pa0tcM1h6bU"
+  },
+  {
+    "nome": "Tapioca Salgada",
+    "categoria": "Diversos",
+    "descricao": "Tapioca Salgada",
+    "ingredientes": [null],
+    "preco": "16.00",
+    "preco_especial": "14.50",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaQHE54THP8QvJJuCwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hUUhFNTRUSFA4UXZKSnVDd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5NDkwLCJleHAiOjE3ODExODU0OTB9.AOGC6PHtON8FHs3U_7RtAk4xGzLF7Z8pH-cLJ8q2X2g"
+  },
+  {
+    "nome": "Tapioca três sabores",
+    "categoria": "Diversos",
+    "descricao": "Tapioca com três sabores da escolha do usuário.",
+    "ingredientes": [null],
+    "preco": "20.00",
+    "preco_especial": "18.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianayvqfc9fl3rtorkiwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5heXZxZmM5ZmwzcnRvcmtpd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjQ5NTY2LCJleHAiOjE3ODExODU1NjZ9.cKP4pHzTw6RugwL69u4_VxUCorDZf1FM4dlV7hp3x54"
+  },
+  {
+    "nome": "Toddynho",
+    "categoria": "Bebidas",
+    "descricao": "Caixa de achocolatado Toddynho.",
+    "ingredientes": [null],
+    "preco": "6.00",
+    "preco_especial": "5.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianasvfLno9GR3rIpfWwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hc3ZmTG5vOUdSM3JJcGZXd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUwNDI3LCJleHAiOjE3ODExODY0Mjd9.E3r5ggYSVAhNLRl16J4kYGielJy-Hl8JTEwUNYYzN2E"
+  },
+  {
+    "nome": "Trento bites",
+    "categoria": "Doces",
+    "descricao": "Wafer recheado sabor chocolate coberto com chocolate.",
+    "ingredientes": [null],
+    "preco": "6.50",
+    "preco_especial": "6.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaxlqyuwjxls7ldznwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5heGxxeXV3anhsczdsZHpud2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU0MzU5LCJleHAiOjE3ODExOTAzNTl9.vXbkalHKVI30Q9sM5OLZFvOGJ4qgBGru109xbFXrBjA"
+  },
+  {
+    "nome": "Twix (40g)",
+    "categoria": "Doces",
+    "descricao": "Barra de chocolate Twix.",
+    "ingredientes": [null],
+    "preco": "6.50",
+    "preco_especial": "6.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaY0oVsSGwb7oHK8nwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hWTBvVnNTR3diN29ISzhud2VicC5qcGVnIiwiaWF0IjoxNzQ5NjU1MDE0LCJleHAiOjE3ODExOTEwMTR9.mkfwcUfGGfkl9YXhzLcoP1OkGFfDkP9u7AbAIHFTTPk"
+  },
+  {
+    "nome": "X-Burguer",
+    "categoria": "Sanduíches",
+    "descricao": "Pão de hambúrguer, carne, queijo prato e maionese.",
+    "ingredientes": [null],
+    "preco": "17.50",
+    "preco_especial": "16.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaHcPMqFwz5AdlLr2webp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hSGNQTXFGd3o1QWRsTHIyd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzNDIwLCJleHAiOjE3ODExODk0MjB9.IeD2CkCilF0dQ-M-Gpp0easKLJg9fmSYbrrwvqhK0pw"
+  },
+  {
+    "nome": "X-Egg",
+    "categoria": "Sanduíches",
+    "descricao": "Pão de hambúrguer, carne, mussarela, ovo e maionese.",
+    "ingredientes": [null],
+    "preco": "19.50",
+    "preco_especial": "18.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianavf4baHQU6FoDPurwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hdmY0YmFIUVU2Rm9EUHVyd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzNjAyLCJleHAiOjE3ODExODk2MDJ9.DZ5jBJtJDtyfOG8byk31eyaiViMiBZOv0qA9QvIlUzI"
+  },
+  {
+    "nome": "X-Frango",
+    "categoria": "Sanduíches",
+    "descricao": "Pão francês, filé de frango grelhado, queijo prato, alface e tomate.",
+    "ingredientes": [null],
+    "preco": "19.50",
+    "preco_especial": "18.00",
+    "avaliacao": null,
+    "imagem_url": null
+  },
+  {
+    "nome": "X-Linguiça Toscana",
+    "categoria": "Sanduíches",
+    "descricao": "Pão Francês, linguiça toscana, queijo prato, alface e tomate.",
+    "ingredientes": [null],
+    "preco": "19.50",
+    "preco_especial": "18.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamarianaUGTqpGC6g70NqrHwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hVUdUcXBHQzZnNzBOcXJId2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzNzY2LCJleHAiOjE3ODExODk3NjZ9.FGSTGPpfl22ww1P1y4uqdyQDbpr56zNkdkwT478KRFc"
+  },
+  {
+    "nome": "X-Salada",
+    "categoria": "Saladas",
+    "descricao": "Pão de hambúrguer, carne, queijo prato, alface, tomate e maionese.",
+    "ingredientes": [null],
+    "preco": "18.50",
+    "preco_especial": "17.00",
+    "avaliacao": null,
+    "imagem_url": "https://vhdpfwtcsscxiwafuxoa.supabase.co/storage/v1/object/sign/imagens-cardapio/cafeterianovageracaounidadevilamariana8zJzFTpkwEXr6Yrwebp.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iZmVmZWFlNS04NGVlLTQ0ZmUtYmRlYy02MzIxZGY1ZGU4MWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZW5zLWNhcmRhcGlvL2NhZmV0ZXJpYW5vdmFnZXJhY2FvdW5pZGFkZXZpbGFtYXJpYW5hOHpKekZUcGt3RVhyNllyd2VicC5qcGVnIiwiaWF0IjoxNzQ5NjUzNjk1LCJleHAiOjE3ODExODk2OTV9.J4VFn64XEimtbKf11zMPHHLlsTDFqTC7c9VDLywUqGg"
   }
 ]
