@@ -28,6 +28,7 @@ def obter_pedidos_no_restaurante(token_funcionario : str):
             return None
         statement = select(Pedido).where(Pedido.id_restaurante == funcionario.id_restaurante)
         pedidos = session.exec(statement).all()
+        session.close()
         return pedidos
     except Exception:
         pass
@@ -48,6 +49,7 @@ def atualizar_status_pedido(token_funcionario : str, id_pedido : str, novo_statu
         session.add(pedido)
         session.commit()
         session.refresh(pedido)
+        session.close()
         return True
     except Exception:
         pass

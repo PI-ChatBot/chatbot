@@ -46,6 +46,7 @@ class CadastroFuncionario:
             )
             session.add(funcionario)
             session.commit()
+            session.close()
             return True
         except:
             return None
@@ -60,6 +61,7 @@ class LoginFuncionario:
         try:
             statement = select(Funcionario).where(Funcionario.email == login.email)
             funcionario = session.exec(statement).one()
+            session.close()
             if verify_password(login.senha, funcionario.hash_senha):
                 return (create_access_token(data={
                     "nome" : funcionario.nome,

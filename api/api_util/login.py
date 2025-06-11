@@ -55,6 +55,7 @@ class Cadastro:
             print(cliente)
             session.add(cliente)
             session.commit()
+            session.close()
             return True
         except:
             return None
@@ -69,6 +70,7 @@ class Login:
         try:
             statement = select(Cliente).where(Cliente.email == login.email)
             cliente = session.exec(statement).one()
+            session.close()
             if verify_password(login.senha, cliente.hash_senha):
                 return (create_access_token(data={
                     "nome" : cliente.nome,
