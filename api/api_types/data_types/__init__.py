@@ -1,1 +1,1 @@
-from .produtos_type import ProdutoDict
+from .produtos_type import ProdutoDict, ProdutoModel

@@ -1,6 +1,7 @@
 # Dicionário tipado de produtos
 
 from typing import TypedDict, List, Union, Optional
+from pydantic import BaseModel
 
 
 class ProdutoDict(TypedDict):
@@ -28,3 +29,19 @@ class ProdutoDict(TypedDict):
     # ingredientes_ids: List[Union[str, None]]
     # URL da imagem
     imagem: str
+
+
+class ProdutoModel(BaseModel):
+    '''Modelo Pydantic para os produtos.'''
+    id_item: str
+    nome: str
+    restaurante: str
+    id_restaurante: str
+    categoria: str
+    id_categoria: str
+    descricao: str
+    avaliacao: float | None
+    estoque: int
+    preco: float
+    preco_especial: float | None
+    imagem: str | None
