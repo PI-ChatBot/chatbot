@@ -8,22 +8,23 @@ class ProdutoDict(TypedDict):
     Dicionário tipado para os produtos.
     '''
     # Identificação
-    id: str
+    id_item: str
     nome: str
     # Restaurante
     restaurante: str
-    restaurante_id: str
+    id_restaurante: str
     # Categoria
     categoria: str
-    categoria_id: str
+    id_categoria: str
     # Informações
     descricao: str
     avaliacao: float
-    # Ingredientes
-    ingredientes: List[Union[str, None]]
-    ingredientes_ids: List[Union[str, None]]
+    estoque: int
     # Preço
     preco: float
     preco_especial: Optional[float]
+    # Ingredientes
+    # ingredientes: List[Union[str, None]]
+    # ingredientes_ids: List[Union[str, None]]
     # URL da imagem
-    imagem_url: str
+    imagem: str
