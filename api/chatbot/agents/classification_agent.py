@@ -87,7 +87,7 @@ class ClassificationAgent:
             self.client, self.model_name, input_messages)
         chatbot_output = double_check_json_output(
             self.client, self.model_name, chatbot_output)
-        print('\n\tClassification Agent:', chatbot_output)  # debug
+        # print('\n\tClassification Agent:', chatbot_output)  # debug
         # Pós-processamento
         output = self.postprocess(chatbot_output)
         # Retornar resposta
