@@ -234,7 +234,61 @@ export default function TelaPedidos() {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#f0f0f0',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    loginBox: {
+        width: 400,
+        backgroundColor: 'white',
+        borderRadius: 16,
+        padding: 24,
+        boxShadow: '0px 4px 8px rgba(0,0,0,0.1)', // só funciona no web
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 24,
+        textAlign: 'center',
+    },
+    input: {
+        height: 48,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingHorizontal: 12,
+        marginBottom: 16,
+        fontSize: 16,
+        backgroundColor: '#fff',
+    },
+    button: {
+        backgroundColor: '#007bff',
+        paddingVertical: 12,
+        borderRadius: 8,
+        alignItems: 'center',
+        marginTop: 8,
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    successText: {
+        marginTop: 20,
+        color: 'green',
+        fontSize: 16,
+        textAlign: 'center',
+    },
+    errorText: {
+        color: 'red',
+        fontSize: 14,
+        marginBottom: 12,
+        textAlign: 'center',
+    },
    safeArea: {
     flex: 1,
     backgroundColor: '#fff',
@@ -390,3 +444,4 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
 });
+
