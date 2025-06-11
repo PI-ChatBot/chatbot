@@ -1,3 +1,4 @@
+from api_util.funcionario import LoginFuncionario, LoginFuncionarioModel
 from fastapi import FastAPI, Request
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
@@ -69,7 +70,7 @@ async def receber_chat(request: Request):
     '''
 
     request_json = await request.json()
-    
+
     # Verificar se os dados estão no formato esperado
     if "body" in request_json:
         # Formato serverless (com body como string JSON)
@@ -138,3 +139,17 @@ async def atualizar_pedido(request : Request):
         return {"message" : "pedido atualizado com sucesso"}
     else:
         return {"message" : "ocorreu um erro ao alterar o status do pedido"}
+
+@app.get("/cozinha/login")
+async def fazer_login_cozinha(request : Request):
+    request_json = await request.json()
+    body = json.loads(request_json["body"])
+    login = LoginFuncionarioModel(
+        email=body["email"],
+        senha=body["senha"]
+    )
+    (token, nome) = LoginFuncionario.fazer_login(login)
+    if token == None:
+        return {"message": "Login inválido"}
+    else:
+        return {"token": token, "nome": nome}
