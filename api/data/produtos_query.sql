@@ -1,5 +1,6 @@
 -- Query para obter os produtos com suas categorias, ingredientes e avaliações
-SELECT i.nome AS nome,
+SELECT i.id_item AS id,
+    i.nome AS nome,
     c.nome AS categoria,
     i.descricao AS descricao,
     ARRAY_AGG(DISTINCT ing.nome) AS ingredientes,
