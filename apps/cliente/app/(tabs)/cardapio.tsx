@@ -32,7 +32,7 @@ export default function TelaCardapio() {
     }).start();
 
     async function carregarProdutos() {
-      const { data, error } = await supabase.from('produtos').select('*');
+      const { data, error } = await supabase.from('item').select('*');
       if (error) {
         console.error('Erro ao carregar produtos:', error);
       } else {
@@ -149,7 +149,7 @@ const estilos = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 12, 
+    marginBottom: 12,
   },
   iconContainer: {
     width: 50,
