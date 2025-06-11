@@ -7,7 +7,7 @@ from typing import Optional, TypedDict
 from pydantic import BaseModel
 from typing_extensions import NotRequired
 
-from .chatbot_memory import ChatbotMemory
+from .chatbot_memory import ChatbotMemory, PartialMemory
 from .message_literals import message_role
 
 # Dicionário tipado
@@ -41,7 +41,7 @@ class MessageDict(TypedDict):
     # Conteúdo da mensagem
     content: str
     # Memória do chatbot (opcional)
-    memory: NotRequired[ChatbotMemory]
+    memory: NotRequired[PartialMemory]
 
 # Base Model
 

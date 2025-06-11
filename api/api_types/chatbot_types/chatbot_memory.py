@@ -5,6 +5,7 @@ Tipagem da memória do chatbot.
 from typing import TypedDict
 from typing_extensions import NotRequired
 from .agent_literals import agent_types, guard_decisions
+from .order_agent_type import OrderTakingAgentResponse
 
 # Dicionário tipado
 
@@ -30,3 +31,20 @@ class ChatbotMemory(TypedDict):
     # Recommendation Agent
     # Decisão do Recommendation Agent
     classification_decision: NotRequired[agent_types]
+
+# Memória que herda memória dos chatbots
+
+
+class PartialMemory(ChatbotMemory, OrderTakingAgentResponse, total=False):
+    '''
+    Memória parcial do chatbot que herda a memória do agente de pedidos.
+    Esta estrutura é usada para armazenar informações adicionais que podem ser relevantes para o agente de pedidos, como o número do passo atual e o pedido em andamento.
+
+    Attributes
+    ----------
+    step_number: int
+        Número do passo atual no processo de pedidos.
+    order: OrderTakingAgentResponse
+        Pedido atual em andamento.
+    '''
+    pass

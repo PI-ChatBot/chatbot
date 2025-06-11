@@ -32,10 +32,10 @@ class AgentController:
         self.classification_agent = ClassificationAgent()  # classificação
         # ... (RecommendationAgent)
         self.agent_dict: Dict[agent_types, Any] = {  # agentes pós-classificação
-            "details_agent": DetailsAgent()
+            "details_agent": DetailsAgent(),
             # "recommendation_agent": RecommendationAgent(),  # TODO: ajustar depois
             # TODO: add RecommendationAgent como método depois
-            # "order_taking_agent": OrderTakingAgent()
+            "order_taking_agent": OrderTakingAgent()
         }
 
     # Método para obter resposta do LLM
