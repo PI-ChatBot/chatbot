@@ -30,7 +30,6 @@ export default function TelaCadastro() {
     router.replace('/(tabs)');
   };
 
-  // Permite apenas números no telefone
   const handleTelefoneChange = (text: string) => {
     const onlyNumbers = text.replace(/[^0-9]/g, '');
     setTelefone(onlyNumbers);

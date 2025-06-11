@@ -236,6 +236,6 @@ const estilos = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#78aeb4',
-    marginBottom: 10, // Adicione esta linha para espaçamento extra
+    marginBottom: 10, 
   },
 });

@@ -128,9 +128,9 @@ const estilos = StyleSheet.create({
   cardHorario: {
     backgroundColor: '#F5F5F5',
     borderRadius: 16,
-    paddingVertical: 18, // aumentado
-    paddingHorizontal: 20, // aumentado
-    marginBottom: 16, // aumentado o espaçamento entre os dias
+    paddingVertical: 18,
+    paddingHorizontal: 20, 
+    marginBottom: 16, 
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.07,

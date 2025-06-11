@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 import { Href, useRouter } from 'expo-router';
-import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; // Adicione esta linha
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function TelaHome() {
@@ -55,7 +55,7 @@ export default function TelaHome() {
             backgroundColor: '#fff',
             marginLeft: 2,
             marginTop: -7,
-            marginBottom: -12 // desce um pouco o robô
+            marginBottom: -12 
           }}>
             <Image
               source={require('@/assets/images/headrobo.png')}

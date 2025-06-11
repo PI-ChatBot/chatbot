@@ -51,7 +51,6 @@ export default function SalaDeChat() {
   }, [estaDigitando]);
 
   useEffect(() => {
-    // Scroll para o final quando novas mensagens chegarem
     if (scrollViewRef.current && mensagens.length > 0) {
       setTimeout(() => {
         scrollViewRef.current?.scrollToEnd({ animated: true });
