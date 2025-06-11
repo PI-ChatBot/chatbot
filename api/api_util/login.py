@@ -107,6 +107,7 @@ def get_current_user(token: str):
     if email is None:
         return None
     user = session.exec(select(Cliente).where(Cliente.email == email)).one()
+    session.close()
     if user is None:
         return None
     return user

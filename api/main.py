@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from api_util.login import *
 import json
 from datetime import datetime
-from api_util.pedido import atualizar_status_pedido, obter_pedidos_no_restaurante
+from api_util.pedido import atualizar_status_pedido, fazer_pedido, obter_pedidos_no_restaurante
 from api_util.pratos import obter_pratos_por_restaurante
 from api_util.restaurante import obter_restaurante_por_id
 from chatbot import AgentController
@@ -114,6 +114,20 @@ async def receber_chat(request: Request):
             "success": False,
             "error": f"Erro interno do servidor: {str(e)}"
         }
+
+@app.post("/pedido")
+async def receber_pedido(request : Request):
+    request_json = await request.json()
+    body = json.loads(request_json["body"])
+    token_cliente = body["token"]
+    itens = body["itens"]
+
+    pedido = fazer_pedido(token_cliente, itens)
+    if pedido is not None:
+        return {"pedido" : pedido}
+    else:
+        return {"message" : "erro ao criar o pedido"}
+
 
 
 @app.get("/cozinha/pedidos")
