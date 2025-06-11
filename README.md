@@ -86,6 +86,21 @@ MODEL_NAME=meta-llama/llama-3.1-8b-instruct:free # ou outro modelo de sua escolh
 
 ---
 
+<!-- Pinecone -->
+
+## 🗃️ Criar banco de dados vetorial no Pinecone
+
+1. **Insira no `api/.env` as informações para conexão com seu banco de dados vetorial (instruções acima)**
+
+2. **Abra a pasta `api/` e execute o seguinte comando para criar o banco de dados vetorial:**
+
+```bash
+cd api &&
+python -m embedding.build_vector_database
+```
+
+---
+
 <!-- Instruções para iniciar o servidor FastAPI -->
 
 ## ⚡ Executando o servidor FastAPI
