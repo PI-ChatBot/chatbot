@@ -34,7 +34,8 @@ def fazer_pedido(token: str, itens: list[dict]):
                         id_pedido=Pedido.id_pedido,
                         id_item= item["id_item"],
                         quantidade= item["quantidade"],
-                        preco = item["preco"]
+                        preco = item["preco"],
+                        observacoes = item["observacoes"]
                     )
                 )
                 session.add(itemPedido)
