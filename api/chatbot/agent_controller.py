@@ -55,7 +55,7 @@ class AgentController:
         messages = job_input['messages']        # Executar o Guard Agent
         # 1º Executar Guard Agent
         guard_agent_response = self.guard_agent.get_response(messages)
-        print("\n\tResposta do Guard Agent:", guard_agent_response)  # debug
+        # print("\n\tResposta do Guard Agent:", guard_agent_response)  # debug
 
         # Se não for permitido, retornar mensagem do guard agent
         memory = guard_agent_response.get('memory', {})
