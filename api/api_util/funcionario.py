@@ -63,7 +63,7 @@ class LoginFuncionario:
                     "nome" : funcionario.nome,
                     "email" : funcionario.email,
                     "funcao":funcionario.funcao
-                }, expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)), funcionario.nome)
+                }, expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)), funcionario.id_restaurante)
         except:
             return (None, None)
         finally:

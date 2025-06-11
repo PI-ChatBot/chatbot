@@ -11,7 +11,6 @@ import {
   Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { storage } from "./utils/storage";
 import { fazerLogin } from "@/lib/data";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -21,24 +20,16 @@ export default function LoginScreen() {
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
-  useEffect(() => {
-    const id = storage.get("restaurantId");
-    if (id) {
-      // Redireciona só depois que a navegação está pronta
-      setTimeout(() => router.replace("/pedidos"), 0);
-    }
-  }, []);
-
   const handleLogin = async () => {
     try {
-      let data: { token: string; nome: string } = await fazerLogin(
+      let data: { token: string; restaurantId: string } = await fazerLogin(
         email,
         password,
       );
       console.log(data);
-      if (data["token"] && data["nome"]) {
+      if (data["token"] && data["restaurantId"]) {
         await AsyncStorage.setItem("token", data["token"]);
-        await AsyncStorage.setItem("nome", data["nome"]);
+        await AsyncStorage.setItem("restaurantId", data["restaurantId"]);
         router.replace("/pedidos");
       } else {
         Alert.alert("Erro", "Houve um erro na hora de fazer login", [

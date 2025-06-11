@@ -148,8 +148,8 @@ async def fazer_login_cozinha(request : Request):
         email=body["email"],
         senha=body["senha"]
     )
-    (token, nome) = LoginFuncionario.fazer_login(login)
+    (token, restaurantId) = LoginFuncionario.fazer_login(login)
     if token == None:
         return {"message": "Login inválido"}
     else:
-        return {"token": token, "nome": nome}
+        return {"token": token, "restaurantId": restaurantId}

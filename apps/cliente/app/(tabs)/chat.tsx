@@ -1,14 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { 
-  Animated, 
-  SafeAreaView, 
-  StyleSheet, 
-  Text, 
-  TextInput, 
-  View, 
-  ScrollView, 
-  TouchableOpacity, 
-  Alert, 
+import {
+  Animated,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -62,7 +62,7 @@ export default function SalaDeChat() {
   // Função para chamar a API real do chatbot
   const chamarAPIChatBot = async (mensagensEntrada: InterfaceMensagem[]) => {
     try {
-      const response = await fetch("http://192.168.0.5:8000/chatbot", {
+      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/chatbot`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -131,7 +131,7 @@ export default function SalaDeChat() {
 
   return (
     <SafeAreaView style={estilos.container}>
-      <KeyboardAvoidingView 
+      <KeyboardAvoidingView
         style={estilos.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
@@ -174,7 +174,7 @@ export default function SalaDeChat() {
               showsVerticalScrollIndicator={false}
             >
               {mensagens.map((mensagem, index) => renderizarMensagem(mensagem, index))}
-              
+
               {/* Indicador de digitação */}
               {estaDigitando && (
                 <View style={[estilos.mensagemContainer, estilos.mensagemAssistente]}>
@@ -204,10 +204,10 @@ export default function SalaDeChat() {
               onPress={lidarComEnvioMensagem}
               disabled={!textoMensagem.trim() || estaDigitando}
             >
-              <Feather 
-                name="send" 
-                size={20} 
-                color={(!textoMensagem.trim() || estaDigitando) ? "#aaa" : "#FFFFFF"} 
+              <Feather
+                name="send"
+                size={20}
+                color={(!textoMensagem.trim() || estaDigitando) ? "#aaa" : "#FFFFFF"}
               />
             </TouchableOpacity>
           </View>
