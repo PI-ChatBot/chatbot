@@ -108,7 +108,7 @@ export default function TelaCardapio() {
       <FlatList
         data={produtosFiltrados}
         renderItem={renderProduto}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id_item}
         numColumns={2}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={estilos.produtosContainer}
@@ -236,6 +236,6 @@ const estilos = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#78aeb4',
-    marginBottom: 10, 
+    marginBottom: 10,
   },
 });

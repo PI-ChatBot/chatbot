@@ -42,6 +42,34 @@ export async function obterPratos(id_restaurante: string) {
   return await req.data;
 }
 
+export type ItemCardapio = {
+  nome: string;
+  preco: number;
+  descricao: string;
+  categoria: string;
+  imagem: string | null;
+  promocional: boolean;
+};
+
+export async function criarPrato(token: string, itemCardapio: ItemCardapio) {
+  let req = await axios.post(`${API_URL}/cozinha/cardapio`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: token,
+      nome: itemCardapio.nome,
+      preco: itemCardapio.preco,
+      descricao: itemCardapio.descricao,
+      categoria: itemCardapio.categoria,
+      imagem: itemCardapio.imagem,
+      promocional: itemCardapio.promocional,
+    }),
+  });
+  return await req.data;
+}
+
 // export async function fazerCadastro(
 //   id_restaurante : number
 //   nome : string,
