@@ -16,6 +16,7 @@ import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { formatDateTime } from "./utils/formatDateTime";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { obterPratos, obterRestaurante } from "@/lib/data";
 
 const pratos1 = [
   {
@@ -91,6 +92,13 @@ const pratos2 = [
 const { width } = Dimensions.get("window");
 const ITEM_WIDTH = (width - 48) / 2;
 
+type Restaurante = {
+  id_restaurante: string;
+  id_unidade: string;
+  nome: string;
+  localizacao: string;
+};
+
 export default function TelaCardapio() {
   const router = useRouter();
 
@@ -100,6 +108,7 @@ export default function TelaCardapio() {
   const [dateTime, setDateTime] = useState(new Date());
   const [pratos, setPratos] = useState([]);
   const [restaurantId, setRestaurantId] = useState<string | null>(null);
+  const [restaurante, setRestaurante] = useState<Restaurante | null>(null);
 
   useEffect(() => {
     async function getData() {
@@ -113,10 +122,29 @@ export default function TelaCardapio() {
     getData();
   }, []);
 
+  // useEffect(() => {
+  //   async function getRestaurante() {
+  // const id = await AsyncStorage.getItem("restaurantId");
+  // console.log(id);
+  // if (id) {
+  //   const restauranteData = await obterRestaurante(id!);
+  //   setRestaurante(restauranteData["restaurante"]);
+  // }
+  // }
+  // getRestaurante();
+  // }, []);
+
   useEffect(() => {
-    // Aqui você puxaria os dados do banco, mas estamos simulando
-    restaurantId == "rest_a" ? setPratos(pratos1) : setPratos(pratos2);
-  }, [restaurantId]);
+    async function getPratos() {
+      const id = await AsyncStorage.getItem("restaurantId");
+      console.log(id);
+      if (id) {
+        const pratosData = await obterPratos(id!);
+        setPratos(pratosData["pratos"]);
+      }
+    }
+    getPratos();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -134,13 +162,14 @@ export default function TelaCardapio() {
 
   const renderItem = ({ item }) => (
     <View
+      key={item.id}
       style={[styles.card, { width: itemWidth, marginHorizontal: spacing / 2 }]}
     >
       <Image source={item.imagem} style={styles.imagem} />
       <Text style={styles.nome} numberOfLines={1}>
         {item.nome}
       </Text>
-      <Text style={styles.preco}>{item.preco}</Text>
+      <Text style={styles.preco}>R${item.preco}</Text>
     </View>
   );
 

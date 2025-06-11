@@ -15,6 +15,7 @@ import { useRouter } from "expo-router";
 import { formatDateTime } from "./utils/formatDateTime";
 import ConfirmModal from "./utils/ConfirmModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { obterRestaurante } from "@/lib/data";
 
 const mockPedidos2 = [
   {
@@ -174,6 +175,13 @@ const mockPedidos1 = [
   },
 ];
 
+type Restaurante = {
+  id_restaurante: string;
+  id_unidade: string;
+  nome: string;
+  localizacao: string;
+};
+
 export default function TelaPedidos() {
   const router = useRouter();
 
@@ -182,7 +190,7 @@ export default function TelaPedidos() {
   };
 
   const [dateTime, setDateTime] = useState(new Date());
-
+  const [restaurante, setRestaurante] = useState<Restaurante | null>(null);
   const [restaurantId, setRestaurantId] = useState<string | null>(null);
   useEffect(() => {
     async function getData() {
@@ -196,9 +204,22 @@ export default function TelaPedidos() {
     getData();
   }, []);
 
+  useEffect(() => {
+    async function getRestaurante() {
+      const id = await AsyncStorage.getItem("restaurantId");
+      console.log(id);
+      if (id) {
+        const restauranteData = await obterRestaurante(id!);
+        setRestaurante(restauranteData["restaurante"]);
+      }
+    }
+    getRestaurante();
+  }, []);
+
   const logout = async () => {
     await AsyncStorage.removeItem("restaurantId");
     await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("nome");
     router.replace("/");
   };
   useEffect(() => {
@@ -271,7 +292,7 @@ export default function TelaPedidos() {
       </View>
       <View style={styles.underContainer}>
         <Text style={styles.infoRestaurante}>
-          Restaurante [nome do restaurante] {restaurantId}
+          Restaurante: {restaurante?.nome}
         </Text>
         <View style={styles.tituloContainer}>
           <Text style={styles.tituloPedidos}>Pedidos</Text>

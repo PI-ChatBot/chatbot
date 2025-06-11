@@ -6,6 +6,8 @@ from api_util.login import *
 import json
 from datetime import datetime
 from api_util.pedido import atualizar_status_pedido, obter_pedidos_no_restaurante
+from api_util.pratos import obter_pratos_por_restaurante
+from api_util.restaurante import obter_restaurante_por_id
 from chatbot import AgentController
 
 app = FastAPI()
@@ -140,7 +142,7 @@ async def atualizar_pedido(request : Request):
     else:
         return {"message" : "ocorreu um erro ao alterar o status do pedido"}
 
-@app.get("/cozinha/login")
+@app.post("/cozinha/login")
 async def fazer_login_cozinha(request : Request):
     request_json = await request.json()
     body = json.loads(request_json["body"])
@@ -153,3 +155,46 @@ async def fazer_login_cozinha(request : Request):
         return {"message": "Login inválido"}
     else:
         return {"token": token, "restaurantId": restaurantId}
+
+
+# Função utilizada para cadastrar novos funcionários, deve ser usada só pelo admin
+# @app.post("/cozinha/cadastro")
+# async def cadastrar_funcionarios(request: Request):
+#     request_json = await request.json()
+#     body = json.loads(request_json["body"])
+#     cadastro = CadastroFuncionarioModel(
+#         id_restaurante=body["id_restaurante"],
+#         nome=body["nome"],
+#         email=body["email"],
+#         senha=body["senha"],
+#         funcao=body["funcao"]
+#     )
+#     cadastrado = CadastroFuncionario.fazer_cadastro(cadastro)
+#     if cadastrado is not None:
+#         return {"message": "Cadastro feito com sucesso"}
+#     else:
+#         return {"message": "Houve um erro ao realizar o cadastro"}
+
+@app.post("/restaurante")
+async def obter_restaurante(request : Request):
+    request_json = await request.json()
+    body = json.loads(request_json["body"])
+    id_restaurante = body["id_restaurante"]
+    restaurante = obter_restaurante_por_id(id_restaurante)
+    print(restaurante)
+    if restaurante is not None:
+        return {"restaurante": restaurante}
+    else:
+        return {"message": "Houve um erro ao obter o restaurante"}
+
+@app.post("/cozinha/pratos")
+async def obter_pratos(request : Request):
+    request_json = await request.json()
+    body = json.loads(request_json["body"])
+    id_restaurante = body["id_restaurante"]
+    pratos = obter_pratos_por_restaurante(id_restaurante)
+    print(pratos)
+    if pratos is not None:
+        return {"pratos" : pratos}
+    else:
+        return {"message" : "Houve um erro ao obter os pratos"}

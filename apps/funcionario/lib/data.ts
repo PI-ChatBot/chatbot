@@ -16,14 +16,38 @@ export async function fazerLogin(email: string, senha: string) {
   return req.data;
 }
 
+export async function obterRestaurante(id_restaurante: string) {
+  let req = await axios.post(`${API_URL}/restaurante`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id_restaurante: id_restaurante,
+    }),
+  });
+  return await req.data;
+}
+
+export async function obterPratos(id_restaurante: string) {
+  let req = await axios.post(`${API_URL}/cozinha/pratos`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id_restaurante: id_restaurante,
+    }),
+  });
+  return await req.data;
+}
+
 // export async function fazerCadastro(
-//   primeiro_nome: string,
-//   sobrenome: string,
-//   data_nascimento: Date,
-//   tipo_cliente: string,
-//   telefone: string,
+//   id_restaurante : number
+//   nome : string,
 //   email: string,
 //   senha: string,
+//   funcao : string,
 // ) {
 //   let req = await axios.post(`${API_URL}/cadastro`, {
 //     headers: {

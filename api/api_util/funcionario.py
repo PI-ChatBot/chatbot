@@ -1,3 +1,4 @@
+import uuid
 from pydantic import BaseModel
 from sqlmodel import Session, select
 from passlib.context import CryptContext
@@ -18,6 +19,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 120
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class CadastroFuncionarioModel(BaseModel):
+    id_restaurante : uuid.UUID
     nome : str
     email : str
     senha : str
@@ -36,7 +38,7 @@ class CadastroFuncionario:
         try:
             print("teste")
             funcionario = Funcionario(
-                id_restaurante= None,
+                id_restaurante= cadastro.id_restaurante,
                 nome = cadastro.nome,
                 email = cadastro.email,
                 hash_senha = get_password_hash(cadastro.senha),
