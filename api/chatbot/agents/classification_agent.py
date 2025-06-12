@@ -67,12 +67,11 @@ class ClassificationAgent:
             Sua tarefa é determinar qual agente deve lidar com a entrada do usuário. Você tem 3 agentes disponíveis:
             1- details_agent: Responsável por responder perguntas sobre os restaurantes ou lanchonetes do Colégio Poliedro. Isso inclui localização dentro da escola, horários de funcionamento, formas de pagamento, detalhes sobre os itens do cardápio, ou listar os itens disponíveis (como "O que vocês têm hoje?").
             2- order_taking_agent: Responsável por conduzir a conversa relacionada a pedidos. Se o usuário quiser pedir algo, este agente deve assumir e acompanhar a conversa até o pedido estar completo.
-            3- recommendation_agent: Responsável por dar recomendações do que comer ou beber. Se o usuário pedir sugestões, dicas ou perguntar “o que você recomenda?”, este agente deve ser escolhido. Também deve ser escolhido por padrão se o usuário usar uma saudação como "Oi" ou "Bom dia" e não fizer uma pergunta específica.
 
             Sua saída deve estar em um formato JSON estruturado exatamente como este. Cada chave é uma string, e cada valor também deve ser uma string:
                         {
             "chain_of_thought": "Percorra cada um dos agentes acima e escreva alguns pensamentos sobre a qual agente esta entrada é relevante.",
-            "decision": "details_agent" ou "order_taking_agent" ou "recommendation_agent",
+            "decision": "details_agent" ou "order_taking_agent",
             "message": "" (deixe a mensagem vazia)
             }
         """
