@@ -5,6 +5,7 @@ import os
 from copy import deepcopy
 from typing import List
 
+import requests
 from api_types import MessageDict, OrderTakingAgentResponse
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -32,9 +33,7 @@ class OrderTakingAgent:
             base_url=os.getenv("CHATBOT_URL")
         )
         # Modelo de LLM
-        self.model_name: str = os.getenv("MODEL_NAME", "")
-
-        # Agente de recomendação
+        self.model_name: str = os.getenv("MODEL_NAME", "")        # Agente de recomendação
         # TODO: Implementar agente de recomendação
 
     # Obter resposta
@@ -46,21 +45,18 @@ class OrderTakingAgent:
         '''
         messages = deepcopy(messages)  # Evitar efeitos colaterais
 
-        # Menu do restaurante
-        menu = ""
+        # Menu do restaurante - Obter via API
+        id_restaurante = "44c57a5e-ced2-4938-ba1d-108a60a60ea1"  # ID padrão da Cafeteria Nova Geração
+        cardapio = self.obter_cardapio_restaurante(id_restaurante)
 
         # System prompt
         system_prompt = f"""
             Você é um agente de pedidos de um chatbot de restaurante do Colégio Poliedro. Sua tarefa é ajudar os clientes (alunos, professores, funcionários ou visitantes da escola) a fazer pedidos de forma eficiente e precisa. Você deve seguir as seguintes diretrizes:
 
             Aqui está o cardápio deste restaurante:
-            {menu}
+            {cardapio}
 
-            
-        """
-
-        # TODO: Carregar o menu do restaurante de uma fonte externa ou banco de dados
-        system_prompt += ""
+              """
 
         system_prompt += """
             Coisas que você NÃO DEVE FAZER:
@@ -233,3 +229,116 @@ class OrderTakingAgent:
                 'recomendacao_solicitada_antes': recomendacao_solicitada_antes,
             }
         }
+
+    def obter_cardapio_restaurante(self, id_restaurante: str, api_url: str = "http://localhost:8000") -> str:
+        """
+        Obtém o cardápio do restaurante via API e formata como string.
+        
+        :param id_restaurante: ID do restaurante
+        :param api_url: URL base da API (padrão: localhost:8000)
+        :return: String formatada com o cardápio
+        """
+        try:
+            # Dados para a requisição
+            payload = {
+                "body": json.dumps({
+                    "id_restaurante": id_restaurante
+                })
+            }
+            
+            # Headers para a requisição
+            headers = {
+                "Content-Type": "application/json"
+            }
+            
+            # Fazer requisição POST para o endpoint
+            response = requests.post(
+                f"{api_url}/cozinha/pratos",
+                json=payload,
+                headers=headers,
+                timeout=10
+            )
+            
+            # Verificar se a requisição foi bem-sucedida
+            response.raise_for_status()
+            
+            # Extrair dados da resposta
+            data = response.json()
+            
+            if "pratos" not in data:
+                return "❌ Erro: Não foi possível obter o cardápio do restaurante."
+            
+            pratos = data["pratos"]
+            
+            if not pratos:
+                return "ℹ️ Este restaurante não possui produtos cadastrados no momento."
+            
+            # Formatar cardápio
+            cardapio_formatado = "📋 **CARDÁPIO DO RESTAURANTE**\n\n"
+            
+            # Agrupar por categoria
+            categorias = {}
+            for prato in pratos:
+                categoria = prato.get('categoria', 'Sem categoria')
+                if categoria not in categorias:
+                    categorias[categoria] = []
+                categorias[categoria].append(prato)
+            
+            # Formatar cada categoria
+            for categoria, itens in categorias.items():
+                cardapio_formatado += f"🍽️ **{categoria.upper()}**\n"
+                cardapio_formatado += "-" * 50 + "\n"
+                
+                for item in itens:
+                    nome = item.get('nome', 'Nome não disponível')
+                    id_item = item.get('id_item', 'ID não disponível')
+                    preco = item.get('preco', 'Preço não disponível')
+                    preco_especial = item.get('preco_especial', None)
+                    descricao = item.get('descricao', '')
+                    estoque = item.get('estoque', 0)
+                    avaliacao = item.get('avaliacao', None)
+                    
+                    # Linha principal do produto
+                    linha_produto = f"{nome} | ID: {id_item} | Preço: R$ {preco}"
+                    
+                    # Adicionar preço especial se existir
+                    if preco_especial and preco_especial != preco:
+                        linha_produto += f" | Preço especial (para alunos, professores e membros do Colégio Poliedro): R$ {preco_especial}"
+                    
+                    cardapio_formatado += linha_produto + "\n"
+                    
+                    # Adicionar descrição se existir
+                    if descricao:
+                        cardapio_formatado += f"   📝 {descricao}\n"
+                    
+                    # Adicionar informações extras
+                    info_extra = []
+                    if estoque is not None:
+                        if estoque > 0:
+                            info_extra.append(f"✅ Em estoque ({estoque} unidades)")
+                        else:
+                            info_extra.append("❌ Sem estoque")
+                    
+                    if avaliacao is not None:
+                        info_extra.append(f"⭐ Avaliação: {avaliacao:.1f}/5")
+                    
+                    if info_extra:
+                        cardapio_formatado += f"   {' | '.join(info_extra)}\n"
+                    
+                    cardapio_formatado += "\n"
+                
+                cardapio_formatado += "\n"
+            
+            # Adicionar informações finais
+            total_produtos = len(pratos)
+            cardapio_formatado += f"📊 **Total de produtos disponíveis: {total_produtos}**\n"
+            cardapio_formatado += "💡 **Dica:** Mencione o nome ou ID do produto para fazer seu pedido!\n"
+            
+            return cardapio_formatado.strip()
+            
+        except requests.exceptions.RequestException as e:
+            return f"❌ Erro de conexão com a API: {str(e)}"
+        except json.JSONDecodeError as e:
+            return f"❌ Erro ao processar resposta da API: {str(e)}"
+        except Exception as e:
+            return f"❌ Erro inesperado ao obter cardápio: {str(e)}"
