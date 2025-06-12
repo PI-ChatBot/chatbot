@@ -2,10 +2,10 @@
 
 import json
 import os
+import requests
 from copy import deepcopy
 from typing import List
 
-import requests
 from api_types import MessageDict, OrderTakingAgentResponse
 from dotenv import load_dotenv
 from openai import OpenAI
