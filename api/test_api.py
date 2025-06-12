@@ -3,7 +3,7 @@ import json
 from typing import List
 
 import requests
-from api_types import ChatRequestDict, MessageDict
+from api_types import MessageDict
 
 # URL base da API
 BASE_URL = "http://localhost:8000"
@@ -37,22 +37,20 @@ def test_chatbot_endpoint():
     '''
     print("\n🤖 Testando o endpoint /chatbot...")
 
-    # Dados do teste
-    test_data: ChatRequestDict = {
-        'messages': [
-            {
-                'role': 'user',
-                'content': 'Quais são os pratos do dia?'  # pergunta de exemplo
-            }
-        ]
-    }
+    # Dados do teste - formato direto (sem body)
+    test_data = [
+        {
+            'role': 'user',
+            'content': 'Quais são os pratos do dia?'  # pergunta de exemplo
+        }
+    ]
 
     try:
-        # Enviar requisição POST para o endpoint /chat
+        # Enviar requisição POST para o endpoint /chatbot
         response = requests.post(
             f"{BASE_URL}/chatbot",
             headers={"Content-Type": "application/json"},  # cabeçalho
-            json=test_data  # dados do teste em JSON
+            json=test_data  # dados do teste em JSON (formato direto)
         )
         print(f"Status Code: {response.status_code}")  # status code
         print(
@@ -61,7 +59,7 @@ def test_chatbot_endpoint():
         return response.status_code == 200  # retorna True se foi bem-sucedido
     except Exception as e:
         print(f"❌ Erro ao enviar requisição: {e}")
-        return
+        return False
 
 # Função do chatbot interativo via CLI
 
@@ -98,14 +96,12 @@ def interactive_chatbot():
 
         # Adicionar mensagem do usuário à lista
         messages.append(
-            {'role': 'user', 'content': user_input})
-
-        # Fazer requisição para o endpoint da API
+            {'role': 'user', 'content': user_input})        # Fazer requisição para o endpoint da API
         try:
             response = requests.post(
                 f"{BASE_URL}/chatbot",  # endpoint
                 headers={"Content-Type": "application/json"},  # cabeçalho
-                json={'messages': messages}  # lista de mensagens
+                json=messages  # lista de mensagens (formato direto)
             )
 
             # Se a resposta for bem-sucedida
