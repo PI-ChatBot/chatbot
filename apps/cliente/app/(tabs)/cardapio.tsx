@@ -74,7 +74,9 @@ export default function TelaCardapio() {
         defaultSource={require('assets/images/Robo.png')}
       />
       <Text style={estilos.produtoNome}>{item.nome}</Text>
-      <Text style={estilos.produtoPreco}>{item.preco}</Text>
+      <Text style={estilos.produtoPreco}>
+        R$ {Number(item.preco).toFixed(2).replace('.', ',')}
+      </Text>
       <Text style={estilos.produtoDescricao}>{item.descricao}</Text>
     </Animated.View>
   );
