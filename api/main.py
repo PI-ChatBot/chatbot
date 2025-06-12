@@ -120,7 +120,6 @@ async def receber_pedido(request : Request):
     body = json.loads(request_json["body"])
     token_cliente = body["token"]
     itens = body["itens"]
-
     pedido = fazer_pedido(token_cliente, itens)
     if pedido is not None:
         return {"pedido" : pedido}

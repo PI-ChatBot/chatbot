@@ -137,7 +137,7 @@ class Pedido(SQLModel, table = True):
     # metadata = MetaData(schema="pedido")
     id_pedido : uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     id_restaurante : uuid.UUID = Field(foreign_key="restaurante.id_restaurante")
-    id_funcionario : uuid.UUID | None = Field(foreign_key="funcionario.id_funcionario")
+    id_funcionario : uuid.UUID = Field(foreign_key="funcionario.id_funcionario")
     id_cliente : uuid.UUID = Field(foreign_key="cliente.id_cliente")
     nome_cliente : str = Field(max_length = 150)
     status : Annotated[str,
@@ -160,7 +160,7 @@ class ItemPedido(SQLModel, table=True):
     id_item : uuid.UUID = Field(foreign_key = "item.id_item")
     quantidade : Annotated[int, BeforeValidator(lambda q : q > 0)] = Field()
     preco : Annotated[decimal.Decimal, BeforeValidator(lambda p : p >=0)] = Field(max_digits=10, decimal_places=2)
-    observacoes : str | None = Field(default = None)
+    observacoes : str = Field(default = "")
 
 class RestricaoPedido(SQLModel, table=True):
     __tablename__ : str = "restricao_pedido"

@@ -14,37 +14,36 @@ def fazer_pedido(token: str, itens: list[dict]):
     if user is not None:
         preco = 0
         for item in itens:
-            preco += item["preco"]
+            preco += item["preco"] * item["quantidade"]
         session = Session(engine)
         try:
             pedido = Pedido(
                 id_restaurante=uuid.UUID(id_restaurante_str),
-                id_funcionario=None,
+                id_funcionario=uuid.UUID("ad899712-8714-4fe6-829a-96c3e73da67c"),
                 id_cliente=user.id_cliente,
                 nome_cliente=user.nome,
                 status="pendente",
                 subtotal=Decimal(preco),
                 codigo_retirada=str(randint(10000,99999))
             )
-            session.add(Pedido)
-            itensPedido : list[ItemPedido]= []
+            session.add(pedido)
+            session.commit()
+            session.refresh(pedido)
             for item in itens:
-                itemPedido = itensPedido.append(
-                    ItemPedido(
-                        id_pedido=Pedido.id_pedido,
-                        id_item= item["id_item"],
-                        quantidade= item["quantidade"],
-                        preco = item["preco"],
-                        observacoes = item["observacoes"]
-                    )
+                itemPedido =ItemPedido(
+                    id_pedido=pedido.id_pedido,
+                    id_item= uuid.UUID(item["idItem"]),
+                    quantidade= item["quantidade"],
+                    preco = item["preco"],
+                    observacoes = ""
                 )
                 session.add(itemPedido)
             session.commit()
-            session.refresh(Pedido)
+            session.refresh(pedido)
             session.close()
-            return Pedido
-        except Exception:
-            pass
+            return pedido
+        except Exception as e:
+            print(e)
         finally:
             session.close()
             return None
