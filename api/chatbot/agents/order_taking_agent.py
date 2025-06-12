@@ -6,7 +6,7 @@ import requests
 from copy import deepcopy
 from typing import List
 
-from api_types import MessageDict, OrderTakingAgentResponse
+from api_types import MessageDict, OrderTakingAgentResponse, OrderItem
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -31,10 +31,122 @@ class OrderTakingAgent:
         self.client = OpenAI(
             api_key=os.getenv("CHATBOT_API_KEY"),
             base_url=os.getenv("CHATBOT_URL")
-        )
-        # Modelo de LLM
-        self.model_name: str = os.getenv("MODEL_NAME", "")        # Agente de recomendação
+        )        # Modelo de LLM
+        self.model_name: str = os.getenv(
+            "MODEL_NAME", "")        # Agente de recomendação
         # TODO: Implementar agente de recomendação
+
+    def finalizar_pedido(self, pedido: List[OrderItem], token_cliente: str = "token_teste_chatbot", api_url: str = "http://localhost:8000") -> dict:
+        '''
+        Finaliza o pedido enviando para a API.
+
+        :param pedido: Lista de itens do pedido
+        :param token_cliente: Token do cliente (para teste)
+        :param api_url: URL base da API
+        :return: Dicionário com resultado da operação
+        '''
+        try:
+            # Converter formato do pedido para o esperado pela API
+            itens_api = []
+            for item in pedido:
+                # Buscar ID do item no cardápio
+                id_item = self.buscar_id_item(item.get('item', ''))
+                if id_item:
+                    itens_api.append({
+                        "id_item": id_item,
+                        "quantidade": item.get('quantidade', 1),
+                        "preco": item.get('preco', 0.0),
+                        "observacoes": item.get('observacoes', '')
+                    })
+
+            if not itens_api:
+                return {
+                    "sucesso": False,
+                    "erro": "Nenhum item válido encontrado no pedido"
+                }
+
+            # Dados para a API
+            payload = {
+                "body": json.dumps({
+                    "token": token_cliente,
+                    "itens": itens_api
+                })
+            }
+
+            # Headers
+            headers = {
+                "Content-Type": "application/json"
+            }
+
+            # Fazer requisição para a API
+            response = requests.post(
+                f"{api_url}/pedido",
+                json=payload,
+                headers=headers,
+                timeout=10
+            )
+
+            if response.status_code == 200:
+                resultado = response.json()
+                return {
+                    "sucesso": True,
+                    "pedido_id": resultado.get("pedido", {}).get("id_pedido", ""),
+                    "codigo_retirada": resultado.get("pedido", {}).get("codigo_retirada", ""),
+                    "mensagem": "Pedido finalizado com sucesso!"
+                }
+            else:
+                return {
+                    "sucesso": False,
+                    "erro": f"Erro na API: {response.status_code} - {response.text}"
+                }
+
+        except Exception as e:
+            return {
+                "sucesso": False,
+                "erro": f"Erro ao finalizar pedido: {str(e)}"
+            }
+
+    def buscar_id_item(self, nome_item: str) -> str:
+        '''
+        Busca o ID de um item pelo nome no cardápio.
+
+        :param nome_item: Nome do item para buscar
+        :return: ID do item ou string vazia se não encontrado
+        '''
+        try:
+            # Obter cardápio atualizado
+            id_restaurante = "44c57a5e-ced2-4938-ba1d-108a60a60ea1"
+
+            payload = {
+                "body": json.dumps({
+                    "id_restaurante": id_restaurante
+                })
+            }
+
+            headers = {
+                "Content-Type": "application/json"
+            }
+
+            response = requests.post(
+                "http://localhost:8000/cozinha/pratos",
+                json=payload,
+                headers=headers,
+                timeout=10
+            )
+
+            if response.status_code == 200:
+                data = response.json()
+                pratos = data.get("pratos", [])
+
+                # Buscar item pelo nome (case insensitive)
+                for prato in pratos:
+                    if prato.get('nome', '').lower() == nome_item.lower():
+                        return prato.get('id_item', '')
+
+            return ""
+
+        except Exception:
+            return ""
 
     # Obter resposta
     def get_response(self, messages: List[MessageDict]) -> MessageDict:
@@ -46,7 +158,8 @@ class OrderTakingAgent:
         messages = deepcopy(messages)  # Evitar efeitos colaterais
 
         # Menu do restaurante - Obter via API
-        id_restaurante = "44c57a5e-ced2-4938-ba1d-108a60a60ea1"  # ID padrão da Cafeteria Nova Geração
+        # ID padrão da Cafeteria Nova Geração
+        id_restaurante = "44c57a5e-ced2-4938-ba1d-108a60a60ea1"
         cardapio = self.obter_cardapio_restaurante(id_restaurante)
 
         # System prompt
@@ -199,9 +312,8 @@ class OrderTakingAgent:
             required_keys = ['pedido', 'resposta', 'etapa']
             for key in required_keys:
                 if key not in output_dict:
+                    # Processamento do pedido
                     return self.criar_output_padrao("Desculpe, não consegui processar seu pedido. Por favor, tente novamente.")
-
-            # Processamento do pedido
             pedido = output_dict.get('pedido', [])
             if isinstance(pedido, str):  # Verificar se é uma string
                 try:
@@ -213,6 +325,27 @@ class OrderTakingAgent:
 
             # Obter resposta do agente
             response = output_dict.get('resposta', '').strip()
+
+            # Verificar se está na etapa final (6) e há pedidos para finalizar
+            etapa = int(output_dict.get('etapa', 1))
+            pedido = output_dict.get('pedido', [])
+
+            # Se está na etapa 6 e há itens no pedido, finalizar pedido
+            if etapa >= 6 and pedido:
+                resultado_pedido = self.finalizar_pedido(pedido)
+
+                if resultado_pedido.get('sucesso'):
+                    codigo_retirada = resultado_pedido.get(
+                        'codigo_retirada', '')
+                    response += "\n\n✅ **Pedido finalizado com sucesso!**"
+                    if codigo_retirada:
+                        response += f"\n🎫 **Código de retirada: {codigo_retirada}**"
+                    response += "\n📋 Seu pedido foi enviado para a cozinha e estará pronto em breve."
+                    response += "\n🕒 Você receberá uma notificação quando estiver pronto para retirada."
+                else:
+                    erro = resultado_pedido.get('erro', 'Erro desconhecido')
+                    response += f"\n\n❌ **Erro ao finalizar pedido:** {erro}"
+                    response += "\n💡 Você pode tentar novamente ou entrar em contato com o restaurante."
 
         except json.JSONDecodeError:
             return self.criar_output_padrao(
@@ -233,7 +366,7 @@ class OrderTakingAgent:
     def obter_cardapio_restaurante(self, id_restaurante: str, api_url: str = "http://localhost:8000") -> str:
         """
         Obtém o cardápio do restaurante via API e formata como string.
-        
+
         :param id_restaurante: ID do restaurante
         :param api_url: URL base da API (padrão: localhost:8000)
         :return: String formatada com o cardápio
@@ -245,12 +378,12 @@ class OrderTakingAgent:
                     "id_restaurante": id_restaurante
                 })
             }
-            
+
             # Headers para a requisição
             headers = {
                 "Content-Type": "application/json"
             }
-            
+
             # Fazer requisição POST para o endpoint
             response = requests.post(
                 f"{api_url}/cozinha/pratos",
@@ -258,24 +391,24 @@ class OrderTakingAgent:
                 headers=headers,
                 timeout=10
             )
-            
+
             # Verificar se a requisição foi bem-sucedida
             response.raise_for_status()
-            
+
             # Extrair dados da resposta
             data = response.json()
-            
+
             if "pratos" not in data:
                 return "❌ Erro: Não foi possível obter o cardápio do restaurante."
-            
+
             pratos = data["pratos"]
-            
+
             if not pratos:
                 return "ℹ️ Este restaurante não possui produtos cadastrados no momento."
-            
+
             # Formatar cardápio
             cardapio_formatado = "📋 **CARDÁPIO DO RESTAURANTE**\n\n"
-            
+
             # Agrupar por categoria
             categorias = {}
             for prato in pratos:
@@ -283,12 +416,12 @@ class OrderTakingAgent:
                 if categoria not in categorias:
                     categorias[categoria] = []
                 categorias[categoria].append(prato)
-            
+
             # Formatar cada categoria
             for categoria, itens in categorias.items():
                 cardapio_formatado += f"🍽️ **{categoria.upper()}**\n"
                 cardapio_formatado += "-" * 50 + "\n"
-                
+
                 for item in itens:
                     nome = item.get('nome', 'Nome não disponível')
                     id_item = item.get('id_item', 'ID não disponível')
@@ -297,45 +430,46 @@ class OrderTakingAgent:
                     descricao = item.get('descricao', '')
                     estoque = item.get('estoque', 0)
                     avaliacao = item.get('avaliacao', None)
-                    
+
                     # Linha principal do produto
                     linha_produto = f"{nome} | ID: {id_item} | Preço: R$ {preco}"
-                    
+
                     # Adicionar preço especial se existir
                     if preco_especial and preco_especial != preco:
                         linha_produto += f" | Preço especial (para alunos, professores e membros do Colégio Poliedro): R$ {preco_especial}"
-                    
+
                     cardapio_formatado += linha_produto + "\n"
-                    
+
                     # Adicionar descrição se existir
                     if descricao:
                         cardapio_formatado += f"   📝 {descricao}\n"
-                    
+
                     # Adicionar informações extras
                     info_extra = []
                     if estoque is not None:
                         if estoque > 0:
-                            info_extra.append(f"✅ Em estoque ({estoque} unidades)")
+                            info_extra.append(
+                                f"✅ Em estoque ({estoque} unidades)")
                         else:
                             info_extra.append("❌ Sem estoque")
-                    
+
                     if avaliacao is not None:
                         info_extra.append(f"⭐ Avaliação: {avaliacao:.1f}/5")
-                    
+
                     if info_extra:
                         cardapio_formatado += f"   {' | '.join(info_extra)}\n"
-                    
+
                     cardapio_formatado += "\n"
-                
+
                 cardapio_formatado += "\n"
-            
+
             # Adicionar informações finais
             total_produtos = len(pratos)
             cardapio_formatado += f"📊 **Total de produtos disponíveis: {total_produtos}**\n"
             cardapio_formatado += "💡 **Dica:** Mencione o nome ou ID do produto para fazer seu pedido!\n"
-            
+
             return cardapio_formatado.strip()
-            
+
         except requests.exceptions.RequestException as e:
             return f"❌ Erro de conexão com a API: {str(e)}"
         except json.JSONDecodeError as e:
