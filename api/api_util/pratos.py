@@ -125,10 +125,7 @@ def criar_prato(token_funcionario_str: str, itemCardapio: ItemCardapio):
         session.close()
         return None
 
-<<<<<<< Updated upstream
 
-def obter_categoria_por_nome(nome_categoria: str):
-=======
 def editar_prato(token_funcionario_str : str, itemCardapio : ItemCardapio):
     session = Session(engine)
     try :
@@ -186,7 +183,6 @@ def deletar_prato(token_funcionario_str : str, itemCardapioID : str):
         return None
 
 def obter_categoria_por_nome(nome_categoria : str):
->>>>>>> Stashed changes
     session = Session(engine)
     try:
         statement = select(Categoria).where(Categoria.nome == nome_categoria)
