@@ -132,20 +132,19 @@ async def receber_pedido(request : Request):
 
 @app.get("/cozinha/pedidos")
 async def obter_pedidos(request : Request):
-    request_json = await request.json()
-    body = json.loads(request_json["body"])
-    token_funcionario = body["token"]
+    token_funcionario = request.headers["Authorization"]
 
     pedidos = obter_pedidos_no_restaurante(token_funcionario)
     if pedidos is not None:
-        return {"pedidos" : list(pedidos)}
+        return {"pedidos" : pedidos}
     else:
         return {"message : erro ao obter os pedidos"}
 
-@app.post("/cozinha/pedidos")
+@app.put("/cozinha/pedidos")
 async def atualizar_pedido(request : Request):
     request_json = await request.json()
     body = json.loads(request_json["body"])
+
     token_funcionario = body["token"]
     id_pedido = body["id_pedido"]
     novo_status = body["status"]
