@@ -15,9 +15,10 @@ RUN pip install -r requirements.txt
 # Copiar o restante do código necessário da API para o diretório de trabalho
 COPY main.py main.py
 COPY api_types/ api_types/
-COPY api_utils/ api_utils/
+COPY api_util/ api_util/
 COPY chatbot/ chatbot/
-COPY agent_controller.py agent_controller.python
+COPY data/ data/
+COPY embedding/ embedding/
 
 # Executar a API (uvicorn main:app)
 ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
