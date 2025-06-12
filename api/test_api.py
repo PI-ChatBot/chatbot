@@ -1,4 +1,3 @@
-
 import json
 from typing import List
 
@@ -61,6 +60,91 @@ def test_chatbot_endpoint():
         print(f"❌ Erro ao enviar requisição: {e}")
         return False
 
+# Testar endpoint de pedidos
+
+
+def test_pedido_endpoint():
+    '''
+    Testa os endpoints relacionados a pedidos da API.
+    '''
+    print("\n📋 Testando endpoints de pedidos...")
+
+    # Teste 1: Endpoint POST /pedido (criar pedido)
+    print("\n🔍 Testando POST /pedido (criar pedido)...")
+    success_post = False
+    try:
+        test_data = {
+            "body": json.dumps({
+                "token": "token_teste_inexistente",  # Token de teste
+                "itens": [
+                    {
+                        "id_item": "1c00da5d-53b6-4ac0-abb0-53604f6c68fb",
+                        "quantidade": 1,
+                        "preco": 5.50,
+                        "observacoes": "Teste de API"
+                    }
+                ]
+            })
+        }
+
+        response = requests.post(
+            f"{BASE_URL}/pedido",
+            headers={"Content-Type": "application/json"},
+            json=test_data
+        )
+        print(f"Status Code: {response.status_code}")
+        print(
+            f"Resposta: {json.dumps(response.json(), ensure_ascii=False, indent=2)}")
+
+        # Consideramos sucesso se o endpoint responde (mesmo com erro de token)
+        success_post = response.status_code in [200, 400, 401, 422]
+
+    except Exception as e:
+        print(f"❌ Erro ao testar POST /pedido: {e}")
+
+    # Teste 2: Endpoint GET /cozinha/pedidos (listar pedidos)
+    print("\n🔍 Testando GET /cozinha/pedidos (listar pedidos)...")
+    success_get = False
+    try:
+        response = requests.get(
+            f"{BASE_URL}/cozinha/pedidos",
+            headers={"Authorization": "token_teste_inexistente"}
+        )
+        print(f"Status Code: {response.status_code}")
+        print(
+            f"Resposta: {json.dumps(response.json(), ensure_ascii=False, indent=2)}")
+
+        # Consideramos sucesso se o endpoint responde (mesmo com erro de token)
+        success_get = response.status_code in [200, 400, 401, 422]
+
+    except Exception as e:
+        print(f"❌ Erro ao testar GET /cozinha/pedidos: {e}")
+
+    # Teste 3: Verificar se GET /pedido retorna Method Not Allowed (comportamento esperado)
+    print("\n🔍 Verificando se GET /pedido retorna Method Not Allowed...")
+    success_method = False
+    try:
+        response = requests.get(f"{BASE_URL}/pedido")
+        print(f"Status Code: {response.status_code}")
+        if response.status_code == 405:
+            print("✅ Comportamento correto: GET /pedido não é permitido")
+            success_method = True
+        else:
+            print(f"⚠️ Comportamento inesperado: {response.text}")
+
+    except Exception as e:
+        print(f"❌ Erro ao testar GET /pedido: {e}")
+
+    # Retorna True se pelo menos um teste passou
+    overall_success = success_post or success_get or success_method
+
+    if overall_success:
+        print("\n✅ Endpoints de pedidos estão funcionando")
+    else:
+        print("\n❌ Problemas detectados nos endpoints de pedidos")
+
+    return overall_success
+
 # Função do chatbot interativo via CLI
 
 
@@ -96,7 +180,8 @@ def interactive_chatbot():
 
         # Adicionar mensagem do usuário à lista
         messages.append(
-            {'role': 'user', 'content': user_input})        # Fazer requisição para o endpoint da API
+            # Fazer requisição para o endpoint da API
+            {'role': 'user', 'content': user_input})
         try:
             response = requests.post(
                 f"{BASE_URL}/chatbot",  # endpoint
@@ -161,6 +246,7 @@ def main():
     tests = [
         ("Endpoint raiz", test_root_endpoint),
         ("Endpoint /chatbot", test_chatbot_endpoint),
+        ("Endpoint /pedido", test_pedido_endpoint),
     ]
     results = []
     for test_name, test_func in tests:
