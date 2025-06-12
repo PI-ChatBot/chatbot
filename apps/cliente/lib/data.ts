@@ -1,4 +1,5 @@
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
+import { Item } from "@/app/(tabs)/chat";
 import axios from "axios";
 
 export async function fazerLogin(email: string, senha:string){
@@ -33,4 +34,17 @@ export async function fazerCadastro(primeiro_nome:string, sobrenome:string, data
   });
   console.log(await req.data);
 
+}
+
+export async function enviarPedido(token : string, pedido : Item[]){
+  let req = await axios.post(`${API_URL}/pedido`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      token : token,
+      itens : pedido
+    })
+  });
+  console.log(await req.data);
 }

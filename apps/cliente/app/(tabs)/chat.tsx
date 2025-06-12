@@ -17,12 +17,23 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
+import { enviarPedido } from '@/lib/data';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { supabase } from '@/lib/supabase';
 
 // Interface para as mensagens
 interface InterfaceMensagem {
   content: string;
   role: 'user' | 'assistant';
 }
+
+export type Item = {
+  idItem: string;
+  nome: string;
+  quantidade: number;
+  preco: number;
+  observacoes: string | "";
+};
 
 export default function SalaDeChat() {
   const robotAnim = useRef(new Animated.Value(0)).current;
@@ -32,6 +43,9 @@ export default function SalaDeChat() {
   const [mensagens, setMensagens] = useState<InterfaceMensagem[]>([]);
   const [estaDigitando, setEstaDigitando] = useState<boolean>(false);
   const [textoMensagem, setTextoMensagem] = useState('');
+  const [modo, setModo] = useState<'normal' | 'pedindo' | 'inserindo'>("normal");
+  const [pedido, setPedido] = useState<Item[]>([]);
+  const [cardapio, setCardapio] = useState<{id_item : string, nome: string, preco:number}[]>([]);
 
   // Animação do robô quando estiver digitando
   useEffect(() => {
@@ -58,60 +72,291 @@ export default function SalaDeChat() {
     }
   }, [mensagens]);
 
-  // Função para chamar a API real do chatbot
-  const chamarAPIChatBot = async (mensagensEntrada: InterfaceMensagem[]) => {
-    try {
-      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/chatbot`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          body: JSON.stringify({
-            messages: mensagensEntrada
-          })
-        })
-      });
-
-      const data : {success: boolean, response :
-        {content : string,
-          role: "assistant" | "user"}| null,
-        error: string | null} = await response.json();
-
-      if (data.success && data.response) {
-        return {
-          content: data.response.content,
-          role: data.response.role
-        };
+  useEffect(() => {
+    async function carregarProdutos() {
+      const { data, error } = await supabase.from('item').select('id_item, nome, preco');
+      if (error) {
+        console.error('Erro ao carregar produtos:', error);
       } else {
-        throw new Error(data.error || "Erro na resposta do chatbot.");
+        setCardapio(data);
+        console.log(data);
       }
-    } catch (err: any) {
-      throw new Error(err.message);
     }
-  };
+    carregarProdutos();
+  }, []);
 
-  const lidarComEnvioMensagem = async () => {
-    let mensagem = textoMensagem.trim();
-    if (!mensagem) return;
-
-    try {
-      // Adicionar a mensagem do usuário à lista de mensagens
-      let mensagensEntrada = [...mensagens, { content: mensagem, role: 'user' as const }];
-
-      setMensagens(mensagensEntrada);
-      setTextoMensagem('');
-      setEstaDigitando(true);
-
-      let mensagemResposta : InterfaceMensagem = await chamarAPIChatBot(mensagensEntrada);
-      setEstaDigitando(false);
-      setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagemResposta]);
-
-    } catch(erro: any) {
-      Alert.alert('Erro', erro.message || 'Erro ao enviar mensagem');
-      setEstaDigitando(false);
+  useEffect(() => {
+    let mensagemInicial : InterfaceMensagem= {
+      content: "Olá, como posso ajudá-lo hoje?",
+      role: "assistant"
     }
-  };
+    let opcoes :InterfaceMensagem= {
+      content: "Escolha uma das opções abaixo:\n1.Fazer Pedidos\n2.Ver os seus pedidos",
+      role: "assistant"
+    }
+    setMensagens([mensagemInicial,opcoes])
+  }, [])
+
+  function comecarPedido(){
+    let novaMensagem : InterfaceMensagem= {
+      content : "O que você gostaria de fazer?",
+      role: "assistant"
+    }
+    let opcoes : InterfaceMensagem = {
+      content: "1.Adicionar item\n2.Ver opções\n3.Finalizar pedido\n4.Ver pedido atual\n5.Cancelar pedido",
+      role : "assistant"
+    }
+    setMensagens((mensagensAnteriores) => [...mensagensAnteriores, novaMensagem,opcoes]);
+
+  }
+
+  function adicionarItem(){
+    let mensagem: InterfaceMensagem = {
+      content : "Insira o nome de um item:\nOu digite 1 para mostrar as opcões",
+      role: "assistant"
+    }
+    setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagem]);
+  }
+
+  function verPedidos(){
+
+  }
+
+  function finalizarPedido(){
+    async function finalizar(){
+      if(pedido.length == 0){
+        let mensagem : InterfaceMensagem = {
+          content : "Insira pelo menos um item",
+          role: "assistant"
+        }
+        setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagem]);
+        return;
+      }
+    let subtotal = 0;
+    let textoItens = "";
+    for(let item of pedido){
+      subtotal += item.preco * item.quantidade;
+      textoItens += item.quantidade;
+      textoItens +="x "
+      textoItens += item.nome;
+      textoItens += "\n";
+    }
+    let novaMensagem : InterfaceMensagem= {
+      content : `Subtotal R$${subtotal}\n${textoItens}`,
+      role: "assistant"
+    }
+    setMensagens((mensagensAnteriores) => [...mensagensAnteriores, novaMensagem]);
+
+    let token = await AsyncStorage.getItem("token");
+    await enviarPedido(token!, pedido);
+    }
+    finalizar();
+  }
+
+  function verPedido(){
+    if(pedido.length == 0){
+      let mensagem : InterfaceMensagem = {
+        content : "Insira pelo menos um item",
+        role: "assistant"
+      }
+      setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagem]);
+      return;
+    }
+    let subtotal = 0;
+    let textoItens = "";
+    for(let item of pedido){
+      subtotal += item.preco * item.quantidade;
+      textoItens += item.quantidade;
+      textoItens +="x "
+      textoItens += item.nome;
+      textoItens += "\n";
+    }
+    let novaMensagem : InterfaceMensagem= {
+      content : `Subtotal R$${subtotal}\n${textoItens}`,
+      role: "assistant"
+    }
+    setMensagens((mensagensAnteriores) => [...mensagensAnteriores, novaMensagem]);
+  }
+
+  function cancelarPedido(){
+    let novaMensagem : InterfaceMensagem= {
+      content : "Pedido cancelado",
+      role: "assistant"
+    }
+    setMensagens((mensagensAnteriores) => [...mensagensAnteriores, novaMensagem]);
+    setPedido([]);
+    let opcoes :InterfaceMensagem= {
+      content: "Escolha uma das opções abaixo:\n1.Fazer Pedidos\n2.Ver os seus pedidos",
+      role: "assistant"
+    }
+    setMensagens((mensagensAnteriores) => [...mensagensAnteriores, opcoes]);
+  }
+
+  function verOpcoes(){
+    let novoCardapio = cardapio.map(item => item.nome.trim());
+    let mensagem :InterfaceMensagem = {
+      content: novoCardapio.join("\n"),
+      role : "assistant"
+    }
+    setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagem]);
+  }
+
+  const lidarComInput = () =>{
+    console.log(pedido);
+    let entrada = textoMensagem.trim();
+    let mensagemUsuario : InterfaceMensagem = {
+      content : entrada,
+      role : "user"
+    }
+    setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagemUsuario]);
+    setTextoMensagem("");
+    if(modo == "normal"){
+      if(entrada === "1"){
+        comecarPedido();
+        setModo('pedindo');
+      }
+      else if(entrada ==="2"){
+        verPedidos();
+      }
+      else{
+        let novaMensagem : InterfaceMensagem= {
+          content : "Opção inválida, insira uma opção válida:",
+          role: "assistant"
+        }
+        setMensagens((mensagensAnteriores) => [...mensagensAnteriores, novaMensagem]);
+      }
+    }
+    else if(modo == "pedindo"){
+      if(entrada === "1"){
+        adicionarItem();
+        setModo("inserindo");
+      }
+      else if(entrada == "2"){
+        verOpcoes();
+      }
+      else if(entrada == "3"){
+        finalizarPedido();
+        setModo("normal");
+      }
+      else if(entrada == "4"){
+        verPedido();
+      }
+      else if (entrada == "5"){
+        cancelarPedido();
+        setModo("normal");
+      }
+      else{
+        let novaMensagem : InterfaceMensagem= {
+          content : "Opção inválida, insira uma opção válida:",
+          role: "assistant"
+        }
+        setMensagens((mensagensAnteriores) => [...mensagensAnteriores, novaMensagem]);
+      }
+    }
+    else if(modo == "inserindo"){
+      if(entrada == "1"){
+        verOpcoes();
+        adicionarItem();
+      }
+      else {
+        let filtro = cardapio.filter(item => item.nome.trim() == entrada);
+        console.log(filtro)
+        if(filtro.length == 0){
+          let mensagem : InterfaceMensagem = {
+            content : "Insira um item válido",
+            role : "assistant"
+          }
+          setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagem]);
+        }
+        else{
+          let produto = filtro[0];
+          for (let item of pedido){
+            if(item.nome == produto.nome){
+              item.quantidade += 1;
+            let mensagem : InterfaceMensagem = {
+              content : `Item:${produto.nome.trim()} adicionado`,
+              role : "assistant"
+            }
+            setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagem]);
+            setModo("pedindo");
+            comecarPedido();
+            return;
+            }
+          }
+          let item : Item ={
+            idItem : produto.id_item,
+            nome : produto.nome,
+            preco : produto.preco,
+            observacoes : "",
+            quantidade : 1
+          }
+          setPedido((pedidosAnteriores) => [...pedidosAnteriores, item]);
+          let mensagem : InterfaceMensagem = {
+            content : `Item:${produto.nome.trim()} adicionado`,
+            role : "assistant"
+          }
+          setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagem]);
+          setModo("pedindo");
+          comecarPedido();
+        }
+      }
+    }
+  }
+
+  // // Função para chamar a API real do chatbot
+  // const chamarAPIChatBot = async (mensagensEntrada: InterfaceMensagem[]) => {
+  //   try {
+  //     const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/chatbot`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify({
+  //         body: JSON.stringify({
+  //           messages: mensagensEntrada
+  //         })
+  //       })
+  //     });
+
+  //     const data : {success: boolean, response :
+  //       {content : string,
+  //         role: "assistant" | "user"}| null,
+  //       error: string | null} = await response.json();
+
+  //     if (data.success && data.response) {
+  //       return {
+  //         content: data.response.content,
+  //         role: data.response.role
+  //       };
+  //     } else {
+  //       throw new Error(data.error || "Erro na resposta do chatbot.");
+  //     }
+  //   } catch (err: any) {
+  //     throw new Error(err.message);
+  //   }
+  // };
+
+  // const lidarComEnvioMensagem = async () => {
+  //   let mensagem = textoMensagem.trim();
+  //   if (!mensagem) return;
+
+  //   try {
+  //     // Adicionar a mensagem do usuário à lista de mensagens
+  //     let mensagensEntrada = [...mensagens, { content: mensagem, role: 'user' as const }];
+
+  //     setMensagens(mensagensEntrada);
+  //     setTextoMensagem('');
+  //     setEstaDigitando(true);
+
+  //     let mensagemResposta : InterfaceMensagem = await chamarAPIChatBot(mensagensEntrada);
+  //     setEstaDigitando(false);
+  //     setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagemResposta]);
+
+  //   } catch(erro: any) {
+  //     Alert.alert('Erro', erro.message || 'Erro ao enviar mensagem');
+  //     setEstaDigitando(false);
+  //   }
+  // };
 
   // Componente para renderizar cada mensagem
   const renderizarMensagem = (item: InterfaceMensagem, index: number) => (
@@ -203,7 +448,7 @@ export default function SalaDeChat() {
             />
             <TouchableOpacity
               style={[estilos.botaoEnviar, (!textoMensagem.trim() || estaDigitando) && estilos.botaoDesabilitado]}
-              onPress={lidarComEnvioMensagem}
+              onPress={lidarComInput}
               disabled={!textoMensagem.trim() || estaDigitando}
             >
               <Feather
