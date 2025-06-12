@@ -105,6 +105,42 @@ export async function deletarPrato(token: string, itemCardapioId: string) {
   return await req.data;
 }
 
+export async function obterPedidos(token: string) {
+  let req = await axios.get(`${API_URL}/cozinha/pedidos`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  });
+  return await req.data;
+}
+
+export async function atualizarPedidos(
+  token: string,
+  id_pedido: string,
+  modalType: string,
+) {
+  let status = "";
+  if (modalType === "concluir") {
+    status = "entregue";
+  } else {
+    status = "cancelado";
+  }
+  let req = await axios.put(`${API_URL}/cozinha/pedidos`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: token,
+      id_pedido: id_pedido,
+      novo_status: status,
+    }),
+  });
+  return await req.data;
+}
+
 // export async function fazerCadastro(
 //   id_restaurante : number
 //   nome : string,

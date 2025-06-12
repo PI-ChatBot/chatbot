@@ -15,165 +15,7 @@ import { useRouter } from "expo-router";
 import { formatDateTime } from "./utils/formatDateTime";
 import ConfirmModal from "./utils/ConfirmModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { obterRestaurante } from "@/lib/data";
-
-const mockPedidos2 = [
-  {
-    id: "1",
-    nome: "Rony Weasley",
-    pratos: [
-      {
-        prato: "Frango",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-      {
-        prato: "Ovo",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-    ],
-    horario: "12:45",
-  },
-];
-const mockPedidos1 = [
-  {
-    id: "1",
-    nome: "João Silva",
-    pratos: [
-      {
-        prato: "Macarrão",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-      {
-        prato: "Manga",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-    ],
-    horario: "12:45",
-  },
-  {
-    id: "2",
-    nome: "Maria Souza",
-    pratos: [
-      {
-        prato: "Macarrão",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-      {
-        prato: "Manga",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-    ],
-    horario: "12:50",
-  },
-  {
-    id: "3",
-    nome: "Felipe Dias",
-    pratos: [
-      {
-        prato: "Macarrão",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-      {
-        prato: "Manga",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-    ],
-    horario: "13:00",
-  },
-  {
-    id: "4",
-    nome: "Felipe Dias",
-    pratos: [
-      {
-        prato: "Macarrão",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-      {
-        prato: "Manga",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-    ],
-    horario: "13:00",
-  },
-  {
-    id: "5",
-    nome: "Felipe Dias",
-    pratos: [
-      {
-        prato: "Macarrão",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-      {
-        prato: "Manga",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-    ],
-    horario: "13:00",
-  },
-  {
-    id: "6",
-    nome: "Felipe Dias",
-    pratos: [
-      {
-        prato: "Macarrão",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-      {
-        prato: "Manga",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-    ],
-    horario: "13:00",
-  },
-  {
-    id: "7",
-    nome: "Felipe Dias",
-    pratos: [
-      {
-        prato: "Macarrão",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-      {
-        prato: "Manga",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-    ],
-    horario: "13:00",
-  },
-  {
-    id: "8",
-    nome: "Felipe Dias",
-    pratos: [
-      {
-        prato: "Macarrão",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-      {
-        prato: "Manga",
-        imagem: require("../assets/images/Robo.png"),
-        quantidade: 1,
-      },
-    ],
-    horario: "13:00",
-  },
-];
+import { atualizarPedidos, obterPedidos, obterRestaurante } from "@/lib/data";
 
 type Restaurante = {
   id_restaurante: string;
@@ -181,6 +23,20 @@ type Restaurante = {
   nome: string;
   localizacao: string;
 };
+
+type Pedidos = [
+  {
+    id: string;
+    subtotal: number;
+    nome_cliente: string;
+    itens: [
+      {
+        imagem: string | null;
+        nome: string;
+      },
+    ];
+  },
+];
 
 export default function TelaPedidos() {
   const router = useRouter();
@@ -191,18 +47,6 @@ export default function TelaPedidos() {
 
   const [dateTime, setDateTime] = useState(new Date());
   const [restaurante, setRestaurante] = useState<Restaurante | null>(null);
-  const [restaurantId, setRestaurantId] = useState<string | null>(null);
-  useEffect(() => {
-    async function getData() {
-      const id = await AsyncStorage.getItem("restaurantId");
-      if (!id) {
-        setTimeout(() => router.replace("/"), 0); // volta para login se não logado
-      } else {
-        setRestaurantId(id);
-      }
-    }
-    getData();
-  }, []);
 
   useEffect(() => {
     async function getRestaurante() {
@@ -214,6 +58,17 @@ export default function TelaPedidos() {
       }
     }
     getRestaurante();
+  }, []);
+
+  useEffect(() => {
+    async function getData() {
+      const token = await AsyncStorage.getItem("token");
+      if (token) {
+        let pedidosData = await obterPedidos(token);
+        setPedidos(pedidosData);
+      }
+    }
+    getData();
   }, []);
 
   const logout = async () => {
@@ -230,15 +85,7 @@ export default function TelaPedidos() {
     return () => clearInterval(interval);
   }, []);
 
-  const [pedidos, setPedidos] = useState([]);
-
-  useEffect(() => {
-    // Aqui você puxaria os dados do banco, mas estamos simulando
-    console.log(restaurantId);
-    restaurantId == "rest_a"
-      ? setPedidos(mockPedidos1)
-      : setPedidos(mockPedidos2);
-  }, [restaurantId]);
+  const [pedidos, setPedidos] = useState<Pedidos | null>(null);
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState(null);
@@ -257,13 +104,15 @@ export default function TelaPedidos() {
   };
 
   const executarAcao = () => {
-    if (modalType === "cancelar") {
-      setPedidos((prev) => prev.filter((pedido) => pedido.id !== itemId));
-    } else if (modalType === "concluir") {
-      setPedidos((prev) => prev.filter((pedido) => pedido.id !== itemId));
-    } else if (modalType === "sair") {
-      logout();
+    async function atualizar() {
+      if (modalType === "cancelar" || modalType === "concluir") {
+        const token = await AsyncStorage.getItem("token");
+        await atualizarPedidos(token!, itemId!, modalType);
+      } else if (modalType === "sair") {
+        logout();
+      }
     }
+    atualizar();
 
     fecharModal();
   };
@@ -299,46 +148,49 @@ export default function TelaPedidos() {
         </View>
       </View>
       <ScrollView contentContainerStyle={styles.containerPedidos}>
-        {pedidos.map((pedido) => (
-          <View key={pedido.id} style={styles.card}>
-            <View style={styles.viewTextoPedido}>
-              <View></View>
-              <Text style={styles.textoPedido}>Pedido {pedido.id}</Text>
-              <TouchableOpacity
-                style={styles.botaoCancelar}
-                onPress={() => abrirModal("cancelar", pedido.id)}
-              >
-                <Feather name="x" size={20} color="white" />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.cardRow}>
-              <View style={styles.grupoColumn}>
-                {pedido.pratos.map((item) => (
-                  <View style={styles.grupo}>
-                    <Image source={item.imagem} style={styles.imagem} />
-                    <Text style={styles.nome}>{item.prato}</Text>
-                  </View>
-                ))}
-              </View>
-              <View style={styles.info}>
-                <View>
-                  <Text style={styles.nome}>{pedido.nome}</Text>
-                </View>
-                <View>
-                  <Text style={styles.horario}>Horário: {pedido.horario}</Text>
-                </View>
-              </View>
-              <View>
+        {pedidos &&
+          pedidos.length > 1 &&
+          pedidos.map((pedido) => (
+            <View key={pedido.id} style={styles.card}>
+              <View style={styles.viewTextoPedido}>
+                <View></View>
+                <Text style={styles.textoPedido}>Pedido {pedido.id}</Text>
                 <TouchableOpacity
-                  style={styles.botaoConcluir}
-                  onPress={() => abrirModal("concluir", pedido.id)}
+                  style={styles.botaoCancelar}
+                  onPress={() => abrirModal("cancelar", pedido.id)}
                 >
-                  <Text style={styles.botaoTexto}>Concluir</Text>
+                  <Feather name="x" size={20} color="white" />
                 </TouchableOpacity>
               </View>
+              <View style={styles.cardRow}>
+                <View style={styles.grupoColumn}>
+                  {pedido.itens &&
+                    pedido.itens.map((item, key) => (
+                      <View style={styles.grupo} key={key}>
+                        <Image
+                          source={`${item.imagem ? item.imagem : ""}`}
+                          style={styles.imagem}
+                        />
+                        <Text style={styles.nome}>{item.nome}</Text>
+                      </View>
+                    ))}
+                </View>
+                <View style={styles.info}>
+                  <View>
+                    <Text style={styles.nome}>{pedido.nome_cliente}</Text>
+                  </View>
+                </View>
+                <View>
+                  <TouchableOpacity
+                    style={styles.botaoConcluir}
+                    onPress={() => abrirModal("concluir", pedido.id)}
+                  >
+                    <Text style={styles.botaoTexto}>Concluir</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
-          </View>
-        ))}
+          ))}
       </ScrollView>
       {/* Os componentes abaixo pertencem ao Modal para confirmar a confirmação ou o cancelamento do pedido. */}
       <ConfirmModal
