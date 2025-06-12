@@ -1,0 +1,23 @@
+# Configuração do container do Docker para a API
+
+# Definir a imagem base (versão do Python)
+FROM python:3.13.4-slim
+
+# Abrir e definir o diretório de trabalho
+RUN mkdir /app
+WORKDIR /app
+
+# Copiar o arquivo de requisitos para o diretório de trabalho
+COPY requirements.txt requirements.txt
+# Instalar as dependências do Python
+RUN pip install -r requirements.txt
+
+# Copiar o restante do código necessário da API para o diretório de trabalho
+COPY main.py main.py
+COPY api_types/ api_types/
+COPY api_utils/ api_utils/
+COPY chatbot/ chatbot/
+COPY agent_controller.py agent_controller.python
+
+# Executar a API (uvicorn main:app)
+ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
