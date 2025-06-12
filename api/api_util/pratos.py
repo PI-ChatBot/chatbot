@@ -80,10 +80,11 @@ def obter_pratos_por_restaurante(id_restaurante: str) -> List[ProdutoModel] | No
 
 
 class ItemCardapio(BaseModel):
+    id_item : str | None
     nome: str
     preco: float
     descricao: str
-    categoria: str | None
+    categoria: str
     imagem: str | None
     promocional: bool
 
@@ -99,7 +100,7 @@ def criar_prato(token_funcionario_str: str, itemCardapio: ItemCardapio):
         categoria = obter_categoria_por_nome(itemCardapio.nome)
         if categoria is None:
             categoria = Categoria(
-                nome=itemCardapio.nome
+                nome=itemCardapio.categoria
             )
             session.add(categoria)
             session.commit()
@@ -109,6 +110,7 @@ def criar_prato(token_funcionario_str: str, itemCardapio: ItemCardapio):
             id_categoria=categoria.id_categoria,
             nome=itemCardapio.nome,
             descricao=itemCardapio.descricao,
+            imagem=itemCardapio.imagem,
             estoque=1000,
             preco=Decimal(itemCardapio.preco),
             preco_especial=Decimal(itemCardapio.preco)
@@ -123,8 +125,68 @@ def criar_prato(token_funcionario_str: str, itemCardapio: ItemCardapio):
         session.close()
         return None
 
+<<<<<<< Updated upstream
 
 def obter_categoria_por_nome(nome_categoria: str):
+=======
+def editar_prato(token_funcionario_str : str, itemCardapio : ItemCardapio):
+    session = Session(engine)
+    try :
+        funcionario = get_current_funcionario(token_funcionario_str)
+        if funcionario is None:
+            return None
+        if funcionario.id_restaurante is None:
+            return None
+        categoria = obter_categoria_por_nome(itemCardapio.nome)
+        if categoria is None:
+            categoria = Categoria(
+                nome=itemCardapio.categoria
+            )
+            session.add(categoria)
+            session.commit()
+            session.refresh(categoria)
+        if itemCardapio.id_item is None:
+            return None
+        statement = select(Item).where(Item.id_item == uuid.UUID(itemCardapio.id_item))
+        item = session.exec(statement).one()
+        item.id_restaurante= funcionario.id_restaurante
+        item.id_categoria= categoria.id_categoria
+        item.nome=itemCardapio.nome
+        item.descricao=itemCardapio.descricao
+        item.estoque=1000
+        item.imagem=itemCardapio.imagem
+        item.preco=Decimal(itemCardapio.preco)
+        item.preco_especial=Decimal(itemCardapio.preco)
+        session.add(item)
+        session.commit()
+        session.close()
+        return True
+    except Exception:
+        pass
+    finally:
+        session.close()
+        return None
+
+def deletar_prato(token_funcionario_str : str, itemCardapioID : str):
+    session = Session(engine)
+    try:
+        funcionario = get_current_funcionario(token_funcionario_str)
+        if funcionario is None:
+            return None
+        statement = select(Item).where(Item.id_item == uuid.UUID(itemCardapioID))
+        item = session.exec(statement).one()
+        session.delete(item)
+        session.commit()
+        session.close()
+        return True
+    except Exception:
+        pass
+    finally:
+        session.close()
+        return None
+
+def obter_categoria_por_nome(nome_categoria : str):
+>>>>>>> Stashed changes
     session = Session(engine)
     try:
         statement = select(Categoria).where(Categoria.nome == nome_categoria)

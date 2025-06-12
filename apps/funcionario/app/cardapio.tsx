@@ -21,6 +21,8 @@ import { formatDateTime } from "./utils/formatDateTime";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   criarPrato,
+  deletarPrato,
+  editarPrato,
   ItemCardapio,
   obterPratos,
   obterRestaurante,
@@ -51,8 +53,8 @@ export default function TelaCardapio() {
   const [restaurante, setRestaurante] = useState<Restaurante | null>(null);
   const [modalEditarVisible, setModalEditarVisible] = useState(false);
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
-  const [itemEditando, setItemEditando] = useState(null);
-  const [itemExcluindo, setItemExcluindo] = useState(null);
+  const [itemEditando, setItemEditando] = useState<ItemCardapio | null>(null);
+  const [itemExcluindo, setItemExcluindo] = useState<ItemCardapio | null>(null);
 
   const [nome, setNome] = useState("");
   const [preco, setPreco] = useState("");
@@ -79,8 +81,8 @@ export default function TelaCardapio() {
     setNome(item.nome);
     setPreco(item.preco.toString());
     setDescricao(item.descricao);
-    setCategoria(item.categoria);
-    setPromocional(item.promocional);
+    setCategoria("");
+    setPromocional(false);
     setImagem(item.imagem || null);
     setModalEditarVisible(true);
   };
@@ -125,8 +127,8 @@ export default function TelaCardapio() {
         const { data } = supabase.storage
           .from("imagens-cardapio")
           .getPublicUrl(path);
-        console.log(data.publicUrl);
         setImagem(data.publicUrl);
+        console.log(data.publicUrl);
       }
     }
   };
@@ -134,8 +136,12 @@ export default function TelaCardapio() {
   const salvarItem = () => {
     async function salvar() {
       if (!nome || !preco) return;
-
+      let id_item = null;
+      if (itemEditando?.id_item) {
+        id_item = itemEditando.id_item;
+      }
       const novoItem: ItemCardapio = {
+        id_item: id_item,
         nome: nome,
         preco: parseFloat(preco.replace(",", ".")),
         imagem: imagem,
@@ -143,10 +149,11 @@ export default function TelaCardapio() {
         categoria: categoria,
         promocional: promocional,
       };
+      console.log(novoItem);
       let token_funcionario = await AsyncStorage.getItem("token");
       if (itemEditando) {
+        await editarPrato(token_funcionario!, novoItem);
       } else {
-        console.log("teste");
         await criarPrato(token_funcionario!, novoItem);
       }
       setModalEditarVisible(false);
@@ -160,9 +167,13 @@ export default function TelaCardapio() {
   };
 
   const excluirItem = () => {
-    // Colocar a lógica do banco de dados aqui
-    console.log(itemExcluindo?.id);
-    setModalConfirmVisible(false);
+    async function excluir() {
+      let token_funcionario = await AsyncStorage.getItem("token");
+      await deletarPrato(token_funcionario!, itemExcluindo?.id_item!);
+      console.log(itemExcluindo?.id_item);
+      setModalConfirmVisible(false);
+    }
+    excluir();
   };
   useEffect(() => {
     async function getData() {
@@ -196,7 +207,10 @@ export default function TelaCardapio() {
 
   const renderItem = ({ item }) => (
     <View
-      style={[styles.card, { width: itemWidth, marginHorizontal: spacing / 2 }]}
+      style={[
+        styles.card,
+        { width: itemWidth, marginHorizontal: spacing / 2 - 1 },
+      ]}
     >
       <View style={styles.containerBotoes}>
         <View></View>
@@ -255,7 +269,6 @@ export default function TelaCardapio() {
             <Feather name="plus-circle" size={20} color="white" />
           </View>
         </TouchableOpacity>
-        <View style={styles.side}></View>
       </View>
       <Text style={styles.tituloPedidos}>Cardápio</Text>
       <View style={styles.containerFlatList}>

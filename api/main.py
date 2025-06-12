@@ -6,7 +6,7 @@ from api_util.login import *
 import json
 from datetime import datetime
 from api_util.pedido import atualizar_status_pedido, fazer_pedido, obter_pedidos_no_restaurante
-from api_util.pratos import ItemCardapio, criar_prato, obter_pratos_por_restaurante
+from api_util.pratos import ItemCardapio, criar_prato, deletar_prato, editar_prato, obter_pratos_por_restaurante
 from api_util.restaurante import obter_restaurante_por_id
 from chatbot import AgentController
 
@@ -227,6 +227,7 @@ async def criar_pratos_cardapio(request : Request):
     imagem = body["imagem"]
     promocional = body["promocional"]
     item = ItemCardapio(
+        id_item=None,
         nome=nome,
         preco=preco,
         descricao=descricao,
@@ -239,3 +240,42 @@ async def criar_pratos_cardapio(request : Request):
         return {"message" : "Houve um erro ao criar o prato"}
     else:
         return {"message" : "O prato foi criado"}
+
+@app.put("/cozinha/cardapio")
+async def editar_pratos_cardapio(request : Request):
+    request_json = await request.json()
+    body = json.loads(request_json["body"])
+    token_funcionario = body["token"]
+
+    id_item = body["id"]
+    nome = body["nome"]
+    preco = body["preco"]
+    descricao = body["descricao"]
+    categoria = body["categoria"]
+    imagem = body["imagem"]
+    promocional = body["promocional"]
+    item = ItemCardapio(
+        id_item=id_item,
+        nome=nome,
+        preco=preco,
+        descricao=descricao,
+        categoria=categoria,
+        imagem=imagem,
+        promocional=promocional
+    )
+    result = editar_prato(token_funcionario, item)
+    if result is None:
+        return {"message" : "Houve um erro ao editar o prato"}
+    else:
+        return {"message" : "O prato foi editado"}
+
+@app.delete("/cozinha/cardapio")
+async def deletar_pratos_cardapio(request : Request):
+    request_json = await request.json()
+    token = request_json["token"]
+    id_item = request_json["id"]
+    result = deletar_prato(token, id_item)
+    if result is None:
+        return {"message" : "Houve um erro ao deletar o prato"}
+    else:
+        return {"message" : "O prato foi deletado"}

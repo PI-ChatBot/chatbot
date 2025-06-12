@@ -43,6 +43,7 @@ export async function obterPratos(id_restaurante: string) {
 }
 
 export type ItemCardapio = {
+  id_item: string | null;
   nome: string;
   preco: number;
   descricao: string;
@@ -65,6 +66,40 @@ export async function criarPrato(token: string, itemCardapio: ItemCardapio) {
       categoria: itemCardapio.categoria,
       imagem: itemCardapio.imagem,
       promocional: itemCardapio.promocional,
+    }),
+  });
+  return await req.data;
+}
+
+export async function editarPrato(token: string, itemCardapio: ItemCardapio) {
+  let req = await axios.put(`${API_URL}/cozinha/cardapio`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: token,
+      id: itemCardapio.id_item,
+      nome: itemCardapio.nome,
+      preco: itemCardapio.preco,
+      descricao: itemCardapio.descricao,
+      categoria: itemCardapio.categoria,
+      imagem: itemCardapio.imagem,
+      promocional: itemCardapio.promocional,
+    }),
+  });
+  return await req.data;
+}
+
+export async function deletarPrato(token: string, itemCardapioId: string) {
+  let req = await axios.delete(`${API_URL}/cozinha/cardapio`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify({
+      token: token,
+      id: itemCardapioId,
     }),
   });
   return await req.data;
