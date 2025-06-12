@@ -20,8 +20,8 @@ import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 // Interface para as mensagens
 interface InterfaceMensagem {
-  conteudo: string;
-  papel: 'usuario' | 'assistente';
+  content: string;
+  role: 'user' | 'assistant';
 }
 
 export default function SalaDeChat() {
@@ -73,12 +73,15 @@ export default function SalaDeChat() {
         })
       });
 
-      const data = await response.json();
+      const data : {success: boolean, response :
+        {content : string,
+          role: "assistant" | "user"}| null,
+        error: string | null} = await response.json();
 
       if (data.success && data.response) {
         return {
-          conteudo: data.response,
-          papel: 'assistente'
+          content: data.response.content,
+          role: data.response.role
         };
       } else {
         throw new Error(data.error || "Erro na resposta do chatbot.");
@@ -94,15 +97,15 @@ export default function SalaDeChat() {
 
     try {
       // Adicionar a mensagem do usuário à lista de mensagens
-      let mensagensEntrada = [...mensagens, { conteudo: mensagem, papel: 'usuario' as const }];
+      let mensagensEntrada = [...mensagens, { content: mensagem, role: 'user' as const }];
 
       setMensagens(mensagensEntrada);
       setTextoMensagem('');
       setEstaDigitando(true);
 
-      let mensagemResposta = await chamarAPIChatBot(mensagensEntrada);
+      let mensagemResposta : InterfaceMensagem = await chamarAPIChatBot(mensagensEntrada);
       setEstaDigitando(false);
-      setMensagens(mensagensAnteriores => [...mensagensAnteriores, mensagemResposta]);
+      setMensagens((mensagensAnteriores) => [...mensagensAnteriores, mensagemResposta]);
 
     } catch(erro: any) {
       Alert.alert('Erro', erro.message || 'Erro ao enviar mensagem');
@@ -116,14 +119,14 @@ export default function SalaDeChat() {
       key={index}
       style={[
         estilos.mensagemContainer,
-        item.papel === 'usuario' ? estilos.mensagemUsuario : estilos.mensagemAssistente
+        item.role === 'user' ? estilos.mensagemUsuario : estilos.mensagemAssistente
       ]}
     >
       <Text style={[
         estilos.textoMensagem,
-        item.papel === 'usuario' ? estilos.textoUsuario : estilos.textoAssistente
+        item.role === 'user' ? estilos.textoUsuario : estilos.textoAssistente
       ]}>
-        {item.conteudo}
+        {item.content}
       </Text>
     </View>
   );
